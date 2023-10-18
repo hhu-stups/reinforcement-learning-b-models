@@ -1,0 +1,138 @@
+{
+  "svg":"HighwayEnv.svg",
+  "definitions":[
+    { "name":"xoffset",
+      "value" :"100.0",
+      "comment":"x coordinate of EgoVehicle in visualization"
+    },
+    { "name":"yoffset",
+      "value" :"75.0",
+      "comment":"y coordinate of EgoVehicle in visualization"
+    },
+    { "name":"vehicle_height",
+       "value" :"20.0"
+    },
+    { "name":"vehicle_length",
+       "value" :"50.0"
+    },
+    { "name":"ego_xpos",
+      "value":"xoffset - 10.0 * 2.0/2.0"
+    },
+    { "name":"ego_ypos",
+      "value":"yoffset + 10.0 * (VehiclesY(EgoVehicle) - 5.0/2.0)"
+    },
+    { "name":"xpos",
+      "value":"%v.(v:Vehicles|xoffset + 10.0 * (VehiclesX(v) - 2.0/2.0))"
+    },
+    { "name":"ypos",
+      "value":"%v.(v:Vehicles|yoffset + 10.0 * (VehiclesY(EgoVehicle) + VehiclesY(v) - 5.0/2.0))"
+    }
+  ],
+  "svg_objects":[
+    {
+      "for":{"from":1,"to":"card(Vehicles)"}, 
+      "svg_class":"line",
+      "id":"speed%0",
+      "stroke":"white",
+      "visibility":"hidden",
+      "stroke-width":"0.8",
+      "marker-start": "url(#circlemarker)",
+      "marker-end":"url(#arrowhead)"
+    },
+    {
+      "svg_class":"text",
+      "id":"infotext",
+      "x":100,
+      "y":180,
+      "stroke":"black",
+      "text": "",
+      "comment": "used to display hover informations"
+    }
+  ],
+  "items":[
+    {
+      "id": "ego",
+      "attr": "x",
+      "value":"ego_xpos"
+    },
+    {
+      "id": "ego",
+      "attr": "y",
+      "value":"ego_ypos"
+    },
+    {
+      "for":{"from":2,"to":"card(Vehicles)"}, 
+      "id": "car_%0",
+      "attr": "x",
+      "value":"xpos(Vehicles%0)"
+    },
+    {
+      "for":{"from":2,"to":"card(Vehicles)"}, 
+      "id": "car_%0",
+      "attr": "y",
+      "value":"ypos(Vehicles%0)"
+    },
+    {
+      "for":{"from":2,"to":"card(Vehicles)"}, 
+      "id": "speed%0",
+      "attr": "x1",
+      "value":"xpos(Vehicles%0)+vehicle_length/2.0"
+    },
+    {
+      "for":{"from":2,"to":"card(Vehicles)"}, 
+      "id": "speed%0",
+      "attr": "y1",
+      "value":"ypos(Vehicles%0) + vehicle_height/2.0"
+    },
+    {
+      "for":{"from":2,"to":"card(Vehicles)"}, 
+      "id": "speed%0",
+      "attr": "x2",
+      "value":"xpos(Vehicles%0)+10.0*VehiclesVx(Vehicles%0)+vehicle_length/2.0"
+    },
+    {
+      "for":{"from":2,"to":"card(Vehicles)"}, 
+      "id": "speed%0",
+      "attr": "y2",
+      "value":"ypos(Vehicles%0)+10.0*VehiclesVy(Vehicles%0) + vehicle_height/2.0"
+    },
+    {
+      "id": "speed1",
+      "attr": "x1",
+      "value":"ego_xpos+vehicle_length/2.0"
+    },
+    {
+      "id": "speed1",
+      "attr": "y1",
+      "value":"ego_ypos + vehicle_height/2.0"
+    },
+    {
+      "id": "speed1",
+      "attr": "x2",
+      "value":"ego_xpos+10.0*VehiclesVx(EgoVehicle)+vehicle_length/2.0"
+    },
+    {
+      "id": "speed1",
+      "attr": "y2",
+      "value":"ego_ypos+10.0*VehiclesVy(EgoVehicle) + vehicle_height/2.0"
+    }
+  ],
+  "events": [
+    {
+	  "for": {"from":1, "to":"card(Vehicles)"},
+      "id": "car_%0",
+      "event": "",
+      "hovers": [{ "attr":"opacity", "enter":"0.5", "leave":"1"},
+                 { "id": "speed%0","attr":"visibility", "enter":"visible", "leave":"hidden"},
+                 { "id": "infotext","attr":"text", "enter":"Vehicle%0", "leave":""}]
+    },
+    {
+      "id": "ego",
+      "event": "",
+      "hovers": [{ "attr":"opacity", "enter":"0.5", "leave":"1"},
+                 { "id": "speed1","attr":"visibility", "enter":"visible", "leave":"hidden"},
+                 { "id": "speed1","attr":"stroke", "enter":"red", "leave":"white"},
+                 { "id": "infotext","attr":"text", "enter":"EgoVehicle", "leave":""}]
+    }
+    ]
+}
