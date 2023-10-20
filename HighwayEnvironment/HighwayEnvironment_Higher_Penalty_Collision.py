@@ -68,6 +68,7 @@ while True:
     finished = False
     j = 0
     delta = 1000
+
     input("")
     print("")
     input("")
