@@ -1,6 +1,7 @@
 import gymnasium as gym
 import json
 import highway_env
+import copy
 from stable_baselines3 import DQN
 import warnings
 warnings.filterwarnings("ignore")
@@ -32,6 +33,13 @@ def get_Crash(obs, info):
     if info is None:
         return "FALSE"
     return "TRUE" if info["crashed"] else "FALSE"
+
+def get_PresentVehicles(obs):
+    vehicles = ["EgoVehicle"]
+    for i in range(1,5):
+        if int(obs[i][0]) == 1:
+            vehicles.append("Vehicles{0}".format(i+1))
+    return "{{{0}}}".format(", ".join(vehicles))
 
 def get_VehiclesX(obs):
     return "{{EgoVehicle |-> {0}, Vehicles2 |-> {1}, Vehicles3 |-> {2}, Vehicles4 |-> {3}, Vehicles5 |-> {4}}}".format(obs[0][1]*200, obs[1][1]*200, obs[2][1]*200, obs[3][1]*200, obs[4][1]*200)
@@ -68,12 +76,11 @@ while True:
     finished = False
     j = 0
     delta = 1000
-    input("")
-    print("")
+    finished = (int(input("")) == 1)
     input("")
     print("$initialise_machine")
     print(0)
-    print("Crash = {0}".format(get_Crash(obs, info)) + " & " + "VehiclesX = {0}".format(get_VehiclesX(obs)) + " & " + "VehiclesY = {0}".format(get_VehiclesY(obs)) + " & " + "VehiclesVx = {0}".format(get_VehiclesVx(obs)) + " & " + "VehiclesVy = {0}".format(get_VehiclesVy(obs)) + " & " + "VehiclesAx = {0}".format(get_VehiclesAx(obs, prev_obs)) + " & " + "VehiclesAy = {0}".format(get_VehiclesAy(obs, prev_obs)) + " & " + "Reward = {0}".format(get_Reward(obs, rewards)))
+    print("Crash = {0}".format(get_Crash(obs, info)) + " & " + "PresentVehicles = {0}".format(get_PresentVehicles(obs)) + " & " + "VehiclesX = {0}".format(get_VehiclesX(obs)) + " & " + "VehiclesY = {0}".format(get_VehiclesY(obs)) + " & " + "VehiclesVx = {0}".format(get_VehiclesVx(obs)) + " & " + "VehiclesVy = {0}".format(get_VehiclesVy(obs)) + " & " + "VehiclesAx = {0}".format(get_VehiclesAx(obs, prev_obs)) + " & " + "VehiclesAy = {0}".format(get_VehiclesAy(obs, prev_obs)) + " & " + "Reward = {0}".format(get_Reward(obs, rewards)))
     print("false")
 
     while not done:
@@ -81,20 +88,28 @@ while True:
         if finished:
             break
 
-        j = j + 1
-        action, _states = model.predict(obs)
         prev_obs = obs
 
-        print(action_names.get(int(action)))
-        corrected_action = input("")
-        corrected_action = action_names_inv.get(corrected_action)
+        enabled_operations = input("")
+        operations_list = enabled_operations.split(",")
 
-        obs, rewards, done, truncated, info = env.step(int(corrected_action))
-        actionName = action_names.get(int(corrected_action))
+        obs_tensor, _ = model.policy.obs_to_tensor(obs)
+        predictions = model.policy.q_net(obs_tensor)
+        action_order = (-predictions).argsort(dim=1)
+
+        new_action = 0
+
+        for action in action_order[0]:
+            if action_names.get(int(action)) in operations_list:
+                new_action = action
+                break
+
+        obs, rewards, done, truncated, info = env.step(int(new_action))
+        actionName = action_names.get(int(new_action))
 
         print(actionName)
         print(delta)
-        print("Crash = {0}".format(get_Crash(obs, info)) + " & " + "VehiclesX = {0}".format(get_VehiclesX(obs)) + " & " + "VehiclesY = {0}".format(get_VehiclesY(obs)) + " & " + "VehiclesVx = {0}".format(get_VehiclesVx(obs)) + " & " + "VehiclesVy = {0}".format(get_VehiclesVy(obs)) + " & " + "VehiclesAx = {0}".format(get_VehiclesAx(obs, prev_obs)) + " & " + "VehiclesAy = {0}".format(get_VehiclesAy(obs, prev_obs)) + " & " + "Reward = {0}".format(get_Reward(obs, rewards)))
+        print("Crash = {0}".format(get_Crash(obs, info)) + " & " + "PresentVehicles = {0}".format(get_PresentVehicles(obs)) + " & " + "VehiclesX = {0}".format(get_VehiclesX(obs)) + " & " + "VehiclesY = {0}".format(get_VehiclesY(obs)) + " & " + "VehiclesVx = {0}".format(get_VehiclesVx(obs)) + " & " + "VehiclesVy = {0}".format(get_VehiclesVy(obs)) + " & " + "VehiclesAx = {0}".format(get_VehiclesAx(obs, prev_obs)) + " & " + "VehiclesAy = {0}".format(get_VehiclesAy(obs, prev_obs)) + " & " + "Reward = {0}".format(get_Reward(obs, rewards)))
         print("true" if done else "false")
 
 env.close()

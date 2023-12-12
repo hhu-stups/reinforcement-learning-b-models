@@ -3,7 +3,7 @@ import json
 import os
 import sys
 
-from stable_baselines3 import A2C
+from stable_baselines3 import DQN
 from stable_baselines3.common.callbacks import CheckpointCallback
 import warnings
 warnings.filterwarnings("ignore")
@@ -85,14 +85,21 @@ if __name__ == '__main__':
     if len(sys.argv) == 2 and sys.argv[1] == 'train':
         save_path, model_path = get_paths()
 
-
-        model = A2C('MlpPolicy', env,
+        model = DQN('MlpPolicy', env,
                     policy_kwargs=dict(net_arch=[256, 256]),
                     learning_rate=5e-4,
+                    buffer_size=15000,
+                    learning_starts=200,
+                    batch_size=32,
                     gamma=0.9,  # Discount factor
+                    exploration_fraction=0.3,
+                    exploration_initial_eps=1.0,
+                    exploration_final_eps=0.05,
+                    train_freq=1,
+                    gradient_steps=1,
+                    target_update_interval=50,
                     verbose=1,
                     tensorboard_log=save_path)
-
 
         # Save a checkpoint every 1000 steps
         checkpoint_callback = CheckpointCallback(
@@ -101,11 +108,11 @@ if __name__ == '__main__':
             name_prefix="rl_model"
         )
 
-        model.learn(int(20_000), callback=checkpoint_callback, tb_log_name="new_dqn", progress_bar=True)
+        model.learn(int(2_000_000), callback=checkpoint_callback, tb_log_name="new_dqn", progress_bar=True)
         model.save(model_path)
     else:
         # Load pre-trained model
-        model = A2C.load("models/new/trained_model")
+        model = DQN.load("models/new/trained_model")
         while True:
             obs = env.reset()[0]
             rewards = 0.0
@@ -115,29 +122,33 @@ if __name__ == '__main__':
             j = 0
             delta = 10
             finished = (int(input("")) == 1)
-            print("")
             input("")
             print("$initialise_machine")
             print(0)
             print("x = {0}".format(get_x(obs)) + " & " + "y = {0}".format(get_y(obs)) + " & " + "v_x = {0}".format(get_v_x(obs)) + " & " + "v_y = {0}".format(get_v_y(obs)) + " & " + "angle = {0}".format(get_angle(obs)) + " & " + "v_angular = {0}".format(get_v_angular(obs)) + " & " + "left_leg_on_ground = {0}".format(get_left_leg_on_ground(obs)) + " & " + "right_leg_on_ground = {0}".format(get_right_leg_on_ground(obs)) + " & " + "surface = {0}".format(get_surface(env)))
             print("false")
 
-            while not done:
+            while not done and not finished:
                 finished = int(input("")) == 1
                 if finished:
                     break
 
-                j = j + 1
+                enabled_operations = input("")
+                operations_list = enabled_operations.split(",")
 
-                action, _states = model.predict(obs)
+                obs_tensor, _ = model.policy.obs_to_tensor(obs)
+                predictions = model.policy.q_net(obs_tensor)
+                action_order = (-predictions).argsort(dim=1)
 
-                print(action_names.get(int(action)))
-                corrected_action = input("")
-                corrected_action = action_names_inv.get(corrected_action)
+                new_action = 0
 
-                obs, rewards, done, truncated, info = env.step(int(corrected_action))
+                for action in action_order[0]:
+                    if action_names.get(int(action)) in operations_list:
+                        new_action = action
+                        break
 
-                actionName = action_names.get(int(corrected_action))
+                obs, rewards, done, truncated, info = env.step(int(new_action))
+                actionName = action_names.get(int(new_action))
 
                 print(actionName)
                 print(delta)
