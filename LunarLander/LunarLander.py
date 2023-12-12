@@ -58,7 +58,7 @@ def get_surface(env):
     for i in range(1, len(fixtures)):
         point1 = fixtures[i].shape.vertices[0]
         point2 = fixtures[i].shape.vertices[1]
-        objects.append("{0} |-> ({1} |-> {2}) |-> ({3} |-> {4})".format(
+        objects.append("{0} |-> (({1} |-> {2}) |-> ({3} |-> {4}))".format(
         i,
         point1[0] * 800.0/20.0,
         200.0 - point1[1] * 200.0/20.0,
