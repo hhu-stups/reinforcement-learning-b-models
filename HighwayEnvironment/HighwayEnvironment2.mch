@@ -1,4 +1,4 @@
-MACHINE HighwayEnvironment2
+MACHINE HighwayEnvironment2 
 
 SETS
     Vehicles
@@ -69,7 +69,7 @@ OPERATIONS
     Crash :: BOOL ||
     PresentVehicles :: POW(Vehicles) ||
     VehiclesX :: Vehicles --> REAL ||
-    VehiclesY :: Vehicles --> REAL ||
+    VehiclesY :(VehiclesY : Vehicles --> REAL & Crash = FALSE => (VehiclesY(EgoVehicle) <= VehiclesY$0(EgoVehicle) + 0.05))  ||
     VehiclesVx :: Vehicles --> REAL ||
     VehiclesVy :: Vehicles --> REAL ||
     VehiclesAx :: Vehicles --> REAL ||
@@ -87,7 +87,7 @@ OPERATIONS
     Crash :: BOOL ||
     PresentVehicles :: POW(Vehicles) ||
     VehiclesX :: Vehicles --> REAL ||
-    VehiclesY :: Vehicles --> REAL ||
+    VehiclesY :(VehiclesY : Vehicles --> REAL & Crash = FALSE => (VehiclesY(EgoVehicle) >= VehiclesY$0(EgoVehicle) - 0.05)) ||
     VehiclesVx :: Vehicles --> REAL ||
     VehiclesVy :: Vehicles --> REAL ||
     VehiclesAx :: Vehicles --> REAL ||
@@ -103,9 +103,9 @@ OPERATIONS
     PresentVehicles :: POW(Vehicles) ||
     VehiclesX :: Vehicles --> REAL ||
     VehiclesY :: Vehicles --> REAL ||
-    VehiclesVx :: Vehicles --> REAL ||
+    VehiclesVx : (VehiclesVx : Vehicles --> REAL & VehiclesVx(EgoVehicle) >= VehiclesVx$0(EgoVehicle) - 0.05) ||
     VehiclesVy :: Vehicles --> REAL ||
-    VehiclesAx :: Vehicles --> REAL ||
+    VehiclesAx : (VehiclesAx : Vehicles --> REAL & VehiclesAx(EgoVehicle) >= -0.05) ||
     VehiclesAy :: Vehicles --> REAL ||
     Reward :: REAL
   END;
@@ -129,11 +129,11 @@ OPERATIONS
   THEN
     Crash :: BOOL ||
     PresentVehicles :: POW(Vehicles) ||
-    VehiclesX :: Vehicles --> REAL ||
+    VehiclesX :: Vehicles --> REAL || 
     VehiclesY :: Vehicles --> REAL ||
-    VehiclesVx :: Vehicles --> REAL ||
+    VehiclesVx : (VehiclesVx : Vehicles --> REAL & VehiclesVx(EgoVehicle) <= VehiclesVx$0(EgoVehicle) + 0.05) ||
     VehiclesVy :: Vehicles --> REAL ||
-    VehiclesAx :: Vehicles --> REAL ||
+    VehiclesAx : (VehiclesAx : Vehicles --> REAL & VehiclesAx(EgoVehicle) <= 0.05) ||
     VehiclesAy :: Vehicles --> REAL ||
     Reward :: REAL
   END
