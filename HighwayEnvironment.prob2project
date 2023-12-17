@@ -1,0 +1,1771 @@
+{
+  "name": "HighwayEnvironment",
+  "description": "",
+  "machines": [
+    {
+      "name": "HighwayEnvironment",
+      "description": "",
+      "location": "HighwayEnvironment/HighwayEnvironment.mch",
+      "lastUsedPreferenceName": "default",
+      "temporalFormulas": [],
+      "ltlPatterns": [],
+      "symbolicCheckingFormulas": [],
+      "symbolicAnimationFormulas": [],
+      "testCases": [],
+      "traces": [
+        {
+          "location": "HighwayEnvironment/traces/Agent_Slowing_Down.prob2trace",
+          "selected": true
+        },
+        {
+          "location": "HighwayEnvironment/traces/Agent_Lane_Left_Collision.prob2trace",
+          "selected": true
+        }
+      ],
+      "modelcheckingItems": [],
+      "proofObligationItems": [],
+      "simulations": [
+        {
+          "path": "HighwayEnvironment/HighwayEnvironment.py",
+          "simulationItems": [
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.05,
+                "PROBABILITY": 0.95,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 100,
+                "PREDICATE": "Crash = FALSE",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "ESTIMATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 100,
+                "ESTIMATION_TYPE": "MEAN",
+                "ENDING_TIME": 60000,
+                "EXPRESSION": "VehiclesVx(EgoVehicle)",
+                "DESIRED_VALUE": 800.0,
+                "CHECKING_TYPE": "SUM",
+                "EPSILON": 250.0
+              }
+            },
+            {
+              "type": "ESTIMATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 100,
+                "ESTIMATION_TYPE": "MEAN",
+                "ENDING_TIME": 60000,
+                "EXPRESSION": "RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle))",
+                "DESIRED_VALUE": 25.0,
+                "CHECKING_TYPE": "AVERAGE",
+                "EPSILON": 5.0
+              }
+            },
+            {
+              "type": "ESTIMATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 100,
+                "ESTIMATION_TYPE": "MEAN",
+                "ENDING_TIME": 60000,
+                "EXPRESSION": "Reward",
+                "DESIRED_VALUE": 0.7,
+                "CHECKING_TYPE": "AVERAGE",
+                "EPSILON": 0.3
+              }
+            },
+            {
+              "type": "ESTIMATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 100,
+                "ESTIMATION_TYPE": "MEAN",
+                "ENDING_TIME": 60000,
+                "EXPRESSION": "Reward",
+                "DESIRED_VALUE": 55.0,
+                "CHECKING_TYPE": "SUM",
+                "EPSILON": 5.0
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.05,
+                "PROBABILITY": 0.95,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 100,
+                "PREDICATE": "RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle)) >= 20.0",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.05,
+                "PROBABILITY": 0.95,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 100,
+                "PREDICATE": "RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle)) <= 30.0",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.05,
+                "PROBABILITY": 0.95,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 100,
+                "PREDICATE": "RSQRT(VehiclesAy(EgoVehicle) * VehiclesAy(EgoVehicle) + VehiclesAx(EgoVehicle) * VehiclesAx(EgoVehicle)) >= -3.0",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.05,
+                "PROBABILITY": 0.95,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 100,
+                "PREDICATE": "RSQRT(VehiclesAy(EgoVehicle) * VehiclesAy(EgoVehicle) + VehiclesAx(EgoVehicle) * VehiclesAx(EgoVehicle)) <= 5.0",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.05,
+                "PROBABILITY": 0.95,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 100,
+                "PREDICATE": "not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -10.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -2.0 & VehiclesY(v) <= 4.0))",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            }
+          ]
+        },
+        {
+          "path": "HighwayEnvironment/HighwayEnvironment_Base.py",
+          "simulationItems": [
+            {
+              "type": "MONTE_CARLO_SIMULATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 1000,
+                "ENDING_TIME": 60000
+              }
+            },
+            {
+              "type": "MONTE_CARLO_SIMULATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 10,
+                "ENDING_TIME": 60000
+              }
+            },
+            {
+              "id": "Sim_SAF1_Base",
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.95,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 1000,
+                "PREDICATE": "Crash = FALSE",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "id": "Sim_Velocity_Base",
+              "type": "ESTIMATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 1000,
+                "ESTIMATION_TYPE": "MEAN",
+                "ENDING_TIME": 60000,
+                "EXPRESSION": "RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle))",
+                "DESIRED_VALUE": 25.0,
+                "CHECKING_TYPE": "AVERAGE",
+                "EPSILON": 5.0
+              }
+            },
+            {
+              "id": "Sim_Reward_Base",
+              "type": "ESTIMATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 1000,
+                "ESTIMATION_TYPE": "MEAN",
+                "ENDING_TIME": 60000,
+                "EXPRESSION": "Reward",
+                "DESIRED_VALUE": 40.0,
+                "CHECKING_TYPE": "SUM",
+                "EPSILON": 20.0
+              }
+            },
+            {
+              "id": "Sim_Distance_Base",
+              "type": "ESTIMATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 1000,
+                "ESTIMATION_TYPE": "MEAN",
+                "ENDING_TIME": 60000,
+                "EXPRESSION": "VehiclesVx(EgoVehicle)",
+                "DESIRED_VALUE": 1500.0,
+                "CHECKING_TYPE": "SUM",
+                "EPSILON": 300.0
+              }
+            },
+            {
+              "id": "Sim_SAF4_Base",
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.7,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 1000,
+                "PREDICATE": "Crash = FALSE => (VehiclesAx(EgoVehicle) < 0.0 => RSQRT(VehiclesAy(EgoVehicle) * VehiclesAy(EgoVehicle) + VehiclesAx(EgoVehicle) * VehiclesAx(EgoVehicle)) <= 5.0)",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "id": "Sim_SAF5_Base",
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.7,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 1000,
+                "PREDICATE": "Crash = FALSE => (VehiclesAx(EgoVehicle) > 0.0 => RSQRT(VehiclesAy(EgoVehicle) * VehiclesAy(EgoVehicle) + VehiclesAx(EgoVehicle) * VehiclesAx(EgoVehicle)) <= 5.0)",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "id": "Sim_SAF2_Base",
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.7,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 1000,
+                "PREDICATE": "Crash = FALSE => (RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle)) >= 20.0)",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "id": "Sim_SAF3_Base",
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.7,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 1000,
+                "PREDICATE": "Crash = FALSE => (RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle)) <= 30.0)",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "id": "Sim_SAF6_Base",
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.95,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 1000,
+                "PREDICATE": "not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.001,
+                "PROBABILITY": 0.999,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 1000,
+                "PREDICATE": "Crash = FALSE => not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) < 0.01 & VehiclesX(v) > -0.01 & VehiclesY(v) < 0.01 & VehiclesY(v) > -0.01))",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            }
+          ]
+        },
+        {
+          "path": "HighwayEnvironment_Higher_Penalty_Collision.py",
+          "simulationItems": [
+            {
+              "type": "MONTE_CARLO_SIMULATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 1000,
+                "ENDING_TIME": 60000
+              }
+            },
+            {
+              "type": "MONTE_CARLO_SIMULATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 10,
+                "ENDING_TIME": 60000
+              }
+            },
+            {
+              "id": "Sim_SAF1_HP",
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.95,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 1000,
+                "PREDICATE": "Crash = FALSE",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "id": "Sim_Velocity_HP",
+              "type": "ESTIMATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 1000,
+                "ESTIMATION_TYPE": "MEAN",
+                "ENDING_TIME": 60000,
+                "EXPRESSION": "RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle))",
+                "DESIRED_VALUE": 25.0,
+                "CHECKING_TYPE": "AVERAGE",
+                "EPSILON": 5.0
+              }
+            },
+            {
+              "id": "Sim_Reward_HP",
+              "type": "ESTIMATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 1000,
+                "ESTIMATION_TYPE": "MEAN",
+                "ENDING_TIME": 60000,
+                "EXPRESSION": "Reward",
+                "DESIRED_VALUE": 40.0,
+                "CHECKING_TYPE": "SUM",
+                "EPSILON": 20.0
+              }
+            },
+            {
+              "id": "Sim_Distance_HP",
+              "type": "ESTIMATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 1000,
+                "ESTIMATION_TYPE": "MEAN",
+                "ENDING_TIME": 60000,
+                "EXPRESSION": "VehiclesVx(EgoVehicle)",
+                "DESIRED_VALUE": 1500.0,
+                "CHECKING_TYPE": "SUM",
+                "EPSILON": 300.0
+              }
+            },
+            {
+              "id": "Sim_SAF4_HP",
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.7,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 1000,
+                "PREDICATE": "Crash = FALSE => (VehiclesAx(EgoVehicle) < 0.0 => RSQRT(VehiclesAy(EgoVehicle) * VehiclesAy(EgoVehicle) + VehiclesAx(EgoVehicle) * VehiclesAx(EgoVehicle)) <= 5.0)",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "id": "Sim_SAF5_HP",
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.7,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 1000,
+                "PREDICATE": "Crash = FALSE => (VehiclesAx(EgoVehicle) > 0.0 => RSQRT(VehiclesAy(EgoVehicle) * VehiclesAy(EgoVehicle) + VehiclesAx(EgoVehicle) * VehiclesAx(EgoVehicle)) <= 5.0)",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "id": "Sim_SAF2_HP",
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.7,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 1000,
+                "PREDICATE": "Crash = FALSE => (RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle)) >= 20.0)",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "id": "Sim_SAF3_HP",
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.7,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 1000,
+                "PREDICATE": "Crash = FALSE => (RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle)) <= 30.0)",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "id": "Sim_SAF6_HP",
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.95,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 1000,
+                "PREDICATE": "not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.001,
+                "PROBABILITY": 0.999,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 1000,
+                "PREDICATE": "Crash = FALSE => not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) < 0.01 & VehiclesX(v) > -0.01 & VehiclesY(v) < 0.01 & VehiclesY(v) > -0.01))",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            }
+          ]
+        },
+        {
+          "path": "Traces_Base",
+          "simulationItems": [
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.95,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "PREDICATE": "Crash = FALSE",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "ESTIMATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "ESTIMATION_TYPE": "MEAN",
+                "ENDING_TIME": 60000,
+                "EXPRESSION": "RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle))",
+                "DESIRED_VALUE": 25.0,
+                "CHECKING_TYPE": "AVERAGE",
+                "EPSILON": 5.0
+              }
+            },
+            {
+              "type": "ESTIMATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "ESTIMATION_TYPE": "MEAN",
+                "ENDING_TIME": 60000,
+                "EXPRESSION": "Reward",
+                "DESIRED_VALUE": 40.0,
+                "CHECKING_TYPE": "SUM",
+                "EPSILON": 20.0
+              }
+            },
+            {
+              "type": "ESTIMATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "ESTIMATION_TYPE": "MEAN",
+                "ENDING_TIME": 60000,
+                "EXPRESSION": "VehiclesVx(EgoVehicle)",
+                "DESIRED_VALUE": 1500.0,
+                "CHECKING_TYPE": "SUM",
+                "EPSILON": 300.0
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.7,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "PREDICATE": "Crash = FALSE => (VehiclesAx(EgoVehicle) < 0.0 => RSQRT(VehiclesAy(EgoVehicle) * VehiclesAy(EgoVehicle) + VehiclesAx(EgoVehicle) * VehiclesAx(EgoVehicle)) <= 5.0)",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.7,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "PREDICATE": "Crash = FALSE => (VehiclesAx(EgoVehicle) > 0.0 => RSQRT(VehiclesAy(EgoVehicle) * VehiclesAy(EgoVehicle) + VehiclesAx(EgoVehicle) * VehiclesAx(EgoVehicle)) <= 5.0)",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.7,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "PREDICATE": "Crash = FALSE => (RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle)) >= 20.0)",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.7,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "PREDICATE": "Crash = FALSE => (RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle)) <= 30.0)",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.95,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "PREDICATE": "not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.001,
+                "PROBABILITY": 0.999,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "PREDICATE": "Crash = FALSE => not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) < 0.01 & VehiclesX(v) > -0.01 & VehiclesY(v) < 0.01 & VehiclesY(v) > -0.01))",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "ESTIMATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "ESTIMATION_TYPE": "MEAN",
+                "ENDING_TIME": 60000,
+                "EXPRESSION": "IF VehiclesY(EgoVehicle) >= 7.0 THEN 1.0 ELSE 0.0 END",
+                "DESIRED_VALUE": 30.0,
+                "CHECKING_TYPE": "SUM",
+                "EPSILON": 30.0
+              }
+            }
+          ]
+        },
+        {
+          "path": "Traces_Higher_Penalty_Collision",
+          "simulationItems": [
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.95,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "PREDICATE": "Crash = FALSE",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "ESTIMATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "ESTIMATION_TYPE": "MEAN",
+                "ENDING_TIME": 60000,
+                "EXPRESSION": "RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle))",
+                "DESIRED_VALUE": 25.0,
+                "CHECKING_TYPE": "AVERAGE",
+                "EPSILON": 5.0
+              }
+            },
+            {
+              "type": "ESTIMATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "ESTIMATION_TYPE": "MEAN",
+                "ENDING_TIME": 60000,
+                "EXPRESSION": "Reward",
+                "DESIRED_VALUE": 40.0,
+                "CHECKING_TYPE": "SUM",
+                "EPSILON": 20.0
+              }
+            },
+            {
+              "type": "ESTIMATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "ESTIMATION_TYPE": "MEAN",
+                "ENDING_TIME": 60000,
+                "EXPRESSION": "VehiclesVx(EgoVehicle)",
+                "DESIRED_VALUE": 1500.0,
+                "CHECKING_TYPE": "SUM",
+                "EPSILON": 300.0
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.7,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "PREDICATE": "Crash = FALSE => (VehiclesAx(EgoVehicle) < 0.0 => RSQRT(VehiclesAy(EgoVehicle) * VehiclesAy(EgoVehicle) + VehiclesAx(EgoVehicle) * VehiclesAx(EgoVehicle)) <= 5.0)",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.7,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "PREDICATE": "Crash = FALSE => (VehiclesAx(EgoVehicle) > 0.0 => RSQRT(VehiclesAy(EgoVehicle) * VehiclesAy(EgoVehicle) + VehiclesAx(EgoVehicle) * VehiclesAx(EgoVehicle)) <= 5.0)",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.7,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "PREDICATE": "Crash = FALSE => (RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle)) >= 20.0)",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.7,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "PREDICATE": "Crash = FALSE => (RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle)) <= 30.0)",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.95,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "PREDICATE": "not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.001,
+                "PROBABILITY": 0.999,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "PREDICATE": "Crash = FALSE => not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) < 0.01 & VehiclesX(v) > -0.01 & VehiclesY(v) < 0.01 & VehiclesY(v) > -0.01))",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "ESTIMATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "ESTIMATION_TYPE": "MEAN",
+                "ENDING_TIME": 60000,
+                "EXPRESSION": "IF VehiclesY(EgoVehicle) >= 7.0 THEN 1.0 ELSE 0.0 END",
+                "DESIRED_VALUE": 30.0,
+                "CHECKING_TYPE": "SUM",
+                "EPSILON": 30.0
+              }
+            }
+          ]
+        }
+      ],
+      "visBVisualisation": "HighwayEnvironment/visualization/HighwayEnv.json",
+      "historyChartItems": [],
+      "dotVisualizationItems": {},
+      "tableVisualizationItems": {}
+    },
+    {
+      "name": "HighwayEnvironment2",
+      "description": "",
+      "location": "HighwayEnvironment/HighwayEnvironment2.mch",
+      "lastUsedPreferenceName": "default",
+      "temporalFormulas": [],
+      "ltlPatterns": [],
+      "symbolicCheckingFormulas": [],
+      "symbolicAnimationFormulas": [],
+      "testCases": [],
+      "traces": [
+        {
+          "location": "HighwayEnvironment/traces/Agent_Lane_Left_Collision.prob2trace",
+          "selected": true
+        },
+        {
+          "location": "HighwayEnvironment/traces/Agent_Slowing_Down.prob2trace",
+          "selected": true
+        },
+        {
+          "location": "HighwayEnvironment/traces/Agent_Scenario_Base_Shield.prob2trace",
+          "selected": true
+        },
+        {
+          "location": "HighwayEnvironment/traces/Agent_Scenario_Higher_Penalty_Collision_Shield.prob2trace",
+          "selected": true
+        }
+      ],
+      "modelcheckingItems": [],
+      "proofObligationItems": [],
+      "simulations": [
+        {
+          "path": "HighwayEnvironment/HighwayEnvironment.py",
+          "simulationItems": [
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.05,
+                "PROBABILITY": 0.95,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 100,
+                "PREDICATE": "Crash = FALSE",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "ESTIMATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 100,
+                "ESTIMATION_TYPE": "MEAN",
+                "ENDING_TIME": 60000,
+                "EXPRESSION": "VehiclesVx(EgoVehicle)",
+                "DESIRED_VALUE": 800.0,
+                "CHECKING_TYPE": "SUM",
+                "EPSILON": 250.0
+              }
+            },
+            {
+              "type": "ESTIMATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 100,
+                "ESTIMATION_TYPE": "MEAN",
+                "ENDING_TIME": 60000,
+                "EXPRESSION": "RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle))",
+                "DESIRED_VALUE": 25.0,
+                "CHECKING_TYPE": "AVERAGE",
+                "EPSILON": 5.0
+              }
+            },
+            {
+              "type": "ESTIMATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 100,
+                "ESTIMATION_TYPE": "MEAN",
+                "ENDING_TIME": 60000,
+                "EXPRESSION": "Reward",
+                "DESIRED_VALUE": 0.7,
+                "CHECKING_TYPE": "AVERAGE",
+                "EPSILON": 0.3
+              }
+            },
+            {
+              "type": "ESTIMATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 100,
+                "ESTIMATION_TYPE": "MEAN",
+                "ENDING_TIME": 60000,
+                "EXPRESSION": "Reward",
+                "DESIRED_VALUE": 55.0,
+                "CHECKING_TYPE": "SUM",
+                "EPSILON": 5.0
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.05,
+                "PROBABILITY": 0.95,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 100,
+                "PREDICATE": "RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle)) >= 20.0",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.05,
+                "PROBABILITY": 0.95,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 100,
+                "PREDICATE": "RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle)) <= 30.0",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.05,
+                "PROBABILITY": 0.95,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 100,
+                "PREDICATE": "RSQRT(VehiclesAy(EgoVehicle) * VehiclesAy(EgoVehicle) + VehiclesAx(EgoVehicle) * VehiclesAx(EgoVehicle)) >= -3.0",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.05,
+                "PROBABILITY": 0.95,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 100,
+                "PREDICATE": "RSQRT(VehiclesAy(EgoVehicle) * VehiclesAy(EgoVehicle) + VehiclesAx(EgoVehicle) * VehiclesAx(EgoVehicle)) <= 5.0",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.95,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "PREDICATE": "not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "MONTE_CARLO_SIMULATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 1000,
+                "ENDING_TIME": 60000
+              }
+            },
+            {
+              "type": "MONTE_CARLO_SIMULATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 100,
+                "ENDING_TIME": 60000
+              }
+            }
+          ]
+        },
+        {
+          "path": "Traces_Shield",
+          "simulationItems": [
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.05,
+                "PROBABILITY": 0.95,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 100,
+                "PREDICATE": "Crash = FALSE",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            }
+          ]
+        },
+        {
+          "path": "HighwayEnvironment/HighwayEnvironment_Base.py",
+          "simulationItems": [
+            {
+              "type": "MONTE_CARLO_SIMULATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 1000,
+                "ENDING_TIME": 60000
+              }
+            },
+            {
+              "type": "MONTE_CARLO_SIMULATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 10,
+                "ENDING_TIME": 60000
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.05,
+                "PROBABILITY": 0.95,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 100,
+                "PREDICATE": "Crash = FALSE",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "id": "Sim_SAF1_Base_Shielded",
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.05,
+                "PROBABILITY": 0.95,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 1000,
+                "PREDICATE": "Crash = FALSE",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "id": "Sim_Velocity_Base_Shielded",
+              "type": "ESTIMATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "ESTIMATION_TYPE": "MEAN",
+                "ENDING_TIME": 60000,
+                "EXPRESSION": "RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle))",
+                "DESIRED_VALUE": 25.0,
+                "CHECKING_TYPE": "AVERAGE",
+                "EPSILON": 5.0
+              }
+            },
+            {
+              "id": "Sim_Reward_Base_Shielded",
+              "type": "ESTIMATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "ESTIMATION_TYPE": "MEAN",
+                "ENDING_TIME": 60000,
+                "EXPRESSION": "Reward",
+                "DESIRED_VALUE": 40.0,
+                "CHECKING_TYPE": "SUM",
+                "EPSILON": 20.0
+              }
+            },
+            {
+              "id": "Sim_Distance_Base_Shielded",
+              "type": "ESTIMATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "ESTIMATION_TYPE": "MEAN",
+                "ENDING_TIME": 60000,
+                "EXPRESSION": "VehiclesVx(EgoVehicle)",
+                "DESIRED_VALUE": 1500.0,
+                "CHECKING_TYPE": "SUM",
+                "EPSILON": 300.0
+              }
+            },
+            {
+              "id": "Sim_SAF4_Base_Shielded",
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.7,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "PREDICATE": "Crash = FALSE => (VehiclesAx(EgoVehicle) < 0.0 => RSQRT(VehiclesAy(EgoVehicle) * VehiclesAy(EgoVehicle) + VehiclesAx(EgoVehicle) * VehiclesAx(EgoVehicle)) <= 5.0)",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "id": "Sim_SAF5_Base_Shielded",
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.7,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "PREDICATE": "Crash = FALSE => (VehiclesAx(EgoVehicle) > 0.0 => RSQRT(VehiclesAy(EgoVehicle) * VehiclesAy(EgoVehicle) + VehiclesAx(EgoVehicle) * VehiclesAx(EgoVehicle)) <= 5.0)",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "id": "Sim_SAF2_Base_Shielded",
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.7,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "PREDICATE": "Crash = FALSE => (RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle)) >= 20.0)",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "id": "Sim_SAF3_Base_Shielded",
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.7,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "PREDICATE": "Crash = FALSE => (RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle)) <= 30.0)",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "id": "Sim_SAF6_Base_Shielded",
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.95,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "PREDICATE": "not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.001,
+                "PROBABILITY": 0.999,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "PREDICATE": "Crash = FALSE => not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) < 0.01 & VehiclesX(v) > -0.01 & VehiclesY(v) < 0.01 & VehiclesY(v) > -0.01))",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            }
+          ]
+        },
+        {
+          "path": "HighwayEnvironment/HighwayEnvironment_Higher_Penalty_Collision.py",
+          "simulationItems": [
+            {
+              "type": "MONTE_CARLO_SIMULATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 1000,
+                "ENDING_TIME": 60000
+              }
+            },
+            {
+              "type": "MONTE_CARLO_SIMULATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 10,
+                "ENDING_TIME": 60000
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.05,
+                "PROBABILITY": 0.95,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 100,
+                "PREDICATE": "Crash = FALSE",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "id": "Sim_SAF1_HP_Shielded",
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.05,
+                "PROBABILITY": 0.95,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 1000,
+                "PREDICATE": "Crash = FALSE",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "id": "Sim_Velocity_HP_Shielded",
+              "type": "ESTIMATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 1000,
+                "ESTIMATION_TYPE": "MEAN",
+                "ENDING_TIME": 60000,
+                "EXPRESSION": "RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle))",
+                "DESIRED_VALUE": 25.0,
+                "CHECKING_TYPE": "AVERAGE",
+                "EPSILON": 5.0
+              }
+            },
+            {
+              "id": "Sim_Reward_HP_Shielded",
+              "type": "ESTIMATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 1000,
+                "ESTIMATION_TYPE": "MEAN",
+                "ENDING_TIME": 60000,
+                "EXPRESSION": "Reward",
+                "DESIRED_VALUE": 40.0,
+                "CHECKING_TYPE": "SUM",
+                "EPSILON": 20.0
+              }
+            },
+            {
+              "id": "Sim_Distance_HP_Shielded",
+              "type": "ESTIMATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 1000,
+                "ESTIMATION_TYPE": "MEAN",
+                "ENDING_TIME": 60000,
+                "EXPRESSION": "VehiclesVx(EgoVehicle)",
+                "DESIRED_VALUE": 1500.0,
+                "CHECKING_TYPE": "SUM",
+                "EPSILON": 300.0
+              }
+            },
+            {
+              "id": "Sim_SAF4_HP_Shielded",
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.7,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 1000,
+                "PREDICATE": "Crash = FALSE => (VehiclesAx(EgoVehicle) < 0.0 => RSQRT(VehiclesAy(EgoVehicle) * VehiclesAy(EgoVehicle) + VehiclesAx(EgoVehicle) * VehiclesAx(EgoVehicle)) <= 5.0)",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "id": "Sim_SAF5_HP_Shielded",
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.7,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 1000,
+                "PREDICATE": "Crash = FALSE => (VehiclesAx(EgoVehicle) > 0.0 => RSQRT(VehiclesAy(EgoVehicle) * VehiclesAy(EgoVehicle) + VehiclesAx(EgoVehicle) * VehiclesAx(EgoVehicle)) <= 5.0)",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "id": "Sim_SAF2_HP_Shielded",
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.7,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 1000,
+                "PREDICATE": "Crash = FALSE => (RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle)) >= 20.0)",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "id": "Sim_SAF3_HP_Shielded",
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.7,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 1000,
+                "PREDICATE": "Crash = FALSE => (RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle)) <= 30.0)",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "id": "Sim_SAF6_HP_Shielded",
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.95,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 1000,
+                "PREDICATE": "not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.001,
+                "PROBABILITY": 0.999,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 1000,
+                "PREDICATE": "Crash = FALSE => not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) < 0.01 & VehiclesX(v) > -0.01 & VehiclesY(v) < 0.01 & VehiclesY(v) > -0.01))",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            }
+          ]
+        },
+        {
+          "path": "HighwayEnvironment/Traces_Base_Shield",
+          "simulationItems": [
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.95,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "PREDICATE": "Crash = FALSE",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "ESTIMATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "ESTIMATION_TYPE": "MEAN",
+                "ENDING_TIME": 60000,
+                "EXPRESSION": "RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle))",
+                "DESIRED_VALUE": 25.0,
+                "CHECKING_TYPE": "AVERAGE",
+                "EPSILON": 5.0
+              }
+            },
+            {
+              "type": "ESTIMATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "ESTIMATION_TYPE": "MEAN",
+                "ENDING_TIME": 60000,
+                "EXPRESSION": "Reward",
+                "DESIRED_VALUE": 40.0,
+                "CHECKING_TYPE": "SUM",
+                "EPSILON": 20.0
+              }
+            },
+            {
+              "type": "ESTIMATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "ESTIMATION_TYPE": "MEAN",
+                "ENDING_TIME": 60000,
+                "EXPRESSION": "VehiclesVx(EgoVehicle)",
+                "DESIRED_VALUE": 1500.0,
+                "CHECKING_TYPE": "SUM",
+                "EPSILON": 300.0
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.7,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "PREDICATE": "Crash = FALSE => (VehiclesAx(EgoVehicle) < 0.0 => RSQRT(VehiclesAy(EgoVehicle) * VehiclesAy(EgoVehicle) + VehiclesAx(EgoVehicle) * VehiclesAx(EgoVehicle)) <= 5.0)",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.7,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "PREDICATE": "Crash = FALSE => (VehiclesAx(EgoVehicle) > 0.0 => RSQRT(VehiclesAy(EgoVehicle) * VehiclesAy(EgoVehicle) + VehiclesAx(EgoVehicle) * VehiclesAx(EgoVehicle)) <= 5.0)",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.7,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "PREDICATE": "Crash = FALSE => (RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle)) >= 20.0)",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.7,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "PREDICATE": "Crash = FALSE => (RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle)) <= 30.0)",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.95,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "PREDICATE": "not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.001,
+                "PROBABILITY": 0.999,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "PREDICATE": "Crash = FALSE => not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) < 0.01 & VehiclesX(v) > -0.01 & VehiclesY(v) < 0.01 & VehiclesY(v) > -0.01))",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "ESTIMATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "ESTIMATION_TYPE": "MEAN",
+                "ENDING_TIME": 60000,
+                "EXPRESSION": "IF VehiclesY(EgoVehicle) >= 7.0 THEN 1.0 ELSE 0.0 END",
+                "DESIRED_VALUE": 30.0,
+                "CHECKING_TYPE": "SUM",
+                "EPSILON": 30.0
+              }
+            }
+          ]
+        },
+        {
+          "path": "HighwayEnvironment/Traces_Higher_Penalty_Collision_Shield",
+          "simulationItems": [
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.95,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "PREDICATE": "Crash = FALSE",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "ESTIMATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "ESTIMATION_TYPE": "MEAN",
+                "ENDING_TIME": 60000,
+                "EXPRESSION": "RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle))",
+                "DESIRED_VALUE": 25.0,
+                "CHECKING_TYPE": "AVERAGE",
+                "EPSILON": 5.0
+              }
+            },
+            {
+              "type": "ESTIMATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "ESTIMATION_TYPE": "MEAN",
+                "ENDING_TIME": 60000,
+                "EXPRESSION": "Reward",
+                "DESIRED_VALUE": 40.0,
+                "CHECKING_TYPE": "SUM",
+                "EPSILON": 20.0
+              }
+            },
+            {
+              "type": "ESTIMATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "ESTIMATION_TYPE": "MEAN",
+                "ENDING_TIME": 60000,
+                "EXPRESSION": "VehiclesVx(EgoVehicle)",
+                "DESIRED_VALUE": 1500.0,
+                "CHECKING_TYPE": "SUM",
+                "EPSILON": 300.0
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.7,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "PREDICATE": "Crash = FALSE => (VehiclesAx(EgoVehicle) < 0.0 => RSQRT(VehiclesAy(EgoVehicle) * VehiclesAy(EgoVehicle) + VehiclesAx(EgoVehicle) * VehiclesAx(EgoVehicle)) <= 5.0)",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.7,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "PREDICATE": "Crash = FALSE => (VehiclesAx(EgoVehicle) > 0.0 => RSQRT(VehiclesAy(EgoVehicle) * VehiclesAy(EgoVehicle) + VehiclesAx(EgoVehicle) * VehiclesAx(EgoVehicle)) <= 5.0)",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.7,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "PREDICATE": "Crash = FALSE => (RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle)) >= 20.0)",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.7,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "PREDICATE": "Crash = FALSE => (RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle)) <= 30.0)",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.01,
+                "PROBABILITY": 0.95,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "PREDICATE": "not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.001,
+                "PROBABILITY": 0.999,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "PREDICATE": "Crash = FALSE => not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) < 0.01 & VehiclesX(v) > -0.01 & VehiclesY(v) < 0.01 & VehiclesY(v) > -0.01))",
+                "ENDING_TIME": 60000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_INVARIANT"
+              }
+            },
+            {
+              "type": "ESTIMATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "ESTIMATION_TYPE": "MEAN",
+                "ENDING_TIME": 60000,
+                "EXPRESSION": "IF VehiclesY(EgoVehicle) >= 7.0 THEN 1.0 ELSE 0.0 END",
+                "DESIRED_VALUE": 30.0,
+                "CHECKING_TYPE": "SUM",
+                "EPSILON": 30.0
+              }
+            }
+          ]
+        }
+      ],
+      "visBVisualisation": "HighwayEnvironment/visualization/HighwayEnv.json",
+      "historyChartItems": [],
+      "dotVisualizationItems": {},
+      "tableVisualizationItems": {}
+    },
+    {
+      "name": "LunarLander",
+      "description": "",
+      "location": "LunarLander/LunarLander.mch",
+      "lastUsedPreferenceName": "default",
+      "temporalFormulas": [],
+      "ltlPatterns": [],
+      "symbolicCheckingFormulas": [],
+      "symbolicAnimationFormulas": [],
+      "testCases": [],
+      "traces": [],
+      "modelcheckingItems": [],
+      "proofObligationItems": [],
+      "simulations": [],
+      "visBVisualisation": null,
+      "historyChartItems": [],
+      "dotVisualizationItems": {},
+      "tableVisualizationItems": {}
+    }
+  ],
+  "requirements": [
+    {
+      "name": "SAF1",
+      "introducedAt": "HighwayEnvironment",
+      "type": "FUNCTIONAL",
+      "text": "The agent must avoid collisions with other vehicles",
+      "validationObligations": [
+        {
+          "machine": "HighwayEnvironment",
+          "expression": "Sim_SAF1_Base & Sim_SAF1_HP"
+        },
+        {
+          "machine": "HighwayEnvironment2",
+          "expression": "Sim_SAF1_Base_Shielded & Sim_SAF1_HP_Shielded"
+        }
+      ]
+    },
+    {
+      "name": "SAF2",
+      "introducedAt": "HighwayEnvironment",
+      "type": "FUNCTIONAL",
+      "text": "The agent must drive with a velocity faster than 20 m/s",
+      "validationObligations": [
+        {
+          "machine": "HighwayEnvironment",
+          "expression": "Sim_SAF2_Base & Sim_SAF2_HP"
+        },
+        {
+          "machine": "HighwayEnvironment2",
+          "expression": "Sim_SAF2_Base_Shielded & Sim_SAF2_HP_Shielded"
+        }
+      ]
+    },
+    {
+      "name": "SAF3",
+      "introducedAt": "HighwayEnvironment",
+      "type": "FUNCTIONAL",
+      "text": "The agent must drive slower than 40 m/s",
+      "validationObligations": [
+        {
+          "machine": "HighwayEnvironment",
+          "expression": "Sim_SAF3_Base & Sim_SAF3_HP"
+        },
+        {
+          "machine": "HighwayEnvironment2",
+          "expression": "Sim_SAF3_Base_Shielded & Sim_SAF3_HP_Shielded"
+        }
+      ]
+    },
+    {
+      "name": "SAF4",
+      "introducedAt": "HighwayEnvironment",
+      "type": "FUNCTIONAL",
+      "text": "The agent should decelerate at a maximum of 5 m/s2",
+      "validationObligations": [
+        {
+          "machine": "HighwayEnvironment",
+          "expression": "Sim_SAF4_Base & Sim_SAF4_HP"
+        },
+        {
+          "machine": "HighwayEnvironment2",
+          "expression": "Sim_SAF4_Base_Shielded & Sim_SAF4_HP_Shielded"
+        }
+      ]
+    },
+    {
+      "name": "SAF5",
+      "introducedAt": "HighwayEnvironment",
+      "type": "FUNCTIONAL",
+      "text": "The agent should accelerate at a maximum of 5 m/s2",
+      "validationObligations": [
+        {
+          "machine": "HighwayEnvironment",
+          "expression": "Sim_SAF5_Base & Sim_SAF5_HP"
+        },
+        {
+          "machine": "HighwayEnvironment2",
+          "expression": "Sim_SAF5_Base_Shielded & Sim_SAF5_HP_Shielded"
+        }
+      ]
+    },
+    {
+      "name": "SAF6",
+      "introducedAt": "HighwayEnvironment",
+      "type": "FUNCTIONAL",
+      "text": "To each other vehicle, the agent should keep a lateral safety distance of at least 2 m and a longitudinal safety distance of at least 10 m",
+      "validationObligations": [
+        {
+          "machine": "HighwayEnvironment",
+          "expression": "Sim_SAF6_Base & Sim_SAF6_HP"
+        },
+        {
+          "machine": "HighwayEnvironment2",
+          "expression": "Sim_SAF6_Base_Shielded & Sim_SAF6_HP_Shielded"
+        }
+      ]
+    },
+    {
+      "name": "Episode Length",
+      "introducedAt": "HighwayEnvironment",
+      "type": "FUNCTIONAL",
+      "text": "RL agent should drive as long as possible without collisions.",
+      "validationObligations": [
+        {
+          "machine": "HighwayEnvironment",
+          "expression": "Sim_SAF1_Base & Sim_SAF1_HP"
+        },
+        {
+          "machine": "HighwayEnvironment2",
+          "expression": "Sim_SAF1_Base_Shielded & Sim_SAF1_HP_Shielded"
+        }
+      ]
+    },
+    {
+      "name": "Velocity",
+      "introducedAt": "HighwayEnvironment",
+      "type": "FUNCTIONAL",
+      "text": "RL agent should drive with a higher speed if possible",
+      "validationObligations": [
+        {
+          "machine": "HighwayEnvironment",
+          "expression": "Sim_Velocity_Base & Sim_Velocity_HP"
+        },
+        {
+          "machine": "HighwayEnvironment2",
+          "expression": "Sim_Velocity_Base_Shielded & Sim_Velocity_HP_Shielded"
+        }
+      ]
+    },
+    {
+      "name": "Distance",
+      "introducedAt": "HighwayEnvironment",
+      "type": "FUNCTIONAL",
+      "text": "RL agent should drive a long distance within an episode.",
+      "validationObligations": [
+        {
+          "machine": "HighwayEnvironment",
+          "expression": "Sim_Distance_Base & Sim_Distance_HP"
+        },
+        {
+          "machine": "HighwayEnvironment2",
+          "expression": "Sim_Distance_Base_Shielded & Sim_Distance_HP_Shielded"
+        }
+      ]
+    },
+    {
+      "name": "Reward",
+      "introducedAt": "HighwayEnvironment",
+      "type": "FUNCTIONAL",
+      "text": "RL agent should achieve a high cumulative reward",
+      "validationObligations": [
+        {
+          "machine": "HighwayEnvironment",
+          "expression": "Sim_Reward_Base & Sim_Reward_HP"
+        },
+        {
+          "machine": "HighwayEnvironment2",
+          "expression": "Sim_Reward_Base_Shielded & Sim_Reward_HP_Shielded"
+        }
+      ]
+    }
+  ],
+  "preferences": [],
+  "metadata": {
+    "fileType": "Project",
+    "formatVersion": 38,
+    "savedAt": "2023-12-14T12:51:41.377430Z",
+    "creator": "User",
+    "proB2KernelVersion": "4.12.3-SNAPSHOT",
+    "proBCliVersion": null,
+    "modelName": null
+  }
+}
