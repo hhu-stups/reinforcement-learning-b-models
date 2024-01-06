@@ -1,5 +1,15 @@
 # Reinforcement Learning B Models
 
+## Getting started
+
+![Start ProB2-UI](/images/Start_RL_Agent_1.png)
+
+![Open SimB](/images/Start_RL_Agent_2.png)
+
+![Load SimB Simulation](/images/Start_RL_Agent_3.png)
+
+![Play SimB Simulation](/images/Start_RL_Agent_4.png)
+
 ## Scenarios
 
 [Scenario Lane Left Collision](https://hhu-stups.github.io/highway-env-b-model/traces/Agent_Lane_Left_Collision)
