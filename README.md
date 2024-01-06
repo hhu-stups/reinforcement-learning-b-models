@@ -2,11 +2,20 @@
 
 ## Getting started
 
+1. Install ProB2-UI in its latest nightly version as available in \url{https://github.com/hhu-stups/prob2_ui}
+2. Load the `RL_Project.prob2project` and start a formal model (`HighwayEnvironment2.mch` in this example)
+
 ![Start ProB2-UI](/images/Start_RL_Agent_1.png)
+
+3. Open SimB in ProB2-UI
 
 ![Open SimB](/images/Start_RL_Agent_2.png)
 
+4. Load a SimB simulation which starts an RL agent (extension `.py`). In this example, it is `HighwayEnvironment_Higher_Penalty_Collision.py`
+
 ![Load SimB Simulation](/images/Start_RL_Agent_3.png)
+
+5. Start the RL agent as a SimB simulation by clicking on the `Play` button
 
 ![Play SimB Simulation](/images/Start_RL_Agent_4.png)
 
