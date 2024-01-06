@@ -29,6 +29,17 @@
 
 [Scenario Higher Penalty with Shield](https://hhu-stups.github.io/highway-env-b-model/traces/Agent_Scenario_Higher_Penalty_Collision_Shield)
 
+## Evaluation
+
+|                | RL Agent                                       |
+|----------------|------------------------------------------------|
+| Base           | HighwayEnvironment_Base.py                     |
+| Higher Penalty | HighwayEnvironment_Higher_Penalty_Collision.py |
+
+|           | Machine                 |
+|-----------|-------------------------|
+| No Shield | HighwayEnvironment.mch  |
+| Shield    | HighwayEnvironment2.mch |
 
 ## Implementation overview
 
