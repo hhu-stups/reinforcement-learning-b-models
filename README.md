@@ -2,7 +2,7 @@
 
 ## Getting started
 
-1. Install ProB2-UI in its latest nightly version as available in \url{https://github.com/hhu-stups/prob2_ui}
+1. Install ProB2-UI in its latest nightly version as available here: https://github.com/hhu-stups/prob2_ui
 2. Load the `RL_Project.prob2project` and start a formal model (`HighwayEnvironment2.mch` in this example)
 
 ![Start ProB2-UI](/images/Start_RL_Agent_1.png)
