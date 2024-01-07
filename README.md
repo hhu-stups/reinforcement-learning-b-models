@@ -36,17 +36,17 @@
 | `Base`           | `HighwayEnvironment_Base.py`                     |
 | `Higher Penalty` | `HighwayEnvironment_Higher_Penalty_Collision.py` |
 
-|           | Machine                 |
-|-----------|-------------------------|
-| No Shield | HighwayEnvironment.mch  |
-| Shield    | HighwayEnvironment2.mch |
+|             | Machine                   |
+|-------------|---------------------------|
+| `No Shield` | `HighwayEnvironment.mch`  |
+| `Shield`    | `HighwayEnvironment2.mch` |
 
-|                            | Saved Traces                                                              |
-|----------------------------|---------------------------------------------------------------------------|
-| Base + No Shield           | Open HighwayEnvironment.mch, load Traces_Base                             |
-| Base + Shield              | Open HighwayEnvironment2.mch, load Traces_Base_Shield                     |
-| Higher Penalty + No Shield | Open HighwayEnvironment.mch, load Traces_Higher_Penalty_Collision         |
-| Higher Penalty + Shield    | Open HighwayEnvironment2.mch, load Traces_Higher_Penalty_Collision_Shield |
+|                                | Saved Traces                                                                  |
+|--------------------------------|-------------------------------------------------------------------------------|
+| `Base` + `No Shield`           | Open `HighwayEnvironment.mch`, load `Traces_Base`                             |
+| `Base` + `Shield`              | Open `HighwayEnvironment2.mch`, load `Traces_Base_Shield`                     |
+| `Higher Penalty` + `No Shield` | Open `HighwayEnvironment.mch`, load `Traces_Higher_Penalty_Collision`         |
+| `Higher Penalty` + `Shield`    | Open `HighwayEnvironment2.mch`, load `Traces_Higher_Penalty_Collision_Shield` |
 
 ## Implementation overview
 
