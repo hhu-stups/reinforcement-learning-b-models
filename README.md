@@ -72,6 +72,18 @@ the set of timed traces `Traces_Base` via SimB.
 | On Right Lane [s] | 32.18 +- 22.42      | 42.84 +- 20.70    | 47.67 +- 17.96                | 49.33 +- 17.69             |
 | Total Reward      | 30.41 +- 17.39      | 42.88 +- 8.86     | 39.90 +- 11.77                | 44.20 +- 4.42              |
 
+
+#### Likelihood of Safety Properties in a 60 s Run
+
+| Safety Property                                                                                                                                   | Base without Shield | Base with Shield | Higher Penalty without Shield | Higher Penalty with Shield |
+|---------------------------------------------------------------------------------------------------------------------------------------------------|---------------------|------------------|-------------------------------|----------------------------|
+| SAF1: The agent must avoid collisions with other vehicles.                                                                                        | 45.4 %              | 91.8 %           | 78.5 %                        | 97.4 %                     |
+| SAF2: The agent must drive faster than 20 m/s.                                                                                                    | 93.4 %              | 91.4 %           | 76.9 %                        | 83.0 %                     |
+| SAF3: The agent must drive slower than 30 m/s.                                                                                                    | 95.2 %              | 98.8 %           | 100.0 %                       | 100.0 %                    |
+| SAF4: The agent should decelerate at a maximum of 5 m/s^2                                                                                         | 100.0 %             | 100.0 %          | 100.0 %                       | 100.0 %                    |
+| SAF5: The agent should accelerate at a maximum of 5 m/s^2                                                                                         | 100.0 %             | 100.0 %          | 100.0 %                       | 100.0 %                    |
+| SAF6: To each other vehicle, the agent should keep a lateral  safety distance of at least 2 m and a longitudinal safety distance of at least 10 m | 6.6 %               | 49.2 %           | 41.6 %                        | 70.5 %                     |
+
 ## Implementation overview
 
 ### Training of agents
