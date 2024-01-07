@@ -31,6 +31,9 @@
 
 ## Evaluation
 
+This part describes the instructions to re-produce our evaluation results.
+These are the Python and B machine files to start the `Base` and `Higher Penalty` Agents with and without shielding.
+
 |                  | RL Agent                                         |
 |------------------|--------------------------------------------------|
 | `Base`           | `HighwayEnvironment_Base.py`                     |
@@ -41,12 +44,22 @@
 | `No Shield` | `HighwayEnvironment.mch`  |
 | `Shield`    | `HighwayEnvironment2.mch` |
 
+For example: In order to re-run the `Base` agent without `Shielding`, one would have to load `HighwayEnvironment.mch` with `HighwayEnvironment_Base.py` via SimB
+As the RL agents' behavior are non-deterministic, particularly, probabilistic, the evaluation results might differ when re-running the agents for specific number of simulations.
+For our evaluation results, we have saved the traces that were generated as shown below:
+
+
 |                                | Saved Traces                                                                  |
 |--------------------------------|-------------------------------------------------------------------------------|
 | `Base` + `No Shield`           | Open `HighwayEnvironment.mch`, load `Traces_Base`                             |
 | `Base` + `Shield`              | Open `HighwayEnvironment2.mch`, load `Traces_Base_Shield`                     |
 | `Higher Penalty` + `No Shield` | Open `HighwayEnvironment.mch`, load `Traces_Higher_Penalty_Collision`         |
 | `Higher Penalty` + `Shield`    | Open `HighwayEnvironment2.mch`, load `Traces_Higher_Penalty_Collision_Shield` |
+
+For eaxmple: In order to re-run the results for `Base` + `No Shield` exacly with the same traces, it is necessary to open `HighwayEnvironment.mch` and load
+the set of timed traces `Traces_Base` via SimB.
+
+
 
 ## Implementation overview
 
