@@ -64,13 +64,13 @@ the set of timed traces `Traces_Base` via SimB.
 
 #### Estimation of Average Values with Standard Deviation
 
-| Metric            | Base without shield | Base with shield  | Higher Penalty without shield | Higher Penalty with shield |
-|-------------------|---------------------|-------------------|-------------------------------|----------------------------|
-| Episode Length    | 38.85 +- 22.41      | 56.71 +- 11.46    | 53.02 +- 15.32                | 59.16 +- 5.54              |
-| Velocity [m/s]    | 23.37 +- 2.17       | 21.49 +- 0.94     | 21.14 +- 0.79                 | 20.95 +- 0.63              |
-| Distance [m]      | 898.00 +- 478.83    | 1235.76 +- 245.44 | 1139.23 +- 322.99             | 1260.50 +- 122.73          |
-| On Right Lane [s] | 32.18 +- 22.42      | 42.84 +- 20.70    | 47.67 +- 17.96                | 49.33 +- 17.69             |
-| Total Reward      | 30.41 +- 17.39      | 42.88 +- 8.86     | 39.90 +- 11.77                | 44.20 +- 4.42              |
+| Metric            | Expression                                                                                                                               | Base without shield | Base with shield  | Higher Penalty without shield | Higher Penalty with shield |
+|-------------------|------------------------------------------------------------------------------------------------------------------------------------------|---------------------|-------------------|-------------------------------|----------------------------|
+| Episode Length    | *Inspection of Statistics*                                                                                                               | 38.85 +- 22.41      | 56.71 +- 11.46    | 53.02 +- 15.32                | 59.16 +- 5.54              |
+| Velocity [m/s]    | Average of `RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) +                    VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle))` | 23.37 +- 2.17       | 21.49 +- 0.94     | 21.14 +- 0.79                 | 20.95 +- 0.63              |
+| Distance [m]      | Sum of `VehiclesVx(EgoVehicle)`                                                                                                          | 898.00 +- 478.83    | 1235.76 +- 245.44 | 1139.23 +- 322.99             | 1260.50 +- 122.73          |
+| On Right Lane [s] | Sum of `IF VehiclesY(EgoVehicle) >= 7.0 THEN 1.0 ELSE 0.0 END`                                                                           | 32.18 +- 22.42      | 42.84 +- 20.70    | 47.67 +- 17.96                | 49.33 +- 17.69             |
+| Total Reward      | Sum of `Reward`                                                                                                                          | 30.41 +- 17.39      | 42.88 +- 8.86     | 39.90 +- 11.77                | 44.20 +- 4.42              |
 
 
 #### Likelihood of Safety Properties in a 60 s Run
