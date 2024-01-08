@@ -31,7 +31,7 @@
 
 ## Evaluation
 
-This part describes the instructions to re-produce our evaluation results.
+This part describes the instructions to re-produce our evaluation results for the RL agent of the Highway Environment.
 These are the Python and B machine files to start the `Base` and `Higher Penalty` Agents with and without shielding.
 
 |                  | RL Agent                                         |
@@ -56,11 +56,15 @@ For our evaluation results, we have saved the traces that were generated as show
 | `Higher Penalty` + `No Shield` | Open `HighwayEnvironment.mch`, load `Traces_Higher_Penalty_Collision`         |
 | `Higher Penalty` + `Shield`    | Open `HighwayEnvironment2.mch`, load `Traces_Higher_Penalty_Collision_Shield` |
 
-For eaxmple: In order to re-run the results for `Base` + `No Shield` exacly with the same traces, it is necessary to open `HighwayEnvironment.mch` and load
+For example: In order to re-run the results for `Base` + `No Shield` exacly with the same traces, it is necessary to open `HighwayEnvironment.mch` and load
 the set of timed traces `Traces_Base` via SimB.
 
 
 ### Results
+
+In the following, we show the results of applying SimB's statistical validation techniques to the RL agent of the Highway Environment.
+The corresponding validation tasks are part of the ProB2-UI project `RL_Project.prob2project` in the corresponding machines.
+They can be executed via the left-hand side of the SimB window.
 
 #### Estimation of Average Values with Standard Deviation
 
@@ -71,6 +75,8 @@ the set of timed traces `Traces_Base` via SimB.
 | Distance [m]      | Sum of `VehiclesVx(EgoVehicle)`                                                                                                          | 898.00 +- 478.83    | 1235.76 +- 245.44 | 1139.23 +- 322.99             | 1260.50 +- 122.73          |
 | On Right Lane [s] | Sum of `IF VehiclesY(EgoVehicle) >= 7.0 THEN 1.0 ELSE 0.0 END`                                                                           | 32.18 +- 22.42      | 42.84 +- 20.70    | 47.67 +- 17.96                | 49.33 +- 17.69             |
 | Total Reward      | Sum of `Reward`                                                                                                                          | 30.41 +- 17.39      | 42.88 +- 8.86     | 39.90 +- 11.77                | 44.20 +- 4.42              |
+
+Example: In order, to re-produce the results of Total Reward for `Base without shield`, one has to open `HighwayEnvironment.mch` and run the SimB validation task which computes the sum of `Reward` in `Traces_Base`.
 
 
 #### Likelihood of Safety Properties in a 60 s Run
@@ -83,6 +89,8 @@ the set of timed traces `Traces_Base` via SimB.
 | `SAF4`: The agent should decelerate at a maximum of 5 m/s^2                                                                                         | `Crash = FALSE =>    (VehiclesAx(EgoVehicle) < 0.0 =>      RSQRT(VehiclesAy(EgoVehicle) * VehiclesAy(EgoVehicle) +            VehiclesAx(EgoVehicle) * VehiclesAx(EgoVehicle))      <= 5.0)` | 100.0 %             | 100.0 %          | 100.0 %                       | 100.0 %                    |
 | `SAF5`: The agent should accelerate at a maximum of 5 m/s^2                                                                                         | `Crash = FALSE =>    (VehiclesAx(EgoVehicle) > 0.0 =>      RSQRT(VehiclesAy(EgoVehicle) * VehiclesAy(EgoVehicle) +            VehiclesAx(EgoVehicle) * VehiclesAx(EgoVehicle))      <= 5.0)` | 100.0 %             | 100.0 %          | 100.0 %                       | 100.0 %                    |
 | `SAF6`: To each other vehicle, the agent should keep a lateral  safety distance of at least 2 m and a longitudinal safety distance of at least 10 m | `not(#v. (v : Vehicles \\ {EgoVehicle} &       VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0 &       VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))`                                            | 6.6 %               | 49.2 %           | 41.6 %                        | 70.5 %                     |
+
+Example: In order, to re-produce the results of `SAF1` for `Base without shield`, one has to open `HighwayEnvironment.mch` and run the SimB validation task which checks `Crash = FALSE` as an invariant for all simulated traces.
 
 
 ## Implementation overview
