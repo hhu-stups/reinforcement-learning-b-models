@@ -15,7 +15,7 @@
 
 ![Load SimB Simulation](/images/Start_RL_Agent_3.png)
 
-5. Start the RL agent as a SimB simulation by clicking on the `Play` button
+5. Start the RL agent as a SimB simulation by clicking on the `Start` button
 
 ![Play SimB Simulation](/images/Start_RL_Agent_4.png)
 
