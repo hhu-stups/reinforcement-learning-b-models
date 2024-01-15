@@ -65,7 +65,7 @@ For the simulation to work, one has to apply the following steps:
 
 The operations represent the actions the RL agent can choose from. The formal model's state mainly represents the state of the environment. Safety shields are encoded by the operations' guards which are provided to the RL agent. Enabled operations are considered to be safe. Thus, the RL agent chooses the enabled operation/action with the highest predicted reward. The operations' substitutions model the desired behavior of the respective actions.
 
-An example for the FASTER of a HighwayEnvironment is as follows:
+An example for the `FASTER` of the HighwayEnvironment is as follows:
 
 ```
 FASTER = 
@@ -88,7 +88,7 @@ END
 
 Lines 2-4 shows the operation's guard which is used as safety shield.
 
-Lines 6-15 shows the operation's substitution describing the desired behavior after executing FASTER.
+Lines 6-15 shows the operation's substitution describing the desired behavior after executing `FASTER`.
 
 
 
