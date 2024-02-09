@@ -24,7 +24,7 @@ action_names = {
 action_names_inv = {val: key for key, val in action_names.items()}
 
 def get_x(obs):
-    return int(obs % 4)
+    return int(obs % 12)
 
 def get_y(obs):
     return int(obs / 12)
