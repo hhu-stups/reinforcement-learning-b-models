@@ -336,5 +336,5 @@ if __name__ == '__main__':
 
                     print(actionName)
                     print(delta if i == n_agents - 1 else 0)
-                    print("drone = {0}".format(i+1) + " & " + "drone_positions = {0}".format(get_drone_positions(obs)))
+                    print("drone_positions = {0}".format(get_drone_positions(obs)))
                     print("true" if done else "false")

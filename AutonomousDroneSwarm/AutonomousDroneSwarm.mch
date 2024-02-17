@@ -2,7 +2,8 @@ MACHINE AutonomousDroneSwarm
 
 VARIABLES 
   visited,
-  drone_positions
+  drone_positions,
+  current_drone
 
 CONSTANTS m, n
 PROPERTIES m = 10 & n = 2
@@ -10,48 +11,54 @@ PROPERTIES m = 10 & n = 2
 INVARIANT
   visited : POW((1..n) * ((0..m-1) * (0..m-1))) &
   drone_positions : 1..n --> (0..m-1) * (0..m-1) &
-  card(ran(drone_positions)) <= 2
+  card(ran(drone_positions)) <= n & 
+  current_drone : 1..n
 
 
 INITIALISATION
   drone_positions :: 1..n --> (0..m-1) * (0..m-1);
-  visited := drone_positions
+  visited := drone_positions;
+  current_drone := 1
 
 OPERATIONS
-  Move_Left(drone) =
+  Move_Left =
   PRE
-    drone : 1.. n & prj1(drone_positions(drone)) > 0/* & 
-    prj1(drone_positions(drone)) - 1 |-> prj2(drone_positions(drone)) /: ran(drone_positions)*/
+    prj1(drone_positions(current_drone)) > 0 & 
+    prj1(drone_positions(current_drone)) - 1 |-> prj2(drone_positions(current_drone)) /: ran(drone_positions)
   THEN
     drone_positions :: 1..n --> (0..m-1) * (0..m-1);
-    visited := visited \/ (drone_positions |>> ran(visited))
+    visited := visited \/ (drone_positions |>> ran(visited));
+    current_drone := IF current_drone + 1 = n+1 THEN 1 ELSE current_drone + 1 END
   END;
 
-  Move_Down(drone) =
+  Move_Down =
   PRE
-    drone : 1.. n & prj2(drone_positions(drone)) < m/* &
-    prj1(drone_positions(drone)) |-> prj2(drone_positions(drone)) + 1 /: ran(drone_positions)*/
+    prj2(drone_positions(current_drone)) < m-1 &
+    prj1(drone_positions(current_drone)) |-> prj2(drone_positions(current_drone)) + 1 /: ran(drone_positions)
   THEN
     drone_positions :: 1..n --> (0..m-1) * (0..m-1);
-    visited := visited \/ (drone_positions |>> ran(visited))
+    visited := visited \/ (drone_positions |>> ran(visited));
+    current_drone := IF current_drone + 1 = n+1 THEN 1 ELSE current_drone + 1 END
   END;
 
-  Move_Right(drone) =
+  Move_Right =
   PRE
-    drone : 1.. n & prj1(drone_positions(drone)) < m/* &
-    prj1(drone_positions(drone)) + 1 |-> prj2(drone_positions(drone)) /: ran(drone_positions)*/
+    prj1(drone_positions(current_drone)) < m-1 &
+    prj1(drone_positions(current_drone)) + 1 |-> prj2(drone_positions(current_drone)) /: ran(drone_positions)
   THEN
     drone_positions :: 1..n --> (0..m-1) * (0..m-1);
-    visited := visited \/ (drone_positions |>> ran(visited))
+    visited := visited \/ (drone_positions |>> ran(visited));
+    current_drone := IF current_drone + 1 = n+1 THEN 1 ELSE current_drone + 1 END
   END;
 
-  Move_Up(drone) =
+  Move_Up =
   PRE
-    drone : 1.. n & prj2(drone_positions(drone)) > 0/* &
-    prj1(drone_positions(drone)) |-> prj2(drone_positions(drone)) - 1 /: ran(drone_positions)*/
+    prj2(drone_positions(current_drone)) > 0 &
+    prj1(drone_positions(current_drone)) |-> prj2(drone_positions(current_drone)) - 1 /: ran(drone_positions)
   THEN
     drone_positions :: 1..n --> (0..m-1) * (0..m-1);
-    visited := visited \/ (drone_positions |>> ran(visited))
+    visited := visited \/ (drone_positions |>> ran(visited));
+    current_drone := IF current_drone + 1 = n+1 THEN 1 ELSE current_drone + 1 END
   END
 
 
