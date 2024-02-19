@@ -1,0 +1,21 @@
+{
+  "svg":"AutonomousDroneSwarm.svg",
+  "items":[
+    {
+      "for":{"from":1,"to":10},
+      "for":{"from":1,"to":10},
+      "id": "tile%0x%1",
+      "attr": "fill",
+      "value": "IF drone_positions(1) = (%0 - 1 |-> %1 - 1) THEN IF drone_positions(1) = drone_positions(2) THEN \"yellow\" ELSE \"blue\" END ELSE IF drone_positions(2) = (%0 - 1 |-> %1 - 1) THEN \"green\" ELSE IF (%0 - 1 |-> %1 - 1) /: visited THEN \"white\" ELSE \"lime\" END END END"
+    },
+    {
+      "for":{"from":1,"to":10},
+      "for":{"from":1,"to":10},
+      "id": "tile%0x%1",
+      "attr": "visibility",
+      "value": "IF %0 <= m & %1 <= m THEN \"visible\" ELSE \"hidden\" END"
+    }
+  ],
+  "events": []
+}
+
