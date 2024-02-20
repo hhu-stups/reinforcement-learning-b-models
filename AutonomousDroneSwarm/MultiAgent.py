@@ -338,3 +338,5 @@ if __name__ == '__main__':
                     print(delta if i == n_agents - 1 else 0)
                     print("drone_positions = {0}".format(get_drone_positions(obs)))
                     print("true" if done else "false")
+                    if done:
+                        break

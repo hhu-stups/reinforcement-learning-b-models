@@ -10,13 +10,12 @@ PROPERTIES m = 10 & n = 2
 
 INVARIANT
   visited : POW((1..n) * ((0..m-1) * (0..m-1))) &
-  drone_positions : 1..n >-> (0..m-1) * (0..m-1) &
-  card(ran(drone_positions)) = n & 
+  drone_positions : 1..n --> (0..m-1) * (0..m-1) &
   current_drone : 1..n
 
 
 INITIALISATION
-  drone_positions :: 1..n >-> (0..m-1) * (0..m-1);
+  drone_positions :: 1..n --> (0..m-1) * (0..m-1);
   visited := drone_positions;
   current_drone := 1
 

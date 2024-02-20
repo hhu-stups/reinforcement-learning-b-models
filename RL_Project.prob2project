@@ -1620,9 +1620,9 @@
         {
           "searchStrategy": "MIXED_BF_DF",
           "options": [
+            "PARTIAL_GUARD_EVALUATION",
             "PARTIAL_ORDER_REDUCTION",
             "FIND_INVARIANT_VIOLATIONS",
-            "PARTIAL_GUARD_EVALUATION",
             "FIND_DEADLOCKS"
           ],
           "shouldExecute": true
@@ -1632,7 +1632,16 @@
       "simulations": [
         {
           "path": "FrozenLake/FrozenLake.py",
-          "simulationItems": []
+          "simulationItems": [
+            {
+              "type": "MONTE_CARLO_SIMULATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 100,
+                "ENDING_TIME": 100000
+              }
+            }
+          ]
         }
       ],
       "visBVisualisation": "FrozenLake/visualization/FrozenLake.json",
@@ -1656,7 +1665,16 @@
       "simulations": [
         {
           "path": "CliffWalking/CliffWalking.py",
-          "simulationItems": []
+          "simulationItems": [
+            {
+              "type": "MONTE_CARLO_SIMULATION",
+              "information": {
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 100,
+                "ENDING_TIME": 100000
+              }
+            }
+          ]
         }
       ],
       "visBVisualisation": "CliffWalking/visualization/CliffWalking.json",
@@ -1736,9 +1754,9 @@
         {
           "searchStrategy": "MIXED_BF_DF",
           "options": [
+            "PARTIAL_GUARD_EVALUATION",
             "PARTIAL_ORDER_REDUCTION",
             "FIND_INVARIANT_VIOLATIONS",
-            "PARTIAL_GUARD_EVALUATION",
             "FIND_DEADLOCKS"
           ],
           "shouldExecute": true
@@ -1752,7 +1770,21 @@
         },
         {
           "path": "AutonomousDroneSwarm/MultiAgent2.py",
-          "simulationItems": []
+          "simulationItems": [
+            {
+              "type": "HYPOTHESIS_TEST",
+              "information": {
+                "SIGNIFICANCE": 0.05,
+                "PROBABILITY": 0.95,
+                "MAX_STEPS_BEFORE_PROPERTY": 0,
+                "EXECUTIONS": 100,
+                "PREDICATE": "card(visited) = 100",
+                "ENDING_TIME": 100000,
+                "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+                "CHECKING_TYPE": "PREDICATE_FINAL"
+              }
+            }
+          ]
         }
       ],
       "visBVisualisation": "AutonomousDroneSwarm/visualization/AutonomousDroneSwarm.json",
@@ -1927,7 +1959,7 @@
   "metadata": {
     "fileType": "Project",
     "formatVersion": 38,
-    "savedAt": "2024-02-19T13:08:54.555549Z",
+    "savedAt": "2024-02-19T20:43:15.517289Z",
     "creator": "User",
     "proB2KernelVersion": "4.12.3-SNAPSHOT",
     "proBCliVersion": null,
