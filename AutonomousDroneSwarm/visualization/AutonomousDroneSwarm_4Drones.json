@@ -1,0 +1,57 @@
+{
+  "svg":"AutonomousDroneSwarm.svg",
+  "items":[
+    {
+      "for":{"from":1,"to":10},
+      "for":{"from":1,"to":10},
+      "id": "tile%0x%1",
+      "attr": "fill",
+      "value": "IF card(drone_positions~[{(%0 - 1 |-> %1 - 1)}]) > 1 THEN
+                 \"yellow\"
+               ELSE
+                 IF drone_positions~[{(%0 - 1 |-> %1 - 1)}] = {1} THEN
+                   \"green\"
+                 ELSE
+                   IF drone_positions~[{(%0 - 1 |-> %1 - 1)}] = {2} THEN
+                     \"blue\"
+                   ELSE
+                     IF drone_positions~[{(%0 - 1 |-> %1 - 1)}] = {3} THEN
+                       \"red\"
+                     ELSE
+                       IF drone_positions~[{(%0 - 1 |-> %1 - 1)}] = {4} THEN
+                         \"orange\"
+                       ELSE
+                         IF (%0 - 1 |-> %1 - 1) /: ran(visited) THEN 
+                           \"white\" 
+                         ELSE 
+                           IF visited~[{(%0 - 1 |-> %1 - 1)}] = {1} THEN
+                             \"lime\"
+                           ELSE
+                             IF visited~[{(%0 - 1 |-> %1 - 1)}] = {2} THEN
+                               \"aqua\" 
+                             ELSE
+                               IF visited~[{(%0 - 1 |-> %1 - 1)}] = {3} THEN
+                                 \"#FFCCCB\"
+                               ELSE
+                                  \"#FED8B1\"
+                               END
+                             END
+                           END
+                         END
+                       END
+                     END
+                   END
+                 END
+               END"
+    },
+    {
+      "for":{"from":1,"to":10},
+      "for":{"from":1,"to":10},
+      "id": "tile%0x%1",
+      "attr": "visibility",
+      "value": "IF %0 <= m & %1 <= m THEN \"visible\" ELSE \"hidden\" END"
+    }
+  ],
+  "events": []
+}
+
