@@ -54,7 +54,7 @@
                 "ENDING_TIME": 60000,
                 "EXPRESSION": "VehiclesVx(EgoVehicle)",
                 "DESIRED_VALUE": 800.0,
-                "CHECKING_TYPE": "SUM",
+                "CHECKING_TYPE": "SUM_MEAN_BETWEEN_STEPS",
                 "EPSILON": 250.0
               }
             },
@@ -249,7 +249,7 @@
                 "ENDING_TIME": 60000,
                 "EXPRESSION": "VehiclesVx(EgoVehicle)",
                 "DESIRED_VALUE": 1500.0,
-                "CHECKING_TYPE": "SUM",
+                "CHECKING_TYPE": "SUM_MEAN_BETWEEN_STEPS",
                 "EPSILON": 300.0
               }
             },
@@ -322,7 +322,7 @@
                 "PROBABILITY": 0.95,
                 "MAX_STEPS_BEFORE_PROPERTY": 0,
                 "EXECUTIONS": 1000,
-                "PREDICATE": "not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
+                "PREDICATE": "Crash = FALSE & not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
                 "ENDING_TIME": 60000,
                 "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
                 "CHECKING_TYPE": "PREDICATE_INVARIANT"
@@ -421,7 +421,7 @@
                 "ENDING_TIME": 60000,
                 "EXPRESSION": "VehiclesVx(EgoVehicle)",
                 "DESIRED_VALUE": 1500.0,
-                "CHECKING_TYPE": "SUM",
+                "CHECKING_TYPE": "SUM_MEAN_BETWEEN_STEPS",
                 "EPSILON": 300.0
               }
             },
@@ -494,7 +494,7 @@
                 "PROBABILITY": 0.95,
                 "MAX_STEPS_BEFORE_PROPERTY": 0,
                 "EXECUTIONS": 1000,
-                "PREDICATE": "not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
+                "PREDICATE": "Crash = FALSE & not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
                 "ENDING_TIME": 60000,
                 "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
                 "CHECKING_TYPE": "PREDICATE_INVARIANT"
@@ -517,7 +517,7 @@
           ]
         },
         {
-          "path": "Traces_Base",
+          "path": "HighwayEnvironment/Traces_Base",
           "simulationItems": [
             {
               "taskType": "SIMULATION",
@@ -567,7 +567,7 @@
                 "ENDING_TIME": 60000,
                 "EXPRESSION": "VehiclesVx(EgoVehicle)",
                 "DESIRED_VALUE": 1500.0,
-                "CHECKING_TYPE": "SUM",
+                "CHECKING_TYPE": "SUM_MEAN_BETWEEN_STEPS",
                 "EPSILON": 300.0
               }
             },
@@ -630,7 +630,7 @@
                 "SIGNIFICANCE": 0.01,
                 "PROBABILITY": 0.95,
                 "MAX_STEPS_BEFORE_PROPERTY": 0,
-                "PREDICATE": "not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
+                "PREDICATE": "Crash = FALSE & not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
                 "ENDING_TIME": 60000,
                 "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
                 "CHECKING_TYPE": "PREDICATE_INVARIANT"
@@ -658,14 +658,14 @@
                 "ENDING_TIME": 60000,
                 "EXPRESSION": "IF VehiclesY(EgoVehicle) >= 7.0 THEN 1.0 ELSE 0.0 END",
                 "DESIRED_VALUE": 30.0,
-                "CHECKING_TYPE": "SUM",
+                "CHECKING_TYPE": "SUM_MEAN_BETWEEN_STEPS",
                 "EPSILON": 30.0
               }
             }
           ]
         },
         {
-          "path": "Traces_Higher_Penalty_Collision",
+          "path": "HighwayEnvironment/Traces_Higher_Penalty_Collision",
           "simulationItems": [
             {
               "taskType": "SIMULATION",
@@ -715,7 +715,7 @@
                 "ENDING_TIME": 60000,
                 "EXPRESSION": "VehiclesVx(EgoVehicle)",
                 "DESIRED_VALUE": 1500.0,
-                "CHECKING_TYPE": "SUM",
+                "CHECKING_TYPE": "SUM_MEAN_BETWEEN_STEPS",
                 "EPSILON": 300.0
               }
             },
@@ -778,7 +778,7 @@
                 "SIGNIFICANCE": 0.01,
                 "PROBABILITY": 0.95,
                 "MAX_STEPS_BEFORE_PROPERTY": 0,
-                "PREDICATE": "not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
+                "PREDICATE": "Crash = FALSE & not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
                 "ENDING_TIME": 60000,
                 "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
                 "CHECKING_TYPE": "PREDICATE_INVARIANT"
@@ -806,7 +806,7 @@
                 "ENDING_TIME": 60000,
                 "EXPRESSION": "IF VehiclesY(EgoVehicle) >= 7.0 THEN 1.0 ELSE 0.0 END",
                 "DESIRED_VALUE": 30.0,
-                "CHECKING_TYPE": "SUM",
+                "CHECKING_TYPE": "SUM_MEAN_BETWEEN_STEPS",
                 "EPSILON": 30.0
               }
             }
@@ -880,7 +880,7 @@
                 "ENDING_TIME": 60000,
                 "EXPRESSION": "VehiclesVx(EgoVehicle)",
                 "DESIRED_VALUE": 800.0,
-                "CHECKING_TYPE": "SUM",
+                "CHECKING_TYPE": "SUM_MEAN_BETWEEN_STEPS",
                 "EPSILON": 250.0
               }
             },
@@ -989,7 +989,7 @@
                 "SIGNIFICANCE": 0.01,
                 "PROBABILITY": 0.95,
                 "MAX_STEPS_BEFORE_PROPERTY": 0,
-                "PREDICATE": "not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
+                "PREDICATE": "Crash = FALSE & not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
                 "ENDING_TIME": 60000,
                 "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
                 "CHECKING_TYPE": "PREDICATE_INVARIANT"
@@ -1122,7 +1122,7 @@
                 "ENDING_TIME": 60000,
                 "EXPRESSION": "VehiclesVx(EgoVehicle)",
                 "DESIRED_VALUE": 1500.0,
-                "CHECKING_TYPE": "SUM",
+                "CHECKING_TYPE": "SUM_MEAN_BETWEEN_STEPS",
                 "EPSILON": 300.0
               }
             },
@@ -1190,7 +1190,7 @@
                 "SIGNIFICANCE": 0.01,
                 "PROBABILITY": 0.95,
                 "MAX_STEPS_BEFORE_PROPERTY": 0,
-                "PREDICATE": "not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
+                "PREDICATE": "Crash = FALSE & not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
                 "ENDING_TIME": 60000,
                 "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
                 "CHECKING_TYPE": "PREDICATE_INVARIANT"
@@ -1302,7 +1302,7 @@
                 "ENDING_TIME": 60000,
                 "EXPRESSION": "VehiclesVx(EgoVehicle)",
                 "DESIRED_VALUE": 1500.0,
-                "CHECKING_TYPE": "SUM",
+                "CHECKING_TYPE": "SUM_MEAN_BETWEEN_STEPS",
                 "EPSILON": 300.0
               }
             },
@@ -1375,7 +1375,7 @@
                 "PROBABILITY": 0.95,
                 "MAX_STEPS_BEFORE_PROPERTY": 0,
                 "EXECUTIONS": 1000,
-                "PREDICATE": "not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
+                "PREDICATE": "Crash = FALSE & not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
                 "ENDING_TIME": 60000,
                 "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
                 "CHECKING_TYPE": "PREDICATE_INVARIANT"
@@ -1448,7 +1448,7 @@
                 "ENDING_TIME": 60000,
                 "EXPRESSION": "VehiclesVx(EgoVehicle)",
                 "DESIRED_VALUE": 1500.0,
-                "CHECKING_TYPE": "SUM",
+                "CHECKING_TYPE": "SUM_MEAN_BETWEEN_STEPS",
                 "EPSILON": 300.0
               }
             },
@@ -1511,7 +1511,7 @@
                 "SIGNIFICANCE": 0.01,
                 "PROBABILITY": 0.95,
                 "MAX_STEPS_BEFORE_PROPERTY": 0,
-                "PREDICATE": "not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
+                "PREDICATE": "Crash = FALSE & not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
                 "ENDING_TIME": 60000,
                 "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
                 "CHECKING_TYPE": "PREDICATE_INVARIANT"
@@ -1539,7 +1539,7 @@
                 "ENDING_TIME": 60000,
                 "EXPRESSION": "IF VehiclesY(EgoVehicle) >= 7.0 THEN 1.0 ELSE 0.0 END",
                 "DESIRED_VALUE": 30.0,
-                "CHECKING_TYPE": "SUM",
+                "CHECKING_TYPE": "SUM_MEAN_BETWEEN_STEPS",
                 "EPSILON": 30.0
               }
             }
@@ -1596,7 +1596,7 @@
                 "ENDING_TIME": 60000,
                 "EXPRESSION": "VehiclesVx(EgoVehicle)",
                 "DESIRED_VALUE": 1500.0,
-                "CHECKING_TYPE": "SUM",
+                "CHECKING_TYPE": "SUM_MEAN_BETWEEN_STEPS",
                 "EPSILON": 300.0
               }
             },
@@ -1659,7 +1659,7 @@
                 "SIGNIFICANCE": 0.01,
                 "PROBABILITY": 0.95,
                 "MAX_STEPS_BEFORE_PROPERTY": 0,
-                "PREDICATE": "not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
+                "PREDICATE": "Crash = FALSE & not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
                 "ENDING_TIME": 60000,
                 "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
                 "CHECKING_TYPE": "PREDICATE_INVARIANT"
@@ -1687,7 +1687,7 @@
                 "ENDING_TIME": 60000,
                 "EXPRESSION": "IF VehiclesY(EgoVehicle) >= 7.0 THEN 1.0 ELSE 0.0 END",
                 "DESIRED_VALUE": 30.0,
-                "CHECKING_TYPE": "SUM",
+                "CHECKING_TYPE": "SUM_MEAN_BETWEEN_STEPS",
                 "EPSILON": 30.0
               }
             }
