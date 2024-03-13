@@ -61,7 +61,7 @@ def get_VehiclesAx(obs, prev_obs):
 def get_VehiclesAy(obs, prev_obs):
     if prev_obs is None:
         return "{{EgoVehicle |-> {0}, Vehicles2 |-> {1}, Vehicles3 |-> {2}, Vehicles4 |-> {3}, Vehicles5 |-> {4}}}".format(0.0, 0.0, 0.0, 0.0, 0.0)
-    return "{{EgoVehicle |-> {0}, Vehicles2 |-> {1}, Vehicles3 |-> {2}, Vehicles4 |-> {3}, Vehicles5 |-> {4}}}".format(obs[0][4]*80 - prev_obs[0][4] * 80, obs[1][4] * 80  - prev_obs[1][4]*80, obs[2][4]*80  - prev_obs[2][4]*80, obs[3][4]*80  - prev_obs[3][4]*80, obs[4][4]*80 -  - prev_obs[4][4]*80)
+    return "{{EgoVehicle |-> {0}, Vehicles2 |-> {1}, Vehicles3 |-> {2}, Vehicles4 |-> {3}, Vehicles5 |-> {4}}}".format(obs[0][4]*80 - prev_obs[0][4] * 80, obs[1][4] * 80  - prev_obs[1][4]*80, obs[2][4]*80  - prev_obs[2][4]*80, obs[3][4]*80  - prev_obs[3][4]*80, obs[4][4]*80 - prev_obs[4][4]*80)
 
 def get_Reward(obs, rewards):
     return rewards * 1.0
