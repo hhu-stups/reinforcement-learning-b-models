@@ -24,12 +24,12 @@ VARIABLES
 INVARIANT
     Crash : BOOL &
     PresentVehicles : POW(Vehicles) &
-    VehiclesX : Vehicles --> REAL &
-    VehiclesY : Vehicles --> REAL &
-    VehiclesVx : Vehicles --> REAL &
-    VehiclesVy : Vehicles --> REAL &
-    VehiclesAx : Vehicles --> REAL &
-    VehiclesAy : Vehicles --> REAL &
+    VehiclesX : PresentVehicles --> REAL &
+    VehiclesY : PresentVehicles --> REAL &
+    VehiclesVx : PresentVehicles --> REAL &
+    VehiclesVy : PresentVehicles --> REAL &
+    VehiclesAx : PresentVehicles --> REAL &
+    VehiclesAy : PresentVehicles --> REAL &
     Reward : REAL
 
 INITIALISATION
@@ -69,7 +69,7 @@ OPERATIONS
     Crash :: BOOL ||
     PresentVehicles :: POW(Vehicles);
     VehiclesX :: PresentVehicles --> REAL ||
-    VehiclesY :(VehiclesY : PresentVehicles --> REAL & (Crash = FALSE => (VehiclesY(EgoVehicle) <= VehiclesY$0(EgoVehicle) + 0.05)))  ||
+    VehiclesY :(VehiclesY : PresentVehicles --> REAL & (Crash = TRUE or (VehiclesY(EgoVehicle) <= VehiclesY$0(EgoVehicle) + 0.05)))  ||
     VehiclesVx :: PresentVehicles --> REAL ||
     VehiclesVy :: PresentVehicles --> REAL ||
     VehiclesAx :: PresentVehicles --> REAL ||
@@ -87,7 +87,7 @@ OPERATIONS
     Crash :: BOOL ||
     PresentVehicles :: POW(Vehicles);
     VehiclesX :: PresentVehicles --> REAL ||
-    VehiclesY :(VehiclesY : PresentVehicles --> REAL & (Crash = FALSE => (VehiclesY(EgoVehicle) >= VehiclesY$0(EgoVehicle) - 0.05))) ||
+    VehiclesY :(VehiclesY : PresentVehicles --> REAL & (Crash = TRUE or (VehiclesY(EgoVehicle) >= VehiclesY$0(EgoVehicle) - 0.05))) ||
     VehiclesVx :: PresentVehicles --> REAL ||
     VehiclesVy :: PresentVehicles --> REAL ||
     VehiclesAx :: PresentVehicles --> REAL ||
@@ -103,9 +103,9 @@ OPERATIONS
     PresentVehicles :: POW(Vehicles);
     VehiclesX :: PresentVehicles --> REAL ||
     VehiclesY :: PresentVehicles --> REAL ||
-    VehiclesVx : (VehiclesVx : PresentVehicles --> REAL & VehiclesVx(EgoVehicle) >= VehiclesVx$0(EgoVehicle) - 0.05) ||
+    VehiclesVx : (VehiclesVx : PresentVehicles --> REAL & (Crash = TRUE or VehiclesVx(EgoVehicle) >= VehiclesVx$0(EgoVehicle) - 0.05)) ||
     VehiclesVy :: PresentVehicles --> REAL ||
-    VehiclesAx : (VehiclesAx : PresentVehicles --> REAL & VehiclesAx(EgoVehicle) >= -0.05) ||
+    VehiclesAx : (VehiclesAx : PresentVehicles --> REAL & (Crash = TRUE or VehiclesAx(EgoVehicle) >= -0.05)) ||
     VehiclesAy :: PresentVehicles --> REAL ||
     Reward :: REAL
   END;
@@ -130,10 +130,10 @@ OPERATIONS
     Crash :: BOOL ||
     PresentVehicles :: POW(Vehicles);
     VehiclesX :: PresentVehicles --> REAL || 
-    VehiclesY :: PresentVehicles --> REAL ||
-    VehiclesVx : (VehiclesVx : PresentVehicles --> REAL & VehiclesVx(EgoVehicle) <= VehiclesVx$0(EgoVehicle) + 0.05) ||
+    VehiclesY :: PresentVehicles --> REAL || 
+    VehiclesVx : (VehiclesVx : PresentVehicles --> REAL & (Crash = TRUE or VehiclesVx(EgoVehicle) <= VehiclesVx$0(EgoVehicle) + 0.05)) ||
     VehiclesVy :: PresentVehicles --> REAL ||
-    VehiclesAx : (VehiclesAx : PresentVehicles --> REAL & VehiclesAx(EgoVehicle) <= 0.05) ||
+    VehiclesAx : (VehiclesAx : PresentVehicles --> REAL & (Crash = TRUE or VehiclesAx(EgoVehicle) <= 0.05)) ||
     VehiclesAy :: PresentVehicles --> REAL ||
     Reward :: REAL
   END
