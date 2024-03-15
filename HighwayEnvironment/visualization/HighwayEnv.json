@@ -34,7 +34,7 @@
       "svg_class":"line",
       "id":"speed%0",
       "stroke":"white",
-      "visibility":"hidden",
+      "visibility":"visible",
       "stroke-width":"0.8",
       "marker-start": "url(#circlemarker)",
       "marker-end":"url(#arrowhead)"
@@ -94,13 +94,13 @@
       "for":{"from":2,"to":"card(Vehicles)"}, 
       "id": "speed%0",
       "attr": "x2",
-      "value":"xpos(Vehicles%0)+10.0*VehiclesVx(Vehicles%0)+vehicle_length/2.0"
+      "value":"xpos(Vehicles%0)+1.0*(VehiclesVx(Vehicles%0) + VehiclesVx(EgoVehicle))+vehicle_length/2.0"
     },
     {
       "for":{"from":2,"to":"card(Vehicles)"}, 
       "id": "speed%0",
       "attr": "y2",
-      "value":"ypos(Vehicles%0)+10.0*VehiclesVy(Vehicles%0) + vehicle_height/2.0"
+      "value":"ypos(Vehicles%0)+1.0*(VehiclesVy(Vehicles%0) + VehiclesVy(EgoVehicle)) + vehicle_height/2.0"
     },
     {
       "id": "speed1",
@@ -115,12 +115,12 @@
     {
       "id": "speed1",
       "attr": "x2",
-      "value":"ego_xpos+10.0*VehiclesVx(EgoVehicle)+vehicle_length/2.0"
+      "value":"ego_xpos+1.0*VehiclesVx(EgoVehicle)+vehicle_length/2.0"
     },
     {
       "id": "speed1",
       "attr": "y2",
-      "value":"ego_ypos+10.0*VehiclesVy(EgoVehicle) + vehicle_height/2.0"
+      "value":"ego_ypos+1.0*VehiclesVy(EgoVehicle) + vehicle_height/2.0"
     }
   ],
   "events": [
