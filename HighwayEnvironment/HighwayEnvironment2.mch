@@ -1,4 +1,4 @@
-MACHINE HighwayEnvironment3
+MACHINE HighwayEnvironment2
 
 SETS
     Vehicles
@@ -11,20 +11,20 @@ PROPERTIES
     EgoVehicle : Vehicles
 
 VARIABLES
-    Crash,
-    PresentVehicles,
-    VehiclesX,
-    VehiclesY,
-    VehiclesVx,
-    VehiclesVy,
-    VehiclesAx,
-    VehiclesAy,
+    Crash       /*@desc "TRUE when a crash occurred" */,
+    PresentVehicles /*@desc "The vehicles that are on screen" */,
+    VehiclesX   /*@desc "x-coordinates of the vehicles" */,
+    VehiclesY   /*@desc "y-coordinates of the vehicles" */,
+    VehiclesVx  /*@desc "horizontal speed of the vehicles" */,
+    VehiclesVy  /*@desc "vertical speed of the vehicles" */,
+    VehiclesAx  /*@desc "horizontal acceleration of the vehicles" */,
+    VehiclesAy  /*@desc "vertical acceleration of the vehicles" */,
     Reward
 
 INVARIANT
     Crash : BOOL &
     PresentVehicles : POW(Vehicles) &
-    EgoVehicle : PresentVehicles &
+    EgoVehicle : PresentVehicles  /*@desc "the Ego vehicle is always present" */ &
     VehiclesX : Vehicles --> REAL &
     VehiclesY : Vehicles --> REAL &
     VehiclesVx : Vehicles --> REAL &
