@@ -15,17 +15,29 @@
     { "name":"vehicle_length",
        "value" :"50.0"
     },
+    { "name":"SCALE",
+       "value" :"10.0"
+    },
     { "name":"ego_xpos",
-      "value":"xoffset - 10.0 * 2.0/2.0"
+      "value":"xoffset - SCALE * 2.0/2.0"
     },
     { "name":"ego_ypos",
-      "value":"yoffset + 10.0 * (VehiclesY(EgoVehicle) - 5.0/2.0)"
+      "value":"yoffset + SCALE * (VehiclesY(EgoVehicle) - 5.0/2.0)"
     },
     { "name":"xpos",
-      "value":"%v.(v:Vehicles|xoffset + 10.0 * (VehiclesX(v) - 2.0/2.0))"
+      "value":"%v.(v:Vehicles|xoffset + SCALE * (VehiclesX(v) - 2.0/2.0))"
     },
     { "name":"ypos",
-      "value":"%v.(v:Vehicles|yoffset + 10.0 * (VehiclesY(EgoVehicle) + VehiclesY(v) - 5.0/2.0))"
+      "value":"%v.(v:Vehicles|yoffset + SCALE * (VehiclesY(EgoVehicle) + VehiclesY(v) - 5.0/2.0))"
+    },
+    { "name":"brakeDistance",
+      "value":"%(initialSpeed,brakeAcc).(initialSpeed:REAL & brakeAcc:REAL | (initialSpeed**2)/(2.0*brakeAcc))"
+    },
+    { "name":"brakeMax",
+      "value" : "5.0"
+    },
+    { "name":"Vehicles1",
+      "value" : "EgoVehicle"
     }
   ],
   "svg_objects":[
@@ -65,6 +77,16 @@
       "marker-end":"url(#arrowhead)"
     },
     {
+      "for":{"from":1,"to":"card(Vehicles)"}, 
+      "svg_class":"line",
+      "id":"brakeline%0",
+      "stroke":"orange",
+      "visibility":"hidden",
+      "stroke-width":"0.8",
+      "marker-start": "url(#circlemarker)",
+      "marker-end":"url(#arrowhead)"
+    },
+    {
       "svg_class":"text",
       "id":"infotext",
       "x":100,
@@ -92,46 +114,32 @@
     {
       "for":{"from":2,"to":"card(Vehicles)"}, 
       "id": "speed%0",
-      "attr": "x1",
-      "value":"xpos(Vehicles%0)+vehicle_length/2.0"
+      "x1":"xpos(Vehicles%0)+vehicle_length/2.0",
+      "y1":"ypos(Vehicles%0) + vehicle_height/2.0",
+      "x2":"xpos(Vehicles%0)+SCALE*VehiclesVx(Vehicles%0) + vehicle_length/2.0",
+      "y2":"ypos(Vehicles%0)+SCALE*VehiclesVy(Vehicles%0) + vehicle_height/2.0"
+    },
+    {
+      "id": "speed1",
+      "x1":"ego_xpos + vehicle_length/2.0",
+      "y1":"ego_ypos + vehicle_height/2.0",
+      "x2":"ego_xpos+SCALE*VehiclesVx(EgoVehicle) + vehicle_length/2.0",
+      "y2":"ego_ypos+SCALE*VehiclesVy(EgoVehicle) + vehicle_height/2.0"
     },
     {
       "for":{"from":2,"to":"card(Vehicles)"}, 
-      "id": "speed%0",
-      "attr": "y1",
-      "value":"ypos(Vehicles%0) + vehicle_height/2.0"
+      "id": "brakeline%0",
+      "x1":"xpos(Vehicles%0) + vehicle_length",
+      "y1":"ypos(Vehicles%0) + vehicle_height",
+      "x2":"xpos(Vehicles%0) + SCALE*brakeDistance(VehiclesVx(Vehicles%0),brakeMax)+vehicle_length+5.0",
+      "y2":"ypos(Vehicles%0) + vehicle_height"
     },
     {
-      "for":{"from":2,"to":"card(Vehicles)"}, 
-      "id": "speed%0",
-      "attr": "x2",
-      "value":"xpos(Vehicles%0)+1.0*(VehiclesVx(Vehicles%0) + VehiclesVx(EgoVehicle))+vehicle_length/2.0"
-    },
-    {
-      "for":{"from":2,"to":"card(Vehicles)"}, 
-      "id": "speed%0",
-      "attr": "y2",
-      "value":"ypos(Vehicles%0)+1.0*(VehiclesVy(Vehicles%0) + VehiclesVy(EgoVehicle)) + vehicle_height/2.0"
-    },
-    {
-      "id": "speed1",
-      "attr": "x1",
-      "value":"ego_xpos+vehicle_length/2.0"
-    },
-    {
-      "id": "speed1",
-      "attr": "y1",
-      "value":"ego_ypos + vehicle_height/2.0"
-    },
-    {
-      "id": "speed1",
-      "attr": "x2",
-      "value":"ego_xpos+1.0*VehiclesVx(EgoVehicle)+vehicle_length/2.0"
-    },
-    {
-      "id": "speed1",
-      "attr": "y2",
-      "value":"ego_ypos+1.0*VehiclesVy(EgoVehicle) + vehicle_height/2.0"
+      "id": "brakeline1",
+      "x1":"ego_xpos + vehicle_length",
+      "y1":"ego_ypos + vehicle_height",
+      "x2":"ego_xpos + SCALE*brakeDistance(VehiclesVx(EgoVehicle),brakeMax)+vehicle_length+5.0",
+      "y2":"ego_ypos + vehicle_height"
     }
   ],
   "events": [
@@ -140,14 +148,14 @@
       "id": "car_%0",
       "event": "",
       "hovers": [{ "attr":"opacity", "enter":"0.5", "leave":"1"},
-                 { "id": "speed%0","attr":"visibility", "enter":"visible", "leave":"hidden"},
+                 { "id": "brakeline%0","attr":"visibility", "enter":"visible", "leave":"hidden"},
                  { "id": "infotext","attr":"text", "enter":"Vehicle%0", "leave":""}]
     },
     {
       "id": "ego",
       "event": "",
       "hovers": [{ "attr":"opacity", "enter":"0.5", "leave":"1"},
-                 { "id": "speed1","attr":"visibility", "enter":"visible", "leave":"hidden"},
+                 { "id": "brakeline1","attr":"visibility", "enter":"visible", "leave":"hidden"},
                  { "id": "speed1","attr":"stroke", "enter":"red", "leave":"white"},
                  { "id": "infotext","attr":"text", "enter":"EgoVehicle", "leave":""}]
     }
