@@ -1,5 +1,5 @@
 {
-  "svg":"HighwayEnv.svg",
+  "svg":"HighwayEnvOld.svg",
   "definitions":[
     { "name":"xoffset",
       "value" :"100.0",
@@ -30,6 +30,31 @@
   ],
   "svg_objects":[
     {
+      "svg_class":"rect",
+      "id":"ego",
+      "fill":"red",
+      "visibility":"visible",
+      "width":"50",
+      "height":"20",
+      "x":"100",
+      "y":"90",
+      "rx":"5",
+      "title":"Ego vehicle"
+    },
+    {
+      "for":{"from":2,"to":"card(Vehicles)"}, 
+      "svg_class":"rect",
+      "id":"car_%0",
+      "fill":"blue",
+      "visibility":"visible",
+      "width":"50",
+      "height":"20",
+      "x":"100",
+      "y":"90",
+      "rx":"5",
+      "title":"other vehicle"
+    },
+    {
       "for":{"from":1,"to":"card(Vehicles)"}, 
       "svg_class":"line",
       "id":"speed%0",
@@ -53,13 +78,15 @@
     {
       "id": "ego",
       "x":"ego_xpos",
-      "y":"ego_ypos"
+      "y":"ego_ypos",
+      "title":"```Ego vehicle at x:${ego_xpos}, y:${ego_ypos}```"
     },
     {
       "for":{"from":2,"to":"card(Vehicles)"}, 
       "id": "car_%0",
       "x":"xpos(Vehicles%0)",
       "y":"ypos(Vehicles%0)",
+      "title":"```Vehicle %0 at x:${xpos(Vehicles%0)}, y:${ypos(Vehicles%0)}```",
       "visibility":"IF Vehicles%0 : PresentVehicles THEN \"visible\" ELSE \"hidden\" END"
     },
     {

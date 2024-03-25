@@ -30,6 +30,31 @@
   ],
   "svg_objects":[
     {
+      "svg_class":"rect",
+      "id":"ego",
+      "fill":"red",
+      "visibility":"visible",
+      "width":"50",
+      "height":"20",
+      "x":"100",
+      "y":"90",
+      "rx":"5",
+      "title":"Ego vehicle"
+    },
+    {
+      "for":{"from":2,"to":"card(Vehicles)"}, 
+      "svg_class":"rect",
+      "id":"car_%0",
+      "fill":"blue",
+      "visibility":"visible",
+      "width":"50",
+      "height":"20",
+      "x":"100",
+      "y":"90",
+      "rx":"5",
+      "title":"other vehicle"
+    },
+    {
       "for":{"from":1,"to":"card(Vehicles)"}, 
       "svg_class":"line",
       "id":"speed%0",
@@ -52,31 +77,17 @@
   "items":[
     {
       "id": "ego",
-      "attr": "x",
-      "value":"ego_xpos"
-    },
-    {
-      "id": "ego",
-      "attr": "y",
-      "value":"ego_ypos"
+      "x":"ego_xpos",
+      "y":"ego_ypos",
+      "title":"```Ego vehicle at x:${VehiclesX(EgoVehicle)}, y:${VehiclesY(EgoVehicle)}```"
     },
     {
       "for":{"from":2,"to":"card(Vehicles)"}, 
       "id": "car_%0",
-      "attr": "x",
-      "value":"xpos(Vehicles%0)"
-    },
-    {
-      "for":{"from":2,"to":"card(Vehicles)"},
-      "id": "car_%0",
-      "attr": "y",
-      "value":"ypos(Vehicles%0)"
-    },
-    {
-      "for":{"from":2,"to":"card(Vehicles)"},
-      "id": "car_%0",
-      "attr": "visibility",
-      "value":"IF Vehicles%0 : PresentVehicles THEN \"visible\" ELSE \"hidden\" END"
+      "x":"xpos(Vehicles%0)",
+      "y":"ypos(Vehicles%0)",
+      "title":"```Vehicle %0 at x:${VehiclesX(Vehicles%0)}, y:${VehiclesY(Vehicles%0)}```",
+      "visibility":"IF Vehicles%0 : PresentVehicles THEN \"visible\" ELSE \"hidden\" END"
     },
     {
       "for":{"from":2,"to":"card(Vehicles)"}, 
