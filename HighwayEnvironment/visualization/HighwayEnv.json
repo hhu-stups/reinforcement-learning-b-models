@@ -63,8 +63,12 @@
     { "name":"dss_wrt_vehicle",
       "value" : "%(Other).(Other:Vehicles|dss_wrt_vx(VehiclesVx(EgoVehicle)+VehiclesVx(Other)))"
     },
+    { "name":"realSpeed",
+      "value" : "%v.(v:REAL|VehiclesVx(EgoVehicle)+v)",
+      "comment" : "compute real speed of other vehicles, as it is relative to EgoVehicle"
+    },
     { "name":"dss_all_lanes",
-      "value" : "dss_wrt_vx(VehiclesVx(EgoVehicle)+min(ran({EgoVehicle} <<| VehiclesVx)))",
+      "value" : "dss_wrt_vx(realSpeed(min(ran({EgoVehicle} <<| VehiclesVx))))",
       "comment" : "safe distance wrt slowest vehicle in all other lanes"
     }
   ],
@@ -80,6 +84,15 @@
       "y":"90",
       "rx":"5",
       "title":"Ego vehicle"
+    },
+    {
+      "svg_class":"text",
+      "id":"ego_text",
+      "font-size":"11.0",
+      "visibility":"visible",
+      "x":"100",
+      "y":"90",
+      "text":"Ego"
     },
     {
       "for":{"from":2,"to":"card(Vehicles)"}, 
@@ -142,6 +155,12 @@
       "title":"```Ego vehicle at x:${VehiclesX(EgoVehicle)}, y:${VehiclesY(EgoVehicle)}, vx:${VehiclesVx(EgoVehicle)}```"
     },
     {
+      "id": "ego_text",
+      "x":"ego_xpos-45.0",
+      "y":"ego_ypos+vehicle_height/2.0+4.0",
+      "text":"```vx:$[2f]{VehiclesVx(EgoVehicle)}```"
+    },
+    {
       "for":{"from":2,"to":"card(Vehicles)"}, 
       "id": "car_%0",
       "x":"xpos(Vehicles%0)",
@@ -169,7 +188,7 @@
       "id": "brakeline%0",
       "x1":"xpos(Vehicles%0) + vehicle_length",
       "y1":"ypos(Vehicles%0) + vehicle_height",
-      "x2":"xpos(Vehicles%0) + SCALE*brakeDistance(VehiclesVx(Vehicles%0),brakeMax)+vehicle_length+5.0",
+      "x2":"xpos(Vehicles%0) + SCALE*brakeDistance(realSpeed(VehiclesVx(Vehicles%0)),brakeMax)+vehicle_length+5.0",
       "y2":"ypos(Vehicles%0) + vehicle_height"
     },
     {
