@@ -54,6 +54,18 @@
     },
     { "name":"reactionDistance",
       "value" : "distanceTravelled(reactionTime,VehiclesVx(EgoVehicle),aMax)"
+    },
+    { "name":"dss_wrt_vx",
+      "value" : "%(VxOther).(VxOther:REAL|max({0.0, reactionDistance +
+       brakeDistance(VehiclesVx(EgoVehicle)+aMax*reactionTime,brakeMax) -
+       brakeDistance(VxOther,brakeMax)}))"
+    },
+    { "name":"dss_wrt_vehicle",
+      "value" : "%(Other).(Other:Vehicles|dss_wrt_vx(VehiclesVx(EgoVehicle)+VehiclesVx(Other)))"
+    },
+    { "name":"dss_all_lanes",
+      "value" : "dss_wrt_vx(VehiclesVx(EgoVehicle)+min(ran({EgoVehicle} <<| VehiclesVx)))",
+      "comment" : "safe distance wrt slowest vehicle in all other lanes"
     }
   ],
   "svg_objects":[
@@ -164,7 +176,7 @@
       "id": "brakeline1",
       "x1":"ego_xpos + vehicle_length",
       "y1":"ego_ypos + vehicle_height",
-      "x2":"ego_xpos + vehicle_length + SCALE*brakeDistance(VehiclesVx(EgoVehicle),brakeMax)",
+      "x2":"ego_xpos + vehicle_length + SCALE*dss_all_lanes",
       "y2":"ego_ypos + vehicle_height"
     },
     {
