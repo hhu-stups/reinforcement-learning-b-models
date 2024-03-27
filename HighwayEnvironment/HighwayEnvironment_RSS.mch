@@ -118,7 +118,7 @@ OPERATIONS
     VehiclesAx :: Vehicles --> REAL ||
     VehiclesAy :: Vehicles --> REAL ||
     Reward :: REAL ||
-    IF not(IDLE_ALLOWED) THEN ErrorMsg := ```FASTER was not ALLOWED at x:${VehiclesX(EgoVehicle)} y:${VehiclesY(EgoVehicle)}``` END
+    IF not(IDLE_ALLOWED) THEN ErrorMsg := ```IDLE was not ALLOWED at x:$[2f]{VehiclesX(EgoVehicle)} y:$[2f]{VehiclesY(EgoVehicle)}``` ELSE ErrorMsg := "IDLE ok" END
   END;
 
   LANE_LEFT =
@@ -138,7 +138,7 @@ OPERATIONS
     VehiclesAx :: Vehicles --> REAL ||
     VehiclesAy :: Vehicles --> REAL ||
     Reward :: REAL ||
-    IF not(LEFT_ALLOWED) THEN ErrorMsg := ```FASTER was not ALLOWED at x:${VehiclesX(EgoVehicle)} y:${VehiclesY(EgoVehicle)}``` END
+    IF not(LEFT_ALLOWED) THEN ErrorMsg := ```LEFT was not ALLOWED at x:$[2f]{VehiclesX(EgoVehicle)} y:$[2f]{VehiclesY(EgoVehicle)}``` ELSE ErrorMsg := "LEFT ok" END
   END;
 
   LANE_RIGHT =
@@ -158,7 +158,7 @@ OPERATIONS
     VehiclesAx :: Vehicles --> REAL ||
     VehiclesAy :: Vehicles --> REAL ||
     Reward :: REAL ||
-    IF not(RIGHT_ALLOWED) THEN ErrorMsg := ```FASTER was not ALLOWED at x:${VehiclesX(EgoVehicle)} y:${VehiclesY(EgoVehicle)}``` END
+    IF not(RIGHT_ALLOWED) THEN ErrorMsg := ```RIGHT was not ALLOWED at x:$[2f]{VehiclesX(EgoVehicle)} y:$[2f]{VehiclesY(EgoVehicle)}``` ELSE ErrorMsg := "RIGHT ok" END
   END;
 
   FASTER =
@@ -175,7 +175,7 @@ OPERATIONS
     VehiclesAx :: Vehicles --> REAL ||
     VehiclesAy :: Vehicles --> REAL ||
     Reward :: REAL ||
-    IF not(FASTER_ALLOWED) THEN ErrorMsg := ```FASTER was not ALLOWED at x:${VehiclesX(EgoVehicle)} y:${VehiclesY(EgoVehicle)}``` END
+    IF not(FASTER_ALLOWED) THEN ErrorMsg := ```FASTER was not ALLOWED at x:$[2f]{VehiclesX(EgoVehicle)} y:$[2f]{VehiclesY(EgoVehicle)}``` ELSE ErrorMsg := "FASTER ok" END
   END;
 
   SLOWER =
@@ -204,7 +204,8 @@ OPERATIONS
     VehiclesVy :: Vehicles --> REAL ||
     VehiclesAx :: Vehicles --> REAL ||
     VehiclesAy :: Vehicles --> REAL ||
-    Reward :: REAL
+    Reward :: REAL ||
+    ErrorMsg := "SLOWER (ok)"
   END
 
 END
