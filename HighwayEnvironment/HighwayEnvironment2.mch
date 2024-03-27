@@ -35,7 +35,7 @@ INVARIANT
 
 INITIALISATION
     Crash :: BOOL ||
-    PresentVehicles : (PresentVehicles : POW(Vehicles) & EgoVehicle : PresentVehicles);
+    PresentVehicles : (PresentVehicles : POW(Vehicles) & EgoVehicle : PresentVehicles) ||
     VehiclesX :: Vehicles --> REAL ||
     VehiclesY :: Vehicles --> REAL ||
     VehiclesVx :: Vehicles --> REAL ||
@@ -50,7 +50,7 @@ OPERATIONS
     not(#v. (v : PresentVehicles \ {EgoVehicle} & VehiclesX(v) > 0.0 & VehiclesX(v) < 35.0  & VehiclesY(v) < 3.5 & VehiclesY(v) > -3.5 & VehiclesVx(v) < 0.0))
   THEN
     Crash :: BOOL ||
-    PresentVehicles : (PresentVehicles : POW(Vehicles) & EgoVehicle : PresentVehicles);
+    PresentVehicles : (PresentVehicles : POW(Vehicles) & EgoVehicle : PresentVehicles) ||
     VehiclesX :: Vehicles --> REAL ||
     VehiclesY :: Vehicles --> REAL ||
     VehiclesVx :: Vehicles --> REAL ||
@@ -69,7 +69,7 @@ OPERATIONS
     not(#v. (v : PresentVehicles \ {EgoVehicle} & VehiclesX(v) > 15.0 & VehiclesX(v) <= 35.0  & VehiclesY(v) > -6.0 & VehiclesY(v) < -2.0 & VehiclesVx(v) < 0.0))
   THEN
     Crash :: BOOL ||
-    PresentVehicles : (PresentVehicles : POW(Vehicles) & EgoVehicle : PresentVehicles);
+    PresentVehicles : (PresentVehicles : POW(Vehicles) & EgoVehicle : PresentVehicles) ||
     VehiclesX :: Vehicles --> REAL ||
     VehiclesY :: Vehicles --> REAL ||
     VehiclesVx :: Vehicles --> REAL ||
@@ -88,7 +88,7 @@ OPERATIONS
     not(#v. (v : PresentVehicles \ {EgoVehicle} & VehiclesX(v) > 15.0 & VehiclesX(v) <= 35.0  & VehiclesY(v) < 6.0 & VehiclesY(v) > 2.0 & VehiclesVx(v) < 0.0))
   THEN
     Crash :: BOOL ||
-    PresentVehicles : (PresentVehicles : POW(Vehicles) & EgoVehicle : PresentVehicles);
+    PresentVehicles : (PresentVehicles : POW(Vehicles) & EgoVehicle : PresentVehicles) ||
     VehiclesX :: Vehicles --> REAL ||
     VehiclesY :: Vehicles --> REAL ||
     VehiclesVx :: Vehicles --> REAL ||
@@ -104,7 +104,7 @@ OPERATIONS
     not(#v. (v : PresentVehicles \ {EgoVehicle} & VehiclesX(v) > 0.0 & VehiclesX(v) < 45.0  & VehiclesY(v) < 3.5 & VehiclesY(v) > -3.5))
   THEN
     Crash :: BOOL ||
-    PresentVehicles : (PresentVehicles : POW(Vehicles) & EgoVehicle : PresentVehicles);
+    PresentVehicles : (PresentVehicles : POW(Vehicles) & EgoVehicle : PresentVehicles) ||
     VehiclesX :: Vehicles --> REAL ||
     VehiclesY :: Vehicles --> REAL ||
     VehiclesVx :: Vehicles --> REAL ||
@@ -133,7 +133,7 @@ OPERATIONS
     )))
   THEN
     Crash :: BOOL ||
-    PresentVehicles : (PresentVehicles : POW(Vehicles) & EgoVehicle : PresentVehicles);
+    PresentVehicles : (PresentVehicles : POW(Vehicles) & EgoVehicle : PresentVehicles) ||
     VehiclesX :: Vehicles --> REAL ||
     VehiclesY :: Vehicles --> REAL ||
     VehiclesVx :: Vehicles --> REAL ||
