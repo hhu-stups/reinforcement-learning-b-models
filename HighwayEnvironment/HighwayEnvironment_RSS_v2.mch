@@ -5,6 +5,11 @@ SETS
 DEFINITIONS
     VISB_JSON_FILE == "visualization/HighwayEnvRSS_v2.json";
     brakeDistance(initialSpeed,brakeAcc) == (initialSpeed**2)/(2.0*brakeAcc);
+    // and now the distance required to brake until a target speed which is not necessarily 0.0:
+    brakeDistanceWithTarget(initialSpeed,targetSpeed,brakeAcc) == (initialSpeed**2 - targetSpeed**2)/(2.0*brakeAcc);
+    minAbsoluteSpeed == 19.5;
+    brakeDistance20(initialSpeed,brakeAcc) == brakeDistanceWithTarget(initialSpeed,minAbsoluteSpeed,brakeAcc);
+    
     distanceTravelled(deltaTime,initialSpeed,acceleration) ==
       IF initialSpeed < -(acceleration*deltaTime)
       THEN brakeDistance(initialSpeed,-acceleration) // we reach speed 0 and then stop
