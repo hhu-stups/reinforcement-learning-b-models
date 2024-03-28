@@ -11,17 +11,23 @@ DEFINITIONS
     brakeDistance20(initialSpeed,brakeAcc) == brakeDistanceWithTarget(initialSpeed,minAbsoluteSpeed,brakeAcc);
     distanceTravelled(deltaTime,initialSpeed,acceleration) ==
       IF initialSpeed < -(acceleration*deltaTime)
-      THEN brakeDistance20(initialSpeed,-acceleration) // we reach speed 0 and then stop
+      THEN brakeDistance(initialSpeed,-acceleration) // we reach speed 0 and then stop
       ELSE initialSpeed*deltaTime + 0.5*acceleration*(deltaTime**2)
       END;
     vSV == VehiclesVx(EgoVehicle);
     reactionDistance == distanceTravelled(reactionTime,vSV,aMax)
      /* "distance car travels during reaction time supposing maximal acceleration" */;
      
-    dRSS_wo_max(maxAccRear,vFront) ==
+    dRSS_wo_max_absolute(maxAccRear,vFront) ==
        distanceTravelled(reactionTime,vSV,maxAccRear) +
-       brakeDistance20(vSV+maxAccRear*reactionTime,aBrakeMin) -
-       brakeDistance20(vFront,aBrakeMax);
+       brakeDistance(vSV+maxAccRear*reactionTime,aBrakeMin) -
+       brakeDistance(vFront,aBrakeMax);
+    
+    // now a version just taking relative speed to minAbsoluteSpeed into account:
+    dRSS_wo_max(maxAccRear,vFront) ==
+       distanceTravelled(reactionTime,vSV-minAbsoluteSpeed,maxAccRear) +
+       brakeDistance(vSV-minAbsoluteSpeed+maxAccRear*reactionTime,aBrakeMin) -
+       brakeDistance(vFront-minAbsoluteSpeed,aBrakeMax);
     OtherV == Vehicles \ {EgoVehicle};
     LeftLane == -2;
     CurLane == 0;
