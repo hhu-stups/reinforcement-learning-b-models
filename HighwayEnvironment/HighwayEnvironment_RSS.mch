@@ -5,9 +5,13 @@ SETS
 DEFINITIONS
     VISB_JSON_FILE == "visualization/HighwayEnvRSS.json";
     brakeDistance(initialSpeed,brakeAcc) == (initialSpeed**2)/(2.0*brakeAcc);
+    // and now the distance required to brake until a target speed which is not necessarily 0.0:
+    brakeDistanceWithTarget(initialSpeed,targetSpeed,brakeAcc) == (initialSpeed**2 - targetSpeed**2)/(2.0*brakeAcc);
+    minAbsoluteSpeed == 19.5;
+    brakeDistance20(initialSpeed,brakeAcc) == brakeDistanceWithTarget(initialSpeed,minAbsoluteSpeed,brakeAcc);
     distanceTravelled(deltaTime,initialSpeed,acceleration) ==
       IF initialSpeed < -(acceleration*deltaTime)
-      THEN brakeDistance(initialSpeed,-acceleration) // we reach speed 0 and then stop
+      THEN brakeDistance20(initialSpeed,-acceleration) // we reach speed 0 and then stop
       ELSE initialSpeed*deltaTime + 0.5*acceleration*(deltaTime**2)
       END;
     vSV == VehiclesVx(EgoVehicle);
@@ -16,8 +20,8 @@ DEFINITIONS
      
     dRSS_wo_max(maxAccRear,vFront) ==
        distanceTravelled(reactionTime,vSV,maxAccRear) +
-       brakeDistance(vSV+maxAccRear*reactionTime,aBrakeMin) -
-       brakeDistance(vFront,aBrakeMax);
+       brakeDistance20(vSV+maxAccRear*reactionTime,aBrakeMin) -
+       brakeDistance20(vFront,aBrakeMax);
     OtherV == Vehicles \ {EgoVehicle};
     LeftLane == -2;
     CurLane == 0;
