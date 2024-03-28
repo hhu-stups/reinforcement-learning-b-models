@@ -1,0 +1,1586 @@
+{
+  "description": "",
+  "transitionList": [
+    {
+      "name": "$setup_constants",
+      "params": {},
+      "results": {},
+      "destState": {
+        "aBrakeMax": "5.1",
+        "reactionTime": "1.0",
+        "aBrakeMin": "4.9",
+        "aMax": "5.0",
+        "vehLen": "5.0"
+      },
+      "destStateNotChanged": [],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "$initialise_machine",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Crash": "FALSE",
+        "PresentVehicles": "{EgoVehicle,Vehicles2,Vehicles3,Vehicles4,Vehicles5}",
+        "VehiclesAy": "{(EgoVehicle↦0.0),(Vehicles2↦0.0),(Vehicles3↦0.0),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "Reward": "0.0",
+        "VehiclesAx": "{(EgoVehicle↦0.0),(Vehicles2↦0.0),(Vehicles3↦0.0),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "VehiclesVx": "{(EgoVehicle↦25.0),(Vehicles2↦-2.9646027088165283),(Vehicles3↦-2.7323079109191895),(Vehicles4↦-3.7923184037208557),(Vehicles5↦-2.262650430202484)}",
+        "VehiclesY": "{(EgoVehicle↦8.000000238418579),(Vehicles2↦-8.000000238418579),(Vehicles3↦0.0),(Vehicles4↦0.0),(Vehicles5↦-4.0000001192092896)}",
+        "VehiclesVy": "{(EgoVehicle↦0.0),(Vehicles2↦0.0),(Vehicles3↦0.0),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "VehiclesX": "{(EgoVehicle↦149.21866655349731),(Vehicles2↦24.709148705005646),(Vehicles3↦47.04199135303497),(Vehicles4↦71.99057936668396),(Vehicles5↦98.13435077667236)}"
+      },
+      "destStateNotChanged": [],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "SLOWER",
+      "params": {},
+      "results": {},
+      "destState": {
+        "VehiclesAy": "{(EgoVehicle↦0.0),(Vehicles2↦0.0),(Vehicles3↦-3.2706791162490845),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "Reward": "0.750891632373114",
+        "VehiclesAx": "{(EgoVehicle↦-4.341564178466797),(Vehicles2↦3.756360337138176),(Vehicles3↦-0.9585338830947876),(Vehicles4↦4.133169911801815),(Vehicles5↦3.3817970752716064)}",
+        "VehiclesVx": "{(EgoVehicle↦20.658435821533203),(Vehicles2↦0.7917576283216476),(Vehicles3↦-3.690841794013977),(Vehicles4↦0.3408515080809593),(Vehicles5↦1.1191466450691223)}",
+        "VehiclesY": "{(EgoVehicle↦8.000000238418579),(Vehicles2↦-8.000000238418579),(Vehicles3↦-2.7463295459747314),(Vehicles4↦0.0),(Vehicles5↦-4.0000001192092896)}",
+        "VehiclesVy": "{(EgoVehicle↦0.0),(Vehicles2↦0.0),(Vehicles3↦-3.2706791162490845),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "VehiclesX": "{(EgoVehicle↦171.8235969543457),(Vehicles2↦23.90490025281906),(Vehicles3↦44.0483033657074),(Vehicles4↦70.49950361251831),(Vehicles5↦97.83431887626648)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "FASTER",
+      "params": {},
+      "results": {},
+      "destState": {
+        "VehiclesAy": "{(EgoVehicle↦0.0),(Vehicles2↦0.0),(Vehicles3↦2.989057805389166),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "Reward": "0.8514205716156639",
+        "VehiclesAx": "{(EgoVehicle↦3.76983642578125),(Vehicles2↦-4.248332306742668),(Vehicles3↦-2.5203025341033936),(Vehicles4↦-3.8927897438406944),(Vehicles5↦-4.311641752719879)}",
+        "VehiclesVx": "{(EgoVehicle↦24.428272247314453),(Vehicles2↦-3.4565746784210205),(Vehicles3↦-6.211144328117371),(Vehicles4↦-3.551938235759735),(Vehicles5↦-3.192495107650757)}",
+        "VehiclesY": "{(EgoVehicle↦8.000000238418579),(Vehicles2↦-8.000000238418579),(Vehicles3↦-3.90016508102417),(Vehicles4↦0.0),(Vehicles5↦-4.0000001192092896)}",
+        "VehiclesVy": "{(EgoVehicle↦0.0),(Vehicles2↦0.0),(Vehicles3↦-0.2816213108599186),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "VehiclesX": "{(EgoVehicle↦194.56169605255127),(Vehicles2↦22.4136084318161),(Vehicles3↦38.93838822841644),(Vehicles4↦68.70690584182739),(Vehicles5↦96.63462042808533)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "IDLE",
+      "params": {},
+      "results": {},
+      "destState": {
+        "VehiclesAy": "{(EgoVehicle↦0.0),(Vehicles2↦0.0),(Vehicles3↦0.26109782978892326),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "Reward": "0.8646589504459584",
+        "VehiclesAx": "{(EgoVehicle↦0.49643754959106445),(Vehicles2↦-0.8429917693138123),(Vehicles3↦0.12104034423828125),(Vehicles4↦-0.575176477432251),(Vehicles5↦-0.821022093296051)}",
+        "VehiclesVx": "{(EgoVehicle↦24.924709796905518),(Vehicles2↦-4.299566447734833),(Vehicles3↦-6.090103983879089),(Vehicles4↦-4.127114713191986),(Vehicles5↦-4.013517200946808)}",
+        "VehiclesY": "{(EgoVehicle↦8.000000238418579),(Vehicles2↦-8.000000238418579),(Vehicles3↦-3.9927942752838135),(Vehicles4↦0.0),(Vehicles5↦-4.0000001192092896)}",
+        "VehiclesVy": "{(EgoVehicle↦0.0),(Vehicles2↦0.0),(Vehicles3↦-0.02052348107099533),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦18.535681068897247),(Vehicles3↦32.72389769554138),(Vehicles4↦64.84702825546265),(Vehicles5↦93.02538633346558)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "IDLE",
+      "params": {},
+      "results": {},
+      "destState": {
+        "VehiclesAy": "{(EgoVehicle↦0.0),(Vehicles2↦0.0),(Vehicles3↦0.019105331011814997),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "Reward": "0.86640227605324",
+        "VehiclesAx": "{(EgoVehicle↦0.06537437438964844),(Vehicles2↦-0.3215944766998291),(Vehicles3↦0.31988441944122314),(Vehicles4↦-0.12042790651321411),(Vehicles5↦-0.2600061893463135)}",
+        "VehiclesVx": "{(EgoVehicle↦24.990084171295166),(Vehicles2↦-4.621160924434662),(Vehicles3↦-5.770219564437866),(Vehicles4↦-4.2475426197052),(Vehicles5↦-4.273523390293121)}",
+        "VehiclesY": "{(EgoVehicle↦8.000000238418579),(Vehicles2↦-8.000000238418579),(Vehicles3↦-3.9995051622390747),(Vehicles4↦0.0),(Vehicles5↦-4.0000001192092896)}",
+        "VehiclesVy": "{(EgoVehicle↦0.0),(Vehicles2↦0.0),(Vehicles3↦-0.0014181500591803342),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦14.091847836971283),(Vehicles3↦26.766371726989746),(Vehicles4↦60.66054701805115),(Vehicles5↦88.8900876045227)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "IDLE",
+      "params": {},
+      "results": {},
+      "destState": {
+        "VehiclesAy": "{(EgoVehicle↦0.0),(Vehicles2↦0.0),(Vehicles3↦0.0013233731442596763),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "Reward": "0.8666318497957629",
+        "VehiclesAx": "{(EgoVehicle↦0.008609294891357422),(Vehicles2↦-0.20769715309143066),(Vehicles3↦0.23204028606414795),(Vehicles4↦-0.049752891063690186),(Vehicles5↦-0.12981027364730835)}",
+        "VehiclesVx": "{(EgoVehicle↦24.998693466186523),(Vehicles2↦-4.8288580775260925),(Vehicles3↦-5.538179278373718),(Vehicles4↦-4.29729551076889),(Vehicles5↦-4.40333366394043)}",
+        "VehiclesY": "{(EgoVehicle↦8.000000238418579),(Vehicles2↦-8.000000238418579),(Vehicles3↦-3.9999672174453735),(Vehicles4↦0.0),(Vehicles5↦-4.0000001192092896)}",
+        "VehiclesVy": "{(EgoVehicle↦0.0),(Vehicles2↦0.0),(Vehicles3↦-9.477691492065787E-05),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦9.3827523291111),(Vehicles3↦21.09658122062683),(Vehicles4↦56.39081001281738),(Vehicles5↦84.55914855003357)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "IDLE",
+      "params": {},
+      "results": {},
+      "destState": {
+        "VehiclesAy": "{(EgoVehicle↦0.0),(Vehicles2↦0.0),(Vehicles3↦8.857499324221862E-05),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "Reward": "0.8666620817289346",
+        "VehiclesAx": "{(EgoVehicle↦0.0011348724365234375),(Vehicles2↦-0.16495317220687866),(Vehicles3↦0.15160560607910156),(Vehicles4↦-0.03509819507598877),(Vehicles5↦-0.08093655109405518)}",
+        "VehiclesVx": "{(EgoVehicle↦24.999828338623047),(Vehicles2↦-4.993811249732971),(Vehicles3↦-5.386573672294617),(Vehicles4↦-4.332393705844879),(Vehicles5↦-4.484270215034485)}",
+        "VehiclesY": "{(EgoVehicle↦8.000000238418579),(Vehicles2↦-8.000000238418579),(Vehicles3↦-3.9999979734420776),(Vehicles4↦0.0),(Vehicles5↦-4.0000001192092896)}",
+        "VehiclesVy": "{(EgoVehicle↦0.0),(Vehicles2↦0.0),(Vehicles3↦-6.201921678439248E-06),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦4.485560581088066),(Vehicles3↦15.624240040779114),(Vehicles4↦52.07902789115906),(Vehicles5↦80.12044429779053)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "SLOWER",
+      "params": {},
+      "results": {},
+      "destState": {
+        "VehiclesAy": "{(EgoVehicle↦0.0),(Vehicles2↦0.0),(Vehicles3↦5.801571205665823E-06),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "Reward": "0.7508910285953054",
+        "VehiclesAx": "{(EgoVehicle↦-4.341413974761963),(Vehicles2↦4.199327826499939),(Vehicles3↦4.441870376467705),(Vehicles4↦4.31022911099717),(Vehicles5↦0.8750858902931213)}",
+        "VehiclesVx": "{(EgoVehicle↦20.658414363861084),(Vehicles2↦-0.7944834232330322),(Vehicles3↦-0.9447032958269119),(Vehicles4↦-0.02216459484770894),(Vehicles5↦-3.6091843247413635)}",
+        "VehiclesY": "{(EgoVehicle↦8.000000238418579),(Vehicles2↦-8.000000238418579),(Vehicles3↦-3.999999761581421),(Vehicles4↦0.0),(Vehicles5↦-8.000000238418579)}",
+        "VehiclesVy": "{(EgoVehicle↦0.0),(Vehicles2↦0.0),(Vehicles3↦-4.003504727734253E-07),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦1.8285389989614487),(Vehicles3↦12.675967812538147),(Vehicles4↦50.12893080711365),(Vehicles5↦76.29462480545044)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "IDLE",
+      "params": {},
+      "results": {},
+      "destState": {
+        "VehiclesAy": "{(EgoVehicle↦0.0),(Vehicles2↦0.0),(Vehicles3↦3.747429833111937E-07),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "Reward": "0.7356454578122763",
+        "VehiclesAx": "{(EgoVehicle↦-0.5717086791992188),(Vehicles2↦0.44339582324028015),(Vehicles3↦0.6418547965586185),(Vehicles4↦0.5435757827945054),(Vehicles5↦0.7140356302261353)}",
+        "VehiclesVx": "{(EgoVehicle↦20.086705684661865),(Vehicles2↦-0.3510875999927521),(Vehicles3↦-0.3028484992682934),(Vehicles4↦0.5214111879467964),(Vehicles5↦-2.8951486945152283)}",
+        "VehiclesY": "{(EgoVehicle↦8.000000238418579),(Vehicles2↦-8.000000238418579),(Vehicles3↦-4.0000001192092896),(Vehicles4↦0.0),(Vehicles5↦-8.000000238418579)}",
+        "VehiclesVy": "{(EgoVehicle↦0.0),(Vehicles2↦0.0),(Vehicles3↦-2.560748946223157E-08),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦1.2972323223948479),(Vehicles3↦12.076514214277267),(Vehicles4↦50.41061043739319),(Vehicles5↦73.05812239646912)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "FASTER",
+      "params": {},
+      "results": {},
+      "destState": {
+        "VehiclesAy": "{(EgoVehicle↦0.0),(Vehicles2↦0.0),(Vehicles3↦2.398037324269353E-08),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "Reward": "0.8494128449245247",
+        "VehiclesAx": "{(EgoVehicle↦4.2662763595581055),(Vehicles2↦-4.385160058736801),(Vehicles3↦-4.21349348500371),(Vehicles4↦-4.290269799530506),(Vehicles5↦-4.130363762378693)}",
+        "VehiclesVx": "{(EgoVehicle↦24.35298204421997),(Vehicles2↦-4.736247658729553),(Vehicles3↦-4.516341984272003),(Vehicles4↦-3.7688586115837097),(Vehicles5↦-7.025512456893921)}",
+        "VehiclesVy": "{(EgoVehicle↦0.0),(Vehicles2↦0.0),(Vehicles3↦-1.6271162195380384E-09),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦-1.4555836096405983),(Vehicles3↦9.44228246808052),(Vehicles4↦48.56852889060974),(Vehicles5↦67.86442995071411)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "SLOWER",
+      "params": {},
+      "results": {},
+      "destState": {
+        "VehiclesAy": "{(EgoVehicle↦0.0),(Vehicles2↦0.0),(Vehicles3↦1.524256276752567E-09),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "Reward": "0.7486195241601569",
+        "VehiclesAx": "{(EgoVehicle↦-3.779749870300293),(Vehicles2↦3.668232560157776),(Vehicles3↦3.8225194811820984),(Vehicles4↦3.7605466379318386),(Vehicles5↦3.9075368642807007)}",
+        "VehiclesVx": "{(EgoVehicle↦20.573232173919678),(Vehicles2↦-1.0680150985717773),(Vehicles3↦-0.6938225030899048),(Vehicles4↦-0.008311973651871085),(Vehicles5↦-3.11797559261322)}",
+        "VehiclesVy": "{(EgoVehicle↦0.0),(Vehicles2↦0.0),(Vehicles3↦-1.028599427854715E-10),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦-4.151852801442146),(Vehicles3↦7.028783857822418),(Vehicles4↦46.876731514930725),(Vehicles5↦62.97582983970642)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "IDLE",
+      "params": {},
+      "results": {},
+      "destState": {
+        "VehiclesAy": "{(EgoVehicle↦0.0),(Vehicles2↦0.0),(Vehicles3↦9.637624032166059E-11),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "Reward": "0.7353463296562072",
+        "VehiclesAx": "{(EgoVehicle↦-0.497744083404541),(Vehicles2↦0.3929082304239273),(Vehicles3↦0.5345610156655312),(Vehicles4↦0.4832996369805187),(Vehicles5↦0.6174755096435547)}",
+        "VehiclesVx": "{(EgoVehicle↦20.075488090515137),(Vehicles2↦-0.67510686814785),(Vehicles3↦-0.15926148742437363),(Vehicles4↦0.4749876633286476),(Vehicles5↦-2.5005000829696655)}",
+        "VehiclesVy": "{(EgoVehicle↦0.0),(Vehicles2↦0.0),(Vehicles3↦-6.483702463810914E-12),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦-4.987747222185135),(Vehicles3↦6.624641269445419),(Vehicles4↦47.136861085891724),(Vehicles5↦60.18095016479492)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "IDLE",
+      "params": {},
+      "results": {},
+      "destState": {
+        "VehiclesAy": "{(EgoVehicle↦0.0),(Vehicles2↦0.0),(Vehicles3↦6.0751403907488566E-12),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "Reward": "0.7335984192688558",
+        "VehiclesAx": "{(EgoVehicle↦-0.06554841995239258),(Vehicles2↦-0.032521188259124756),(Vehicles3↦0.0986157963052392),(Vehicles4↦0.05530953407287598),(Vehicles5↦0.17790555953979492)}",
+        "VehiclesVx": "{(EgoVehicle↦20.009939670562744),(Vehicles2↦-0.7076280564069748),(Vehicles3↦-0.060645691119134426),(Vehicles4↦0.5302971974015236),(Vehicles5↦-2.3225945234298706)}",
+        "VehiclesVy": "{(EgoVehicle↦0.0),(Vehicles2↦0.0),(Vehicles3↦-4.085620730620576E-13),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦-5.666478723287582),(Vehicles3↦6.515008211135864),(Vehicles4↦47.64360785484314),(Vehicles5↦57.76211619377136)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "IDLE",
+      "params": {},
+      "results": {},
+      "destState": {
+        "VehiclesAy": "{(EgoVehicle↦0.0),(Vehicles2↦0.0),(Vehicles3↦3.8191672047105385E-13),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "Reward": "0.7333682417692869",
+        "VehiclesAx": "{(EgoVehicle↦-0.008630752563476562),(Vehicles2↦-0.08220568299293518),(Vehicles3↦0.0391482375562191),(Vehicles4↦0.00180710107088089),(Vehicles5↦0.11441096663475037)}",
+        "VehiclesVx": "{(EgoVehicle↦20.001308917999268),(Vehicles2↦-0.78983373939991),(Vehicles3↦-0.021497453562915325),(Vehicles4↦0.5321042984724045),(Vehicles5↦-2.2081835567951202)}",
+        "VehiclesVy": "{(EgoVehicle↦0.0),(Vehicles2↦0.0),(Vehicles3↦-2.6645352591003757E-14),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦-6.406281143426895),(Vehicles3↦6.471503525972366),(Vehicles4↦48.17569851875305),(Vehicles5↦55.48709034919739)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "IDLE",
+      "params": {},
+      "results": {},
+      "destState": {
+        "VehiclesAy": "{(EgoVehicle↦0.0),(Vehicles2↦0.0),(Vehicles3↦2.6645352591003757E-14),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "Reward": "0.7333379303290145",
+        "VehiclesAx": "{(EgoVehicle↦-0.0011372566223144531),(Vehicles2↦0.7980937382671982),(Vehicles3↦-0.8502302365377545),(Vehicles4↦-0.003089793026447296),(Vehicles5↦0.10104581713676453)}",
+        "VehiclesVx": "{(EgoVehicle↦20.000171661376953),(Vehicles2↦0.008259998867288232),(Vehicles3↦-0.8717276901006699),(Vehicles4↦0.5290145054459572),(Vehicles5↦-2.1071377396583557)}",
+        "VehiclesY": "{(EgoVehicle↦8.000000238418579),(Vehicles2↦-4.0000001192092896),(Vehicles3↦-8.000000238418579),(Vehicles4↦0.0),(Vehicles5↦-8.000000238418579)}",
+        "VehiclesVy": "{(EgoVehicle↦0.0),(Vehicles2↦0.0),(Vehicles3↦0.0),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦6.462214887142181),(Vehicles3↦-7.22934752702713),(Vehicles4↦48.70656132698059),(Vehicles5↦53.31994295120239)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "SLOWER",
+      "params": {},
+      "results": {},
+      "destState": {
+        "VehiclesAy": "{(EgoVehicle↦0.0),(Vehicles2↦0.0),(Vehicles3↦0.0),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "Reward": "0.7333339386990197",
+        "VehiclesAx": "{(EgoVehicle↦-0.00014781951904296875),(Vehicles2↦0.027251451974734664),(Vehicles3↦-0.07454589009284973),(Vehicles4↦-0.002179071307182312),(Vehicles5↦0.09476736187934875)}",
+        "VehiclesVx": "{(EgoVehicle↦20.00002384185791),(Vehicles2↦0.035511450842022896),(Vehicles3↦-0.9462735801935196),(Vehicles4↦0.5268354341387749),(Vehicles5↦-2.012370377779007)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦6.481508910655975),(Vehicles3↦-8.13155546784401),(Vehicles4↦49.234598875045776),(Vehicles5↦51.251137256622314)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "SLOWER",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.7333334130522714",
+        "VehiclesAx": "{(EgoVehicle↦-2.1457672119140625E-05),(Vehicles2↦0.025835176929831505),(Vehicles3↦-0.06595343351364136),(Vehicles4↦-2.4493997916579247),(Vehicles5↦2.538256384432316)}",
+        "VehiclesVx": "{(EgoVehicle↦20.00000238418579),(Vehicles2↦0.0613466277718544),(Vehicles3↦-1.012227013707161),(Vehicles4↦-1.9225643575191498),(Vehicles5↦0.5258860066533089)}",
+        "VehiclesY": "{(EgoVehicle↦8.000000238418579),(Vehicles2↦-4.0000001192092896),(Vehicles3↦-8.000000238418579),(Vehicles4↦-8.000000238418579),(Vehicles5↦0.0)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦6.527453660964966),(Vehicles3↦-9.104916453361511),(Vehicles4↦49.27506148815155),(Vehicles5↦49.76096451282501)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "IDLE",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.7333333438313004",
+        "VehiclesAx": "{(EgoVehicle↦-2.384185791015625E-06),(Vehicles2↦0.02468997612595558),(Vehicles3↦-0.8250122517347336),(Vehicles4↦2.4484623968601227),(Vehicles5↦-0.014186911284923553)}",
+        "VehiclesVx": "{(EgoVehicle↦20.0),(Vehicles2↦0.08603660389780998),(Vehicles3↦-1.8372392654418945),(Vehicles4↦0.5258980393409729),(Vehicles5↦0.5116990953683853)}",
+        "VehiclesY": "{(EgoVehicle↦8.000000238418579),(Vehicles2↦-4.0000001192092896),(Vehicles3↦-8.000000238418579),(Vehicles4↦0.0),(Vehicles5↦-4.0000001192092896)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦6.598761677742004),(Vehicles3↦47.38697111606598),(Vehicles4↦50.28678774833679),(Vehicles5↦77.21795439720154)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "FASTER",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.8491083690093344",
+        "VehiclesAx": "{(EgoVehicle↦4.341564178466797),(Vehicles2↦-4.317885618656874),(Vehicles3↦-4.260402321815491),(Vehicles4↦-4.34082955121994),(Vehicles5↦-4.328867569565773)}",
+        "VehiclesVx": "{(EgoVehicle↦24.341564178466797),(Vehicles2↦-4.231849014759064),(Vehicles3↦-6.097641587257385),(Vehicles4↦-3.8149315118789673),(Vehicles5↦-3.8171684741973877)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦4.299284517765045),(Vehicles3↦43.18745732307434),(Vehicles4↦48.417869210243225),(Vehicles5↦75.33966898918152)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "SLOWER",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.748579428566387",
+        "VehiclesAx": "{(EgoVehicle↦-3.76983642578125),(Vehicles2↦3.792599067091942),(Vehicles3↦3.8470931351184845),(Vehicles4↦3.7711320724338293),(Vehicles5↦3.782510736491531)}",
+        "VehiclesVx": "{(EgoVehicle↦20.571727752685547),(Vehicles2↦-0.4392499476671219),(Vehicles3↦-2.2505484521389008),(Vehicles4↦-0.04379943944513798),(Vehicles5↦-0.03465773770585656)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦2.156273275613785),(Vehicles3↦39.20068442821503),(Vehicles4↦46.68307900428772),(Vehicles5↦73.60723614692688)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "IDLE",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.7353410495780154",
+        "VehiclesAx": "{(EgoVehicle↦-0.49643754959106445),(Vehicles2↦0.5183703266084194),(Vehicles3↦0.5700236558914185),(Vehicles4↦0.4981976840645075),(Vehicles5↦0.5090928659774363)}",
+        "VehiclesVx": "{(EgoVehicle↦20.075290203094482),(Vehicles2↦0.07912037894129753),(Vehicles3↦-1.6805247962474823),(Vehicles4↦0.4543982446193695),(Vehicles5↦0.47443512827157974)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦1.9997244700789452),(Vehicles3↦37.25371956825256),(Vehicles4↦46.913814544677734),(Vehicles5↦73.85150790214539)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "IDLE",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.733597723949917",
+        "VehiclesAx": "{(EgoVehicle↦-0.06537437438964844),(Vehicles2↦0.08654382079839706),(Vehicles3↦0.13549506664276123),(Vehicles4↦0.06753198802471161),(Vehicles5↦0.07800772786140442)}",
+        "VehiclesVx": "{(EgoVehicle↦20.009915828704834),(Vehicles2↦0.1656641997396946),(Vehicles3↦-1.545029729604721),(Vehicles4↦0.5219302326440811),(Vehicles5↦0.5524428561329842)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦2.123435400426388),(Vehicles3↦35.63757538795471),(Vehicles4↦47.40510880947113),(Vehicles5↦74.3670642375946)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "IDLE",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.7333681502046531",
+        "VehiclesAx": "{(EgoVehicle↦-0.008609294891357422),(Vehicles2↦0.02907855436205864),(Vehicles3↦0.07546037435531616),(Vehicles4↦0.011123903095722198),(Vehicles5↦0.021222084760665894)}",
+        "VehiclesVx": "{(EgoVehicle↦20.001306533813477),(Vehicles2↦0.19474275410175323),(Vehicles3↦-1.469569355249405),(Vehicles4↦0.5330541357398033),(Vehicles5↦0.57366494089365)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦2.3020902648568153),(Vehicles3↦34.12429094314575),(Vehicles4↦47.93276786804199),(Vehicles5↦74.92930293083191)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "IDLE",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.7333379182711203",
+        "VehiclesAx": "{(EgoVehicle↦-0.0011348724365234375),(Vehicles2↦0.020959116518497467),(Vehicles3↦0.0649002194404602),(Vehicles4↦0.003976933658123016),(Vehicles5↦0.013725608587265015)}",
+        "VehiclesVx": "{(EgoVehicle↦20.000171661376953),(Vehicles2↦0.2157018706202507),(Vehicles3↦-1.4046691358089447),(Vehicles4↦0.5370310693979263),(Vehicles5↦0.5873905494809151)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦2.5054382160305977),(Vehicles3↦32.681092619895935),(Vehicles4↦48.46755862236023),(Vehicles5↦75.50863027572632)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "IDLE",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.733333937111149",
+        "VehiclesAx": "{(EgoVehicle↦-0.00015020370483398438),(Vehicles2↦0.019380003213882446),(Vehicles3↦0.06100550293922424),(Vehicles4↦0.003297366201877594),(Vehicles5↦0.01271706074476242)}",
+        "VehiclesVx": "{(EgoVehicle↦20.00002145767212),(Vehicles2↦0.23508187383413315),(Vehicles3↦-1.3436636328697205),(Vehicles4↦0.5403284355998039),(Vehicles5↦0.6001076102256775)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦2.7289602905511856),(Vehicles3↦31.301075220108032),(Vehicles4↦49.00590777397156),(Vehicles5↦76.10113024711609)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "IDLE",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.7333334128431691",
+        "VehiclesAx": "{(EgoVehicle↦-1.9073486328125E-05),(Vehicles2↦0.01869974657893181),(Vehicles3↦0.05813091993331909),(Vehicles4↦0.0034518539905548096),(Vehicles5↦0.012558810412883759)}",
+        "VehiclesVx": "{(EgoVehicle↦20.00000238418579),(Vehicles2↦0.25378162041306496),(Vehicles3↦-1.2855327129364014),(Vehicles4↦0.5437802895903587),(Vehicles5↦0.6126664206385612)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦2.9715675860643387),(Vehicles3↦29.98088002204895),(Vehicles4↦49.547600746154785),(Vehicles5↦76.70626640319824)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "IDLE",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.7333333438037645",
+        "VehiclesAx": "{(EgoVehicle↦-2.384185791015625E-06),(Vehicles2↦0.018170848488807678),(Vehicles3↦0.05552612245082855),(Vehicles4↦0.0036991387605667114),(Vehicles5↦0.012465231120586395)}",
+        "VehiclesVx": "{(EgoVehicle↦20.0),(Vehicles2↦0.27195246890187263),(Vehicles3↦-1.2300065904855728),(Vehicles4↦0.5474794283509254),(Vehicles5↦0.6251316517591476)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦3.2326575368642807),(Vehicles3↦28.717759251594543),(Vehicles4↦50.09284019470215),(Vehicles5↦77.32393741607666)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "FASTER",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.8491083690057083",
+        "VehiclesAx": "{(EgoVehicle↦4.341564178466797),(Vehicles2↦-4.323880393058062),(Vehicles3↦-4.288508519530296),(Vehicles4↦-4.337677098810673),(Vehicles5↦-4.32977132499218)}",
+        "VehiclesVx": "{(EgoVehicle↦24.341564178466797),(Vehicles2↦-4.051927924156189),(Vehicles3↦-5.518515110015869),(Vehicles4↦-3.7901976704597473),(Vehicles5↦-3.7046396732330322)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦1.1166609823703766),(Vehicles3↦25.114110112190247),(Vehicles4↦48.24679493904114),(Vehicles5↦75.55894255638123)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "SLOWER",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.7485794285659094",
+        "VehiclesAx": "{(EgoVehicle↦-3.76983642578125),(Vehicles2↦3.7868619710206985),(Vehicles3↦3.820357620716095),(Vehicles4↦3.7754457688424736),(Vehicles5↦3.777777305804193)}",
+        "VehiclesVx": "{(EgoVehicle↦20.571727752685547),(Vehicles2↦-0.2650659531354904),(Vehicles3↦-1.6981574892997742),(Vehicles4↦-0.014751901617273688),(Vehicles5↦0.0731376325711608)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦-0.8487274870276451),(Vehicles3↦21.69567495584488),(Vehicles4↦46.53826355934143),(Vehicles5↦73.9374577999115)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "IDLE",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.7353410495779524",
+        "VehiclesAx": "{(EgoVehicle↦-0.49643754959106445),(Vehicles2↦0.5125421285629272),(Vehicles3↦0.544280931353569),(Vehicles4↦0.5051844322588295),(Vehicles5↦0.5012637237086892)}",
+        "VehiclesVx": "{(EgoVehicle↦20.075290203094482),(Vehicles2↦0.24747617542743683),(Vehicles3↦-1.1538765579462051),(Vehicles4↦0.4904325306415558),(Vehicles5↦0.57440135627985)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦-0.8334080688655376),(Vehicles3↦20.290738344192505),(Vehicles4↦46.80063724517822),(Vehicles5↦74.28657412528992)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "IDLE",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.7335977239499086",
+        "VehiclesAx": "{(EgoVehicle↦-0.06537437438964844),(Vehicles2↦0.08049648255109787),(Vehicles3↦0.11045843362808228),(Vehicles4↦0.0765620544552803),(Vehicles5↦0.06869170814752579)}",
+        "VehiclesVx": "{(EgoVehicle↦20.009915828704834),(Vehicles2↦0.3279726579785347),(Vehicles3↦-1.0434181243181229),(Vehicles4↦0.5669945850968361),(Vehicles5↦0.6430930644273758)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦-0.5437424406409264),(Vehicles3↦19.191181659698486),(Vehicles4↦47.33145833015442),(Vehicles5↦74.89842772483826)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "IDLE",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.733368150204652",
+        "VehiclesAx": "{(EgoVehicle↦-0.008609294891357422),(Vehicles2↦0.02284139394760132),(Vehicles3↦0.050967633724212646),(Vehicles4↦0.0211426243185997),(Vehicles5↦-1.2505458295345306)}",
+        "VehiclesVx": "{(EgoVehicle↦20.001306533813477),(Vehicles2↦0.350814051926136),(Vehicles3↦-0.9924504905939102),(Vehicles4↦0.5881372094154358),(Vehicles5↦-0.6074527651071548)}",
+        "VehiclesY": "{(EgoVehicle↦8.000000238418579),(Vehicles2↦-4.0000001192092896),(Vehicles3↦-8.000000238418579),(Vehicles4↦0.0),(Vehicles5↦-8.000000238418579)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦-0.20526202861219645),(Vehicles3↦18.169669806957245),(Vehicles4↦47.90814816951752),(Vehicles5↦75.04838705062866)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "SLOWER",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.7333379182711202",
+        "VehiclesAx": "{(EgoVehicle↦-0.0011348724365234375),(Vehicles2↦0.01462392508983612),(Vehicles3↦0.0408945232629776),(Vehicles4↦0.01415211707353592),(Vehicles5↦0.026258453726768494)}",
+        "VehiclesVx": "{(EgoVehicle↦20.000171661376953),(Vehicles2↦0.36543797701597214),(Vehicles3↦-0.9515559673309326),(Vehicles4↦0.6022893264889717),(Vehicles5↦-0.5811943113803864)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦0.1516267890110612),(Vehicles3↦17.193950712680817),(Vehicles4↦48.50210249423981),(Vehicles5↦74.45179224014282)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "SLOWER",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.733333937111149",
+        "VehiclesAx": "{(EgoVehicle↦-0.00015020370483398438),(Vehicles2↦0.013043172657489777),(Vehicles3↦0.03749676048755646),(Vehicles4↦0.013124458491802216),(Vehicles5↦0.023288056254386902)}",
+        "VehiclesVx": "{(EgoVehicle↦20.00002145767212),(Vehicles2↦0.3784811496734619),(Vehicles3↦-0.9140592068433762),(Vehicles4↦0.6154137849807739),(Vehicles5↦-0.5579062551259995)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦0.5223471205681562),(Vehicles3↦16.257600486278534),(Vehicles4↦49.10968244075775),(Vehicles5↦73.88007640838623)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "SLOWER",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.7333334128431691",
+        "VehiclesAx": "{(EgoVehicle↦-1.9073486328125E-05),(Vehicles2↦0.012438073754310608),(Vehicles3↦0.03516174852848053),(Vehicles4↦0.012684687972068787),(Vehicles5↦0.02160746604204178)}",
+        "VehiclesVx": "{(EgoVehicle↦20.00000238418579),(Vehicles2↦0.3909192234277725),(Vehicles3↦-0.8788974583148956),(Vehicles4↦0.6280984729528427),(Vehicles5↦-0.5362987890839577)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦0.9058404713869095),(Vehicles3↦15.35777747631073),(Vehicles4↦49.73020553588867),(Vehicles5↦73.3309268951416)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "FASTER",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.8491083780973172",
+        "VehiclesAx": "{(EgoVehicle↦4.341561794281006),(Vehicles2↦-4.329526200890541),(Vehicles3↦-4.308416694402695),(Vehicles4↦-4.329309985041618),(Vehicles5↦-4.321205280721188)}",
+        "VehiclesVx": "{(EgoVehicle↦24.341564178466797),(Vehicles2↦-3.9386069774627686),(Vehicles3↦-5.18731415271759),(Vehicles4↦-3.7012115120887756),(Vehicles5↦-4.857504069805145)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦-1.0934589430689812),(Vehicles3↦12.097228318452835),(Vehicles4↦47.96817600727081),(Vehicles5↦70.4077959060669)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "SLOWER",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.7485794297631584",
+        "VehiclesAx": "{(EgoVehicle↦-3.76983642578125),(Vehicles2↦3.781554065644741),(Vehicles3↦3.801176995038986),(Vehicles4↦3.781657451763749),(Vehicles5↦3.7891898304224014)}",
+        "VehiclesVx": "{(EgoVehicle↦20.571727752685547),(Vehicles2↦-0.1570529118180275),(Vehicles3↦-1.3861371576786041),(Vehicles4↦0.08044593967497349),(Vehicles5↦-1.0683142393827438)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦-2.947692573070526),(Vehicles3↦9.00225043296814),(Vehicles4↦46.351391077041626),(Vehicles5↦67.63777136802673)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "SLOWER",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.7353410497356148",
+        "VehiclesAx": "{(EgoVehicle↦-0.49643754959106445),(Vehicles2↦0.50789013504982),(Vehicles3↦0.5261529237031937),(Vehicles4↦0.5078548099845648),(Vehicles5↦0.5149583891034126)}",
+        "VehiclesVx": "{(EgoVehicle↦20.075290203094482),(Vehicles2↦0.35083722323179245),(Vehicles3↦-0.8599842339754105),(Vehicles4↦0.5883007496595383),(Vehicles5↦-0.5533558502793312)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦-2.8262803331017494),(Vehicles3↦7.901988178491592),(Vehicles4↦46.71030044555664),(Vehicles5↦66.85078740119934)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "SLOWER",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.7335977239706709",
+        "VehiclesAx": "{(EgoVehicle↦-0.06537437438964844),(Vehicles2↦0.07659398019313812),(Vehicles3↦0.09361639618873596),(Vehicles4↦0.07641986012458801),(Vehicles5↦0.08318237960338593)}",
+        "VehiclesVx": "{(EgoVehicle↦20.009915828704834),(Vehicles2↦0.4274312034249306),(Vehicles3↦-0.7663678377866745),(Vehicles4↦0.6647206097841263),(Vehicles5↦-0.4701734706759453)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦-2.434873580932617),(Vehicles3↦7.089477032423019),(Vehicles4↦47.33911156654358),(Vehicles5↦66.34067296981812)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "SLOWER",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.733368150207386",
+        "VehiclesAx": "{(EgoVehicle↦-0.008609294891357422),(Vehicles2↦0.019624345004558563),(Vehicles3↦0.03551557660102844),(Vehicles4↦0.019319206476211548),(Vehicles5↦0.025799907743930817)}",
+        "VehiclesVx": "{(EgoVehicle↦20.001306533813477),(Vehicles2↦0.44705554842948914),(Vehicles3↦-0.7308522611856461),(Vehicles4↦0.6840398162603378),(Vehicles5↦-0.44437356293201447)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦-1.998271606862545),(Vehicles3↦6.338722258806229),(Vehicles4↦48.01289141178131),(Vehicles5↦65.8821702003479)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "SLOWER",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.7333379182714802",
+        "VehiclesAx": "{(EgoVehicle↦-0.0011348724365234375),(Vehicles2↦0.011967234313488007),(Vehicles3↦0.026825740933418274),(Vehicles4↦0.01153893768787384),(Vehicles5↦0.01778334379196167)}",
+        "VehiclesVx": "{(EgoVehicle↦20.000171661376953),(Vehicles2↦0.45902278274297714),(Vehicles3↦-0.7040265202522278),(Vehicles4↦0.6955787539482117),(Vehicles5↦-0.4265902191400528)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦-1.546243391931057),(Vehicles3↦5.618865415453911),(Vehicles4↦48.7017422914505),(Vehicles5↦65.44512510299683)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "SLOWER",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.7333339371111963",
+        "VehiclesAx": "{(EgoVehicle↦-0.00015020370483398438),(Vehicles2↦0.010819733142852783),(Vehicles3↦0.024733170866966248),(Vehicles4↦0.01027323305606842),(Vehicles5↦0.016319677233695984)}",
+        "VehiclesVx": "{(EgoVehicle↦20.00002145767212),(Vehicles2↦0.4698425158858299),(Vehicles3↦-0.6792933493852615),(Vehicles4↦0.7058519870042801),(Vehicles5↦-0.4102705419063568)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦-1.0828576982021332),(Vehicles3↦4.924839362502098),(Vehicles4↦49.40147399902344),(Vehicles5↦65.02512097358704)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "FASTER",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.8491084471367282",
+        "VehiclesAx": "{(EgoVehicle↦4.341545104980469),(Vehicles2↦-5.467109642922878),(Vehicles3↦-3.1818848103284836),(Vehicles4↦-4.33168388903141),(Vehicles5↦-4.325800687074661)}",
+        "VehiclesVx": "{(EgoVehicle↦24.341566562652588),(Vehicles2↦-4.997267127037048),(Vehicles3↦-3.861178159713745),(Vehicles4↦-3.62583190202713),(Vehicles5↦-4.736071228981018)}",
+        "VehiclesY": "{(EgoVehicle↦8.000000238418579),(Vehicles2↦-8.000000238418579),(Vehicles3↦-4.0000001192092896),(Vehicles4↦0.0),(Vehicles5↦-8.000000238418579)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦1.8600009381771088),(Vehicles3↦-3.003845550119877),(Vehicles4↦47.71623909473419),(Vehicles5↦62.226128578186035)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "SLOWER",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.7485794388547681",
+        "VehiclesAx": "{(EgoVehicle↦-3.76983642578125),(Vehicles2↦3.7924791872501373),(Vehicles3↦3.780228281393647),(Vehicles4↦3.7794480845332146),(Vehicles5↦3.785199150443077)}",
+        "VehiclesVx": "{(EgoVehicle↦20.571730136871338),(Vehicles2↦-1.204787939786911),(Vehicles3↦-0.08094987832009792),(Vehicles4↦0.15361618250608444),(Vehicles5↦-0.950872078537941)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦-1.0484743863344193),(Vehicles3↦-4.781193286180496),(Vehicles4↦46.17393612861633),(Vehicles5↦59.575897455215454)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "IDLE",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.7353410509328638",
+        "VehiclesAx": "{(EgoVehicle↦-0.49643993377685547),(Vehicles2↦0.5182275176048279),(Vehicles3↦0.5067098420113325),(Vehicles4↦0.50580944865942),(Vehicles5↦0.5114574357867241)}",
+        "VehiclesVx": "{(EgoVehicle↦20.075290203094482),(Vehicles2↦-0.6865604221820831),(Vehicles3↦0.4257599636912346),(Vehicles4↦0.6594256311655045),(Vehicles5↦-0.4394146427512169)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦-1.9706163555383682),(Vehicles3↦-4.584160819649696),(Vehicles4↦46.605184674263),(Vehicles5↦58.904922008514404)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "IDLE",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.7335977241283332",
+        "VehiclesAx": "{(EgoVehicle↦-0.06537437438964844),(Vehicles2↦0.08637756109237671),(Vehicles3↦0.07553596049547195),(Vehicles4↦0.0745120644569397),(Vehicles5↦0.08008260279893875)}",
+        "VehiclesVx": "{(EgoVehicle↦20.009915828704834),(Vehicles2↦-0.6001828610897064),(Vehicles3↦0.5012959241867065),(Vehicles4↦0.7339376956224442),(Vehicles5↦-0.35933203995227814)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦-2.612650953233242),(Vehicles3↦-4.118263348937035),(Vehicles4↦47.30434715747833),(Vehicles5↦58.5074782371521)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "IDLE",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.733368150228148",
+        "VehiclesAx": "{(EgoVehicle↦-0.008609294891357422),(Vehicles2↦0.02888813614845276),(Vehicles3↦0.018671154975891113),(Vehicles4↦0.017520040273666382),(Vehicles5↦0.02303585410118103)}",
+        "VehiclesVx": "{(EgoVehicle↦20.001306533813477),(Vehicles2↦-0.5712947249412537),(Vehicles3↦0.5199670791625977),(Vehicles4↦0.7514577358961105),(Vehicles5↦-0.3362961858510971)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦-3.1999174505472183),(Vehicles3↦-3.608185797929764),(Vehicles4↦48.04661571979523),(Vehicles5↦58.158689737319946)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "IDLE",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.7333379182742142",
+        "VehiclesAx": "{(EgoVehicle↦-0.0011348724365234375),(Vehicles2↦1.1023673042654991),(Vehicles3↦-1.0705169290304184),(Vehicles4↦0.009823739528656006),(Vehicles5↦0.015304423868656158)}",
+        "VehiclesVx": "{(EgoVehicle↦20.000171661376953),(Vehicles2↦0.5310725793242455),(Vehicles3↦-0.5505498498678207),(Vehicles4↦0.7612814754247665),(Vehicles5↦-0.32099176198244095)}",
+        "VehiclesY": "{(EgoVehicle↦8.000000238418579),(Vehicles2↦-4.0000001192092896),(Vehicles3↦-8.000000238418579),(Vehicles4↦0.0),(Vehicles5↦-8.000000238418579)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦-3.083597868680954),(Vehicles3↦-3.7626907229423523),(Vehicles4↦48.802193999290466),(Vehicles5↦57.82870650291443)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "SLOWER",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.7333339371115564",
+        "VehiclesAx": "{(EgoVehicle↦-0.00015020370483398438),(Vehicles2↦0.01003846526145935),(Vehicles3↦0.019142962992191315),(Vehicles4↦0.008623078465461731),(Vehicles5↦0.014085359871387482)}",
+        "VehiclesVx": "{(EgoVehicle↦20.00002145767212),(Vehicles2↦0.5411110445857048),(Vehicles3↦-0.5314068868756294),(Vehicles4↦0.7699045538902283),(Vehicles5↦-0.30690640211105347)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦-2.5484807789325714),(Vehicles3↦-4.3055132031440735),(Vehicles4↦49.56696331501007),(Vehicles5↦57.51338601112366)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "SLOWER",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.7333334128432228",
+        "VehiclesAx": "{(EgoVehicle↦-1.9073486328125E-05),(Vehicles2↦0.009832829236984253),(Vehicles3↦0.018441490828990936),(Vehicles4↦0.00828184187412262),(Vehicles5↦0.013739392161369324)}",
+        "VehiclesVx": "{(EgoVehicle↦20.00000238418579),(Vehicles2↦0.5509438738226891),(Vehicles3↦-0.5129653960466385),(Vehicles4↦0.7781863957643509),(Vehicles5↦-0.29316700994968414)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦-2.003427781164646),(Vehicles3↦-4.829496517777443),(Vehicles4↦50.34019947052002),(Vehicles5↦57.211995124816895)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "SLOWER",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.7333333438037714",
+        "VehiclesAx": "{(EgoVehicle↦-2.384185791015625E-06),(Vehicles2↦0.00974554568529129),(Vehicles3↦0.017894096672534943),(Vehicles4↦0.008057430386543274),(Vehicles5↦0.013521555811166763)}",
+        "VehiclesVx": "{(EgoVehicle↦20.0),(Vehicles2↦0.5606894195079803),(Vehicles3↦-0.49507129937410355),(Vehicles4↦0.7862438261508942),(Vehicles5↦-0.2796454541385174)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦-1.4485799707472324),(Vehicles3↦-5.335263162851334),(Vehicles4↦51.121628284454346),(Vehicles5↦56.924253702163696)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "SLOWER",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.7333333347121566",
+        "VehiclesAx": "{(EgoVehicle↦0.0),(Vehicles2↦0.009677968919277191),(Vehicles3↦0.017399080097675323),(Vehicles4↦0.007852241396903992),(Vehicles5↦0.013331715017557144)}",
+        "VehiclesVx": "{(EgoVehicle↦20.0),(Vehicles2↦0.5703673884272575),(Vehicles3↦-0.4776722192764282),(Vehicles4↦0.7940960675477982),(Vehicles5↦-0.26631373912096024)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦-0.8840142749249935),(Vehicles3↦-5.823336541652679),(Vehicles4↦51.91102623939514),(Vehicles5↦56.64995312690735)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "SLOWER",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.7333333335149068",
+        "VehiclesAx": "{(EgoVehicle↦0.0),(Vehicles2↦0.009616464376449585),(Vehicles3↦0.016940124332904816),(Vehicles4↦0.007653236389160156),(Vehicles5↦0.013154912739992142)}",
+        "VehiclesVx": "{(EgoVehicle↦20.0),(Vehicles2↦0.5799838528037071),(Vehicles3↦-0.4607320949435234),(Vehicles4↦0.8017493039369583),(Vehicles5↦-0.2531588263809681)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦-0.309795537032187),(Vehicles3↦-6.294197589159012),(Vehicles4↦52.708202600479126),(Vehicles5↦56.388914585113525)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "SLOWER",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.7333333333572442",
+        "VehiclesAx": "{(EgoVehicle↦0.0),(Vehicles2↦0.009558647871017456),(Vehicles3↦0.016512461006641388),(Vehicles4↦0.007458999752998352),(Vehicles5↦0.012987647205591202)}",
+        "VehiclesVx": "{(EgoVehicle↦20.0),(Vehicles2↦0.5895425006747246),(Vehicles3↦-0.444219633936882),(Vehicles4↦0.8092083036899567),(Vehicles5↦-0.2401711791753769)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦0.2740162657573819),(Vehicles3↦-6.748291105031967),(Vehicles4↦53.512948751449585),(Vehicles5↦56.14096522331238)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "SLOWER",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.7333333333364821",
+        "VehiclesAx": "{(EgoVehicle↦0.0),(Vehicles2↦0.009503699839115143),(Vehicles3↦0.016112886369228363),(Vehicles4↦0.007269009947776794),(Vehicles5↦0.012828130275011063)}",
+        "VehiclesVx": "{(EgoVehicle↦20.0),(Vehicles2↦0.5990462005138397),(Vehicles3↦-0.42810674756765366),(Vehicles4↦0.8164773136377335),(Vehicles5↦-0.22734304890036583)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦0.8673645555973053),(Vehicles3↦-7.186035066843033),(Vehicles4↦54.325079917907715),(Vehicles5↦55.905938148498535)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "SLOWER",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.7333333333337481",
+        "VehiclesAx": "{(EgoVehicle↦0.0),(Vehicles2↦0.009451024234294891),(Vehicles3↦0.015738792717456818),(Vehicles4↦0.00708356499671936),(Vehicles5↦0.012675058096647263)}",
+        "VehiclesVx": "{(EgoVehicle↦20.0),(Vehicles2↦0.6084972247481346),(Vehicles3↦-0.41236795485019684),(Vehicles4↦0.8235608786344528),(Vehicles5↦-0.21466799080371857)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦1.4701953157782555),(Vehicles3↦-7.607817649841309),(Vehicles4↦55.144405364990234),(Vehicles5↦55.68367838859558)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "SLOWER",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.733333333333388",
+        "VehiclesAx": "{(EgoVehicle↦0.0),(Vehicles2↦0.009400062263011932),(Vehicles3↦0.01538790762424469),(Vehicles4↦-1.025701630860567),(Vehicles5↦1.0451313108205795)}",
+        "VehiclesVx": "{(EgoVehicle↦20.0),(Vehicles2↦0.6178972870111465),(Vehicles3↦-0.39698004722595215),(Vehicles4↦-0.20214075222611427),(Vehicles5↦0.830463320016861)}",
+        "VehiclesY": "{(EgoVehicle↦8.000000238418579),(Vehicles2↦-4.0000001192092896),(Vehicles3↦-8.000000238418579),(Vehicles4↦-8.000000238418579),(Vehicles5↦0.0)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦2.082456648349762),(Vehicles3↦-8.014003187417984),(Vehicles4↦55.4740309715271),(Vehicles5↦55.97074031829834)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "IDLE",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.7333333333333405",
+        "VehiclesAx": "{(EgoVehicle↦0.0),(Vehicles2↦0.009350553154945374),(Vehicles3↦0.015057995915412903),(Vehicles4↦0.012383740395307541),(Vehicles5↦0.006725862622261047)}",
+        "VehiclesVx": "{(EgoVehicle↦20.0),(Vehicles2↦0.6272478401660919),(Vehicles3↦-0.38192205131053925),(Vehicles4↦-0.18975701183080673),(Vehicles5↦0.837189182639122)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦2.7040980756282806),(Vehicles3↦-8.404934406280518),(Vehicles4↦55.27685880661011),(Vehicles5↦56.803905963897705)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "IDLE",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.7333333333333343",
+        "VehiclesAx": "{(EgoVehicle↦0.0),(Vehicles2↦0.00930197536945343),(Vehicles3↦0.01474715769290924),(Vehicles4↦0.012243799865245819),(Vehicles5↦0.006553679704666138)}",
+        "VehiclesVx": "{(EgoVehicle↦20.0),(Vehicles2↦0.6365498155355453),(Vehicles3↦-0.36717489361763),(Vehicles4↦-0.1775132119655609),(Vehicles5↦0.8437428623437881)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦3.3350706100463867),(Vehicles3↦-8.780933171510696),(Vehicles4↦55.09200692176819),(Vehicles5↦57.64373540878296)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "IDLE",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Reward": "0.7333333333333334",
+        "VehiclesAx": "{(EgoVehicle↦0.0),(Vehicles2↦0.00925406813621521),(Vehicles3↦0.014453679323196411),(Vehicles4↦0.01210670918226242),(Vehicles5↦0.006385892629623413)}",
+        "VehiclesVx": "{(EgoVehicle↦20.0),(Vehicles2↦0.6458038836717606),(Vehicles3↦-0.3527212142944336),(Vehicles4↦-0.1654065027832985),(Vehicles5↦0.8501287549734116)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦3.9753258228302),(Vehicles3↦-9.142303466796875),(Vehicles4↦54.919350147247314),(Vehicles5↦58.4900438785553)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "IDLE",
+      "params": {},
+      "results": {},
+      "destState": {
+        "VehiclesAx": "{(EgoVehicle↦0.0),(Vehicles2↦0.009206533432006836),(Vehicles3↦0.014175958931446075),(Vehicles4↦0.0119719747453928),(Vehicles5↦0.006222426891326904)}",
+        "VehiclesVx": "{(EgoVehicle↦20.0),(Vehicles2↦0.6550104171037674),(Vehicles3↦-0.3385452553629875),(Vehicles4↦-0.1534345280379057),(Vehicles5↦0.8563511818647385)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦4.624816030263901),(Vehicles3↦-9.489332884550095),(Vehicles4↦54.75873947143555),(Vehicles5↦59.342676401138306)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles",
+        "Reward",
+        "VehiclesAy",
+        "VehiclesVy",
+        "VehiclesY"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    }
+  ],
+  "variableNames": [
+    "Crash",
+    "PresentVehicles",
+    "Reward",
+    "VehiclesAx",
+    "VehiclesAy",
+    "VehiclesVx",
+    "VehiclesVy",
+    "VehiclesX",
+    "VehiclesY"
+  ],
+  "constantNames": [
+    "aMax",
+    "aBrakeMax",
+    "aBrakeMin",
+    "vehLen",
+    "reactionTime"
+  ],
+  "setNames": [
+    "Vehicles"
+  ],
+  "machineOperationInfos": {
+    "LANE_RIGHT": {
+      "operationName": "LANE_RIGHT",
+      "parameterNames": [],
+      "outputParameterNames": [],
+      "topLevel": true,
+      "type": "CLASSICAL_B",
+      "readVariables": [
+        "VehiclesVx",
+        "VehiclesX",
+        "VehiclesY",
+        "aBrakeMax",
+        "aBrakeMin",
+        "reactionTime",
+        "vehLen"
+      ],
+      "writtenVariables": [
+        "Crash",
+        "PresentVehicles",
+        "Reward",
+        "VehiclesAx",
+        "VehiclesAy",
+        "VehiclesVx",
+        "VehiclesVy",
+        "VehiclesX",
+        "VehiclesY"
+      ],
+      "nonDetWrittenVariables": [
+        "Crash",
+        "PresentVehicles",
+        "Reward",
+        "VehiclesAx",
+        "VehiclesAy",
+        "VehiclesVx",
+        "VehiclesVy",
+        "VehiclesX",
+        "VehiclesY"
+      ],
+      "typeMap": {
+        "'VehiclesY'": "set(couple(global('Vehicles'),real))",
+        "'Reward'": "real",
+        "'VehiclesX'": "set(couple(global('Vehicles'),real))",
+        "'PresentVehicles'": "set(global('Vehicles'))",
+        "'VehiclesVx'": "set(couple(global('Vehicles'),real))",
+        "'VehiclesVy'": "set(couple(global('Vehicles'),real))",
+        "'Crash'": "boolean",
+        "'VehiclesAx'": "set(couple(global('Vehicles'),real))",
+        "'VehiclesAy'": "set(couple(global('Vehicles'),real))"
+      }
+    },
+    "IDLE": {
+      "operationName": "IDLE",
+      "parameterNames": [],
+      "outputParameterNames": [],
+      "topLevel": true,
+      "type": "CLASSICAL_B",
+      "readVariables": [
+        "VehiclesVx",
+        "VehiclesX",
+        "VehiclesY",
+        "aBrakeMax",
+        "aBrakeMin",
+        "reactionTime",
+        "vehLen"
+      ],
+      "writtenVariables": [
+        "Crash",
+        "PresentVehicles",
+        "Reward",
+        "VehiclesAx",
+        "VehiclesAy",
+        "VehiclesVx",
+        "VehiclesVy",
+        "VehiclesX",
+        "VehiclesY"
+      ],
+      "nonDetWrittenVariables": [
+        "Crash",
+        "PresentVehicles",
+        "Reward",
+        "VehiclesAx",
+        "VehiclesAy",
+        "VehiclesVx",
+        "VehiclesVy",
+        "VehiclesX",
+        "VehiclesY"
+      ],
+      "typeMap": {
+        "'VehiclesY'": "set(couple(global('Vehicles'),real))",
+        "'Reward'": "real",
+        "'VehiclesX'": "set(couple(global('Vehicles'),real))",
+        "'PresentVehicles'": "set(global('Vehicles'))",
+        "'VehiclesVx'": "set(couple(global('Vehicles'),real))",
+        "'VehiclesVy'": "set(couple(global('Vehicles'),real))",
+        "'Crash'": "boolean",
+        "'VehiclesAx'": "set(couple(global('Vehicles'),real))",
+        "'VehiclesAy'": "set(couple(global('Vehicles'),real))"
+      }
+    },
+    "FASTER": {
+      "operationName": "FASTER",
+      "parameterNames": [],
+      "outputParameterNames": [],
+      "topLevel": true,
+      "type": "CLASSICAL_B",
+      "readVariables": [
+        "VehiclesVx",
+        "VehiclesX",
+        "VehiclesY",
+        "aBrakeMax",
+        "aBrakeMin",
+        "aMax",
+        "reactionTime",
+        "vehLen"
+      ],
+      "writtenVariables": [
+        "Crash",
+        "PresentVehicles",
+        "Reward",
+        "VehiclesAx",
+        "VehiclesAy",
+        "VehiclesVx",
+        "VehiclesVy",
+        "VehiclesX",
+        "VehiclesY"
+      ],
+      "nonDetWrittenVariables": [
+        "Crash",
+        "PresentVehicles",
+        "Reward",
+        "VehiclesAx",
+        "VehiclesAy",
+        "VehiclesVx",
+        "VehiclesVy",
+        "VehiclesX",
+        "VehiclesY"
+      ],
+      "typeMap": {
+        "'VehiclesY'": "set(couple(global('Vehicles'),real))",
+        "'Reward'": "real",
+        "'VehiclesX'": "set(couple(global('Vehicles'),real))",
+        "'PresentVehicles'": "set(global('Vehicles'))",
+        "'VehiclesVx'": "set(couple(global('Vehicles'),real))",
+        "'VehiclesVy'": "set(couple(global('Vehicles'),real))",
+        "'Crash'": "boolean",
+        "'VehiclesAx'": "set(couple(global('Vehicles'),real))",
+        "'VehiclesAy'": "set(couple(global('Vehicles'),real))"
+      }
+    },
+    "SLOWER": {
+      "operationName": "SLOWER",
+      "parameterNames": [],
+      "outputParameterNames": [],
+      "topLevel": true,
+      "type": "CLASSICAL_B",
+      "readVariables": [
+        "VehiclesVx",
+        "VehiclesX",
+        "VehiclesY",
+        "aBrakeMax",
+        "aBrakeMin",
+        "reactionTime",
+        "vehLen"
+      ],
+      "writtenVariables": [
+        "Crash",
+        "PresentVehicles",
+        "Reward",
+        "VehiclesAx",
+        "VehiclesAy",
+        "VehiclesVx",
+        "VehiclesVy",
+        "VehiclesX",
+        "VehiclesY"
+      ],
+      "nonDetWrittenVariables": [
+        "Crash",
+        "PresentVehicles",
+        "Reward",
+        "VehiclesAx",
+        "VehiclesAy",
+        "VehiclesVx",
+        "VehiclesVy",
+        "VehiclesX",
+        "VehiclesY"
+      ],
+      "typeMap": {
+        "'VehiclesY'": "set(couple(global('Vehicles'),real))",
+        "'Reward'": "real",
+        "'VehiclesX'": "set(couple(global('Vehicles'),real))",
+        "'PresentVehicles'": "set(global('Vehicles'))",
+        "'VehiclesVx'": "set(couple(global('Vehicles'),real))",
+        "'VehiclesVy'": "set(couple(global('Vehicles'),real))",
+        "'Crash'": "boolean",
+        "'VehiclesAx'": "set(couple(global('Vehicles'),real))",
+        "'VehiclesAy'": "set(couple(global('Vehicles'),real))"
+      }
+    },
+    "LANE_LEFT": {
+      "operationName": "LANE_LEFT",
+      "parameterNames": [],
+      "outputParameterNames": [],
+      "topLevel": true,
+      "type": "CLASSICAL_B",
+      "readVariables": [
+        "VehiclesVx",
+        "VehiclesX",
+        "VehiclesY",
+        "aBrakeMax",
+        "aBrakeMin",
+        "reactionTime",
+        "vehLen"
+      ],
+      "writtenVariables": [
+        "Crash",
+        "PresentVehicles",
+        "Reward",
+        "VehiclesAx",
+        "VehiclesAy",
+        "VehiclesVx",
+        "VehiclesVy",
+        "VehiclesX",
+        "VehiclesY"
+      ],
+      "nonDetWrittenVariables": [
+        "Crash",
+        "PresentVehicles",
+        "Reward",
+        "VehiclesAx",
+        "VehiclesAy",
+        "VehiclesVx",
+        "VehiclesVy",
+        "VehiclesX",
+        "VehiclesY"
+      ],
+      "typeMap": {
+        "'VehiclesY'": "set(couple(global('Vehicles'),real))",
+        "'Reward'": "real",
+        "'VehiclesX'": "set(couple(global('Vehicles'),real))",
+        "'PresentVehicles'": "set(global('Vehicles'))",
+        "'VehiclesVx'": "set(couple(global('Vehicles'),real))",
+        "'VehiclesVy'": "set(couple(global('Vehicles'),real))",
+        "'Crash'": "boolean",
+        "'VehiclesAx'": "set(couple(global('Vehicles'),real))",
+        "'VehiclesAy'": "set(couple(global('Vehicles'),real))"
+      }
+    }
+  },
+  "globalIdentifierTypes": {
+    "aBrakeMax": "real",
+    "reactionTime": "real",
+    "aBrakeMin": "real",
+    "vehLen": "real",
+    "aMax": "real"
+  },
+  "metadata": {
+    "fileType": "Trace",
+    "formatVersion": 5,
+    "savedAt": "2024-03-28T18:01:26.240419Z",
+    "creator": "Simulation: HYPOTHESIS_TEST; SIGNIFICANCE : 0.05, PROBABILITY : 0.95, MAX_STEPS_BEFORE_PROPERTY : 0, EXECUTIONS : 1000, PREDICATE : Crash = FALSE, ENDING_TIME : 60000, HYPOTHESIS_CHECKING_TYPE : LEFT_TAILED, CHECKING_TYPE : PREDICATE_INVARIANT",
+    "proB2KernelVersion": "4.13.1-SNAPSHOT",
+    "proBCliVersion": "1.13.0-final",
+    "modelName": "HighwayEnvironment_RSS_v2"
+  }
+}
