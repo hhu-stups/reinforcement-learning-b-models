@@ -16,6 +16,7 @@ DEFINITIONS
       ELSE initialSpeed*deltaTime + 0.5*acceleration*(deltaTime**2)
       END;
     vSV == VehiclesVx(EgoVehicle);
+    minOtherSpeed == min({v•v:OtherV|vSV+VehiclesVx(v)});
     reactionDistance == distanceTravelled(reactionTime,vSV,aMax)
      /* "distance car travels during reaction time supposing maximal acceleration" */;
      

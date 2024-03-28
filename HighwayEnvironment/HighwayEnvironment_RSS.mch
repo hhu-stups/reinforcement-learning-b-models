@@ -7,7 +7,7 @@ DEFINITIONS
     brakeDistance(initialSpeed,brakeAcc) == (initialSpeed**2)/(2.0*brakeAcc);
     // and now the distance required to brake until a target speed which is not necessarily 0.0:
     brakeDistanceWithTarget(initialSpeed,targetSpeed,brakeAcc) == (initialSpeed**2 - targetSpeed**2)/(2.0*brakeAcc);
-    minAbsoluteSpeed == 19.5;
+    minAbsoluteSpeed == 13.5;
     brakeDistance20(initialSpeed,brakeAcc) == brakeDistanceWithTarget(initialSpeed,minAbsoluteSpeed,brakeAcc);
     distanceTravelled(deltaTime,initialSpeed,acceleration) ==
       IF initialSpeed < -(acceleration*deltaTime)
@@ -15,6 +15,7 @@ DEFINITIONS
       ELSE initialSpeed*deltaTime + 0.5*acceleration*(deltaTime**2)
       END;
     vSV == VehiclesVx(EgoVehicle);
+    minOtherSpeed == min({v•v:OtherV|vSV+VehiclesVx(v)});
     reactionDistance == distanceTravelled(reactionTime,vSV,aMax)
      /* "distance car travels during reaction time supposing maximal acceleration" */;
      
