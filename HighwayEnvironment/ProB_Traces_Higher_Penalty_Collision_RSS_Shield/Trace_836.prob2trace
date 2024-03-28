@@ -1,0 +1,410 @@
+{
+  "description": "",
+  "transitionList": [
+    {
+      "name": "$setup_constants",
+      "params": {},
+      "results": {},
+      "destState": {
+        "aBrakeMax": "5.1",
+        "reactionTime": "1.0",
+        "aBrakeMin": "4.9",
+        "aMax": "5.0",
+        "vehLen": "5.0"
+      },
+      "destStateNotChanged": [],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "$initialise_machine",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Crash": "FALSE",
+        "PresentVehicles": "{EgoVehicle,Vehicles2,Vehicles3,Vehicles4,Vehicles5}",
+        "VehiclesAy": "{(EgoVehicle↦0.0),(Vehicles2↦0.0),(Vehicles3↦0.0),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "Reward": "0.0",
+        "VehiclesAx": "{(EgoVehicle↦0.0),(Vehicles2↦0.0),(Vehicles3↦0.0),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "VehiclesVx": "{(EgoVehicle↦25.0),(Vehicles2↦-2.707112729549408),(Vehicles3↦-2.5199854373931885),(Vehicles4↦-1.3013117015361786),(Vehicles5↦-1.9870160520076752)}",
+        "VehiclesY": "{(EgoVehicle↦8.000000238418579),(Vehicles2↦-4.0000001192092896),(Vehicles3↦-4.0000001192092896),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "VehiclesVy": "{(EgoVehicle↦0.0),(Vehicles2↦0.0),(Vehicles3↦0.0),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "VehiclesX": "{(EgoVehicle↦154.7979474067688),(Vehicles2↦22.77817577123642),(Vehicles3↦48.44067990779877),(Vehicles4↦70.90610861778259),(Vehicles5↦93.12533140182495)}"
+      },
+      "destStateNotChanged": [],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "SLOWER",
+      "params": {},
+      "results": {},
+      "destState": {
+        "VehiclesAy": "{(EgoVehicle↦0.0),(Vehicles2↦-5.028042793273926),(Vehicles3↦0.0),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "Reward": "0.750891632373114",
+        "VehiclesAx": "{(EgoVehicle↦-4.341564178466797),(Vehicles2↦-0.6456181406974792),(Vehicles3↦3.70684877038002),(Vehicles4↦-1.6584362089633942),(Vehicles5↦-1.26424178481102)}",
+        "VehiclesVx": "{(EgoVehicle↦20.658435821533203),(Vehicles2↦-3.352730870246887),(Vehicles3↦1.1868633329868317),(Vehicles4↦-2.9597479104995728),(Vehicles5↦-3.251257836818695)}",
+        "VehiclesY": "{(EgoVehicle↦8.000000238418579),(Vehicles2↦-6.0122716426849365),(Vehicles3↦-4.0000001192092896),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "VehiclesVy": "{(EgoVehicle↦0.0),(Vehicles2↦-5.028042793273926),(Vehicles3↦0.0),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "VehiclesX": "{(EgoVehicle↦177.40288972854614),(Vehicles2↦20.090532302856445),(Vehicles3↦48.07354211807251),(Vehicles4↦69.59986090660095),(Vehicles5↦91.13337397575378)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "FASTER",
+      "params": {},
+      "results": {},
+      "destState": {
+        "VehiclesAy": "{(EgoVehicle↦0.0),(Vehicles2↦11.203969717025757),(Vehicles3↦-1.1449586600065231),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "Reward": "0.8514205716156639",
+        "VehiclesAx": "{(EgoVehicle↦3.76983642578125),(Vehicles2↦-4.34814989566803),(Vehicles3↦-4.193098098039627),(Vehicles4↦-7.727051377296448),(Vehicles5↦-5.2395448088645935)}",
+        "VehiclesVx": "{(EgoVehicle↦24.428272247314453),(Vehicles2↦-7.700880765914917),(Vehicles3↦-3.0062347650527954),(Vehicles4↦-10.68679928779602),(Vehicles5↦-8.490802645683289)}",
+        "VehiclesY": "{(EgoVehicle↦8.000000238418579),(Vehicles2↦-6.898742437362671),(Vehicles3↦-7.614827871322632),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "VehiclesVy": "{(EgoVehicle↦0.0),(Vehicles2↦6.175926923751831),(Vehicles3↦-1.1449586600065231),(Vehicles4↦0.0),(Vehicles5↦0.0)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦15.387162566184998),(Vehicles3↦46.54238820075989),(Vehicles4↦62.570929527282715),(Vehicles5↦85.00253558158875)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "LANE_LEFT",
+      "params": {},
+      "results": {},
+      "destState": {
+        "VehiclesAy": "{(EgoVehicle↦-1.0688171535730362),(Vehicles2↦-4.396177679300308),(Vehicles3↦2.1503375470638275),(Vehicles4↦-0.2687954343855381),(Vehicles5↦1.0688171535730362)}",
+        "Reward": "0.8307142314781372",
+        "VehiclesAx": "{(EgoVehicle↦0.4735112190246582),(Vehicles2↦-0.6462270021438599),(Vehicles3↦-1.2446123361587524),(Vehicles4↦0.23360371589660645),(Vehicles5↦-0.5132240056991577)}",
+        "VehiclesVx": "{(EgoVehicle↦24.90178346633911),(Vehicles2↦-8.347107768058777),(Vehicles3↦-4.250847101211548),(Vehicles4↦-10.453195571899414),(Vehicles5↦-9.004026651382446)}",
+        "VehiclesY": "{(EgoVehicle↦4.335808038711548),(Vehicles2↦-0.6000954508781433),(Vehicles3↦-4.314164757728577),(Vehicles4↦0.16418374702334404),(Vehicles5↦3.6641918420791626)}",
+        "VehiclesVy": "{(EgoVehicle↦-1.0688171535730362),(Vehicles2↦1.7797492444515228),(Vehicles3↦1.0053788870573044),(Vehicles4↦-0.2687954343855381),(Vehicles5↦1.0688171535730362)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦7.940734177827835),(Vehicles3↦43.229952454566956),(Vehicles4↦51.134318113327026),(Vehicles5↦76.4950156211853)}"
+      },
+      "destStateNotChanged": [
+        "Crash",
+        "PresentVehicles"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    },
+    {
+      "name": "LANE_RIGHT",
+      "params": {},
+      "results": {},
+      "destState": {
+        "Crash": "TRUE",
+        "VehiclesAy": "{(EgoVehicle↦3.758843317627907),(Vehicles2↦-1.8205311056226492),(Vehicles3↦-3.6991526931524277),(Vehicles4↦-2.555301245301962),(Vehicles5↦-3.758843317627907)}",
+        "Reward": "0.06666666666666665",
+        "VehiclesAx": "{(EgoVehicle↦-12.405165433883667),(Vehicles2↦3.807414174079895),(Vehicles3↦12.119110226631165),(Vehicles4↦14.785884618759155),(Vehicles5↦12.75206983089447)}",
+        "VehiclesVx": "{(EgoVehicle↦12.496618032455444),(Vehicles2↦-4.539693593978882),(Vehicles3↦7.868263125419617),(Vehicles4↦4.332689046859741),(Vehicles5↦3.748043179512024)}",
+        "VehiclesY": "{(EgoVehicle↦9.599190473556519),(Vehicles2↦-2.117303431034088),(Vehicles3↦-9.597908020019531),(Vehicles4↦-5.551022529602051),(Vehicles5↦-1.5991902351379395)}",
+        "VehiclesVy": "{(EgoVehicle↦2.6900261640548706),(Vehicles2↦-0.040781861171126366),(Vehicles3↦-2.6937738060951233),(Vehicles4↦-2.8240966796875),(Vehicles5↦-2.6900261640548706)}",
+        "VehiclesX": "{(EgoVehicle↦200.0),(Vehicles2↦0.8168570697307587),(Vehicles3↦42.4167662858963),(Vehicles4↦45.270124077796936),(Vehicles5↦71.19168639183044)}"
+      },
+      "destStateNotChanged": [
+        "PresentVehicles"
+      ],
+      "preds": [],
+      "postconditions": [],
+      "description": ""
+    }
+  ],
+  "variableNames": [
+    "Crash",
+    "PresentVehicles",
+    "Reward",
+    "VehiclesAx",
+    "VehiclesAy",
+    "VehiclesVx",
+    "VehiclesVy",
+    "VehiclesX",
+    "VehiclesY"
+  ],
+  "constantNames": [
+    "aMax",
+    "aBrakeMax",
+    "aBrakeMin",
+    "vehLen",
+    "reactionTime"
+  ],
+  "setNames": [
+    "Vehicles"
+  ],
+  "machineOperationInfos": {
+    "LANE_RIGHT": {
+      "operationName": "LANE_RIGHT",
+      "parameterNames": [],
+      "outputParameterNames": [],
+      "topLevel": true,
+      "type": "CLASSICAL_B",
+      "readVariables": [
+        "VehiclesVx",
+        "VehiclesX",
+        "VehiclesY",
+        "aBrakeMax",
+        "aBrakeMin",
+        "reactionTime",
+        "vehLen"
+      ],
+      "writtenVariables": [
+        "Crash",
+        "PresentVehicles",
+        "Reward",
+        "VehiclesAx",
+        "VehiclesAy",
+        "VehiclesVx",
+        "VehiclesVy",
+        "VehiclesX",
+        "VehiclesY"
+      ],
+      "nonDetWrittenVariables": [
+        "Crash",
+        "PresentVehicles",
+        "Reward",
+        "VehiclesAx",
+        "VehiclesAy",
+        "VehiclesVx",
+        "VehiclesVy",
+        "VehiclesX",
+        "VehiclesY"
+      ],
+      "typeMap": {
+        "'VehiclesY'": "set(couple(global('Vehicles'),real))",
+        "'Reward'": "real",
+        "'VehiclesX'": "set(couple(global('Vehicles'),real))",
+        "'PresentVehicles'": "set(global('Vehicles'))",
+        "'VehiclesVx'": "set(couple(global('Vehicles'),real))",
+        "'VehiclesVy'": "set(couple(global('Vehicles'),real))",
+        "'Crash'": "boolean",
+        "'VehiclesAx'": "set(couple(global('Vehicles'),real))",
+        "'VehiclesAy'": "set(couple(global('Vehicles'),real))"
+      }
+    },
+    "IDLE": {
+      "operationName": "IDLE",
+      "parameterNames": [],
+      "outputParameterNames": [],
+      "topLevel": true,
+      "type": "CLASSICAL_B",
+      "readVariables": [
+        "VehiclesVx",
+        "VehiclesX",
+        "VehiclesY",
+        "aBrakeMax",
+        "aBrakeMin",
+        "reactionTime",
+        "vehLen"
+      ],
+      "writtenVariables": [
+        "Crash",
+        "PresentVehicles",
+        "Reward",
+        "VehiclesAx",
+        "VehiclesAy",
+        "VehiclesVx",
+        "VehiclesVy",
+        "VehiclesX",
+        "VehiclesY"
+      ],
+      "nonDetWrittenVariables": [
+        "Crash",
+        "PresentVehicles",
+        "Reward",
+        "VehiclesAx",
+        "VehiclesAy",
+        "VehiclesVx",
+        "VehiclesVy",
+        "VehiclesX",
+        "VehiclesY"
+      ],
+      "typeMap": {
+        "'VehiclesY'": "set(couple(global('Vehicles'),real))",
+        "'Reward'": "real",
+        "'VehiclesX'": "set(couple(global('Vehicles'),real))",
+        "'PresentVehicles'": "set(global('Vehicles'))",
+        "'VehiclesVx'": "set(couple(global('Vehicles'),real))",
+        "'VehiclesVy'": "set(couple(global('Vehicles'),real))",
+        "'Crash'": "boolean",
+        "'VehiclesAx'": "set(couple(global('Vehicles'),real))",
+        "'VehiclesAy'": "set(couple(global('Vehicles'),real))"
+      }
+    },
+    "FASTER": {
+      "operationName": "FASTER",
+      "parameterNames": [],
+      "outputParameterNames": [],
+      "topLevel": true,
+      "type": "CLASSICAL_B",
+      "readVariables": [
+        "VehiclesVx",
+        "VehiclesX",
+        "VehiclesY",
+        "aBrakeMax",
+        "aBrakeMin",
+        "aMax",
+        "reactionTime",
+        "vehLen"
+      ],
+      "writtenVariables": [
+        "Crash",
+        "PresentVehicles",
+        "Reward",
+        "VehiclesAx",
+        "VehiclesAy",
+        "VehiclesVx",
+        "VehiclesVy",
+        "VehiclesX",
+        "VehiclesY"
+      ],
+      "nonDetWrittenVariables": [
+        "Crash",
+        "PresentVehicles",
+        "Reward",
+        "VehiclesAx",
+        "VehiclesAy",
+        "VehiclesVx",
+        "VehiclesVy",
+        "VehiclesX",
+        "VehiclesY"
+      ],
+      "typeMap": {
+        "'VehiclesY'": "set(couple(global('Vehicles'),real))",
+        "'Reward'": "real",
+        "'VehiclesX'": "set(couple(global('Vehicles'),real))",
+        "'PresentVehicles'": "set(global('Vehicles'))",
+        "'VehiclesVx'": "set(couple(global('Vehicles'),real))",
+        "'VehiclesVy'": "set(couple(global('Vehicles'),real))",
+        "'Crash'": "boolean",
+        "'VehiclesAx'": "set(couple(global('Vehicles'),real))",
+        "'VehiclesAy'": "set(couple(global('Vehicles'),real))"
+      }
+    },
+    "SLOWER": {
+      "operationName": "SLOWER",
+      "parameterNames": [],
+      "outputParameterNames": [],
+      "topLevel": true,
+      "type": "CLASSICAL_B",
+      "readVariables": [
+        "VehiclesVx",
+        "VehiclesX",
+        "VehiclesY",
+        "aBrakeMax",
+        "aBrakeMin",
+        "reactionTime",
+        "vehLen"
+      ],
+      "writtenVariables": [
+        "Crash",
+        "PresentVehicles",
+        "Reward",
+        "VehiclesAx",
+        "VehiclesAy",
+        "VehiclesVx",
+        "VehiclesVy",
+        "VehiclesX",
+        "VehiclesY"
+      ],
+      "nonDetWrittenVariables": [
+        "Crash",
+        "PresentVehicles",
+        "Reward",
+        "VehiclesAx",
+        "VehiclesAy",
+        "VehiclesVx",
+        "VehiclesVy",
+        "VehiclesX",
+        "VehiclesY"
+      ],
+      "typeMap": {
+        "'VehiclesY'": "set(couple(global('Vehicles'),real))",
+        "'Reward'": "real",
+        "'VehiclesX'": "set(couple(global('Vehicles'),real))",
+        "'PresentVehicles'": "set(global('Vehicles'))",
+        "'VehiclesVx'": "set(couple(global('Vehicles'),real))",
+        "'VehiclesVy'": "set(couple(global('Vehicles'),real))",
+        "'Crash'": "boolean",
+        "'VehiclesAx'": "set(couple(global('Vehicles'),real))",
+        "'VehiclesAy'": "set(couple(global('Vehicles'),real))"
+      }
+    },
+    "LANE_LEFT": {
+      "operationName": "LANE_LEFT",
+      "parameterNames": [],
+      "outputParameterNames": [],
+      "topLevel": true,
+      "type": "CLASSICAL_B",
+      "readVariables": [
+        "VehiclesVx",
+        "VehiclesX",
+        "VehiclesY",
+        "aBrakeMax",
+        "aBrakeMin",
+        "reactionTime",
+        "vehLen"
+      ],
+      "writtenVariables": [
+        "Crash",
+        "PresentVehicles",
+        "Reward",
+        "VehiclesAx",
+        "VehiclesAy",
+        "VehiclesVx",
+        "VehiclesVy",
+        "VehiclesX",
+        "VehiclesY"
+      ],
+      "nonDetWrittenVariables": [
+        "Crash",
+        "PresentVehicles",
+        "Reward",
+        "VehiclesAx",
+        "VehiclesAy",
+        "VehiclesVx",
+        "VehiclesVy",
+        "VehiclesX",
+        "VehiclesY"
+      ],
+      "typeMap": {
+        "'VehiclesY'": "set(couple(global('Vehicles'),real))",
+        "'Reward'": "real",
+        "'VehiclesX'": "set(couple(global('Vehicles'),real))",
+        "'PresentVehicles'": "set(global('Vehicles'))",
+        "'VehiclesVx'": "set(couple(global('Vehicles'),real))",
+        "'VehiclesVy'": "set(couple(global('Vehicles'),real))",
+        "'Crash'": "boolean",
+        "'VehiclesAx'": "set(couple(global('Vehicles'),real))",
+        "'VehiclesAy'": "set(couple(global('Vehicles'),real))"
+      }
+    }
+  },
+  "globalIdentifierTypes": {
+    "aBrakeMax": "real",
+    "reactionTime": "real",
+    "aBrakeMin": "real",
+    "vehLen": "real",
+    "aMax": "real"
+  },
+  "metadata": {
+    "fileType": "Trace",
+    "formatVersion": 5,
+    "savedAt": "2024-03-28T10:33:12.386777Z",
+    "creator": "Simulation: HYPOTHESIS_TEST; SIGNIFICANCE : 0.05, PROBABILITY : 0.95, MAX_STEPS_BEFORE_PROPERTY : 0, EXECUTIONS : 1000, PREDICATE : Crash = FALSE, ENDING_TIME : 60000, HYPOTHESIS_CHECKING_TYPE : LEFT_TAILED, CHECKING_TYPE : PREDICATE_INVARIANT",
+    "proB2KernelVersion": "4.13.1-SNAPSHOT",
+    "proBCliVersion": "1.13.0-final",
+    "modelName": "HighwayEnvironment_RSS_v2"
+  }
+}
