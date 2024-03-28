@@ -19,13 +19,13 @@ DEFINITIONS
        brakeDistance(vSV+maxAccRear*reactionTime,aBrakeMin) -
        brakeDistance(vFront,aBrakeMax);
     OtherV == Vehicles \ {EgoVehicle};
-    LeftLane == -4;
+    LeftLane == -2;
     CurLane == 0;
-    RightLane == 4;
-    VehiclesInSameLane == {v|v:OtherV & floor(VehiclesY(v)+0.5)=CurLane};
-    VehiclesInLeftLane == {v|v:OtherV & floor(VehiclesY(v)+0.5)=LeftLane};
-    VehiclesInRightLane == {v|v:OtherV & floor(VehiclesY(v)+0.5)=RightLane};
-    VehiclesInLane(Lane) == {v|v:OtherV & floor(VehiclesY(v)+0.5)=Lane};
+    RightLane == 2;
+    VehiclesInSameLane == {v|v:OtherV & floor(VehiclesY(v)/2.0+0.5)=CurLane};
+    VehiclesInLeftLane == {v|v:OtherV & floor(VehiclesY(v)/2.0+0.5)=LeftLane};
+    VehiclesInRightLane == {v|v:OtherV & floor(VehiclesY(v)/2.0+0.5)=RightLane};
+    VehiclesInLane(Lane) == {v|v:OtherV & floor(VehiclesY(v)/2.0+0.5)=Lane};
     NextVehiclesInLane(Lane) == {v|v:VehiclesInLane(Lane) & VehiclesX(v) = min(VehiclesX[VehiclesInLane(Lane)])};
   
     dRSS_lane(maxAccRear,Lane) == max({0.0, 
