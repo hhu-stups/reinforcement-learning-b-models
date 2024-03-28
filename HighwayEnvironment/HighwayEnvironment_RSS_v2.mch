@@ -3,7 +3,7 @@ MACHINE HighwayEnvironment_RSS
 SETS
     Vehicles
 DEFINITIONS
-    VISB_JSON_FILE == "visualization/HighwayEnvRSS.json";
+    VISB_JSON_FILE == "visualization/HighwayEnvRSS_v2.json";
     brakeDistance(initialSpeed,brakeAcc) == (initialSpeed**2)/(2.0*brakeAcc);
     distanceTravelled(deltaTime,initialSpeed,acceleration) ==
       IF initialSpeed < -(acceleration*deltaTime)
@@ -37,6 +37,8 @@ DEFINITIONS
     FASTER_ALLOWED == (NextVehiclesInLane(CurLane)/={}
                          => dRSS_lane(aMax,CurLane) + vehLen <= min(VehiclesX[NextVehiclesInLane(CurLane)]));
     IDLE_ALLOWED == (NextVehiclesInLane(CurLane)/={}
+                         => dRSS_lane(0.05,CurLane) + vehLen <= min(VehiclesX[NextVehiclesInLane(CurLane)]));
+    SLOWER_ALLOWED == (NextVehiclesInLane(CurLane)/={}
                          => dRSS_lane(0.05,CurLane) + vehLen <= min(VehiclesX[NextVehiclesInLane(CurLane)]));
     LEFT_ALLOWED == VehiclesY(EgoVehicle) > 1.0 & 
                     (NextVehiclesInLane(LeftLane)/={}
@@ -76,8 +78,7 @@ VARIABLES
     VehiclesVy  /*@desc "vertical speed of the vehicles" */,
     VehiclesAx  /*@desc "horizontal acceleration of the vehicles" */,
     VehiclesAy  /*@desc "vertical acceleration of the vehicles" */,
-    Reward,
-    ErrorMsg
+    Reward
 
 INVARIANT
     Crash : BOOL &
@@ -89,8 +90,7 @@ INVARIANT
     VehiclesVy : PresentVehicles --> REAL &
     VehiclesAx : PresentVehicles --> REAL &
     VehiclesAy : PresentVehicles --> REAL &
-    Reward : REAL &
-    ErrorMsg : STRING
+    Reward : REAL
 
 INITIALISATION
     Crash :: BOOL ||
@@ -101,13 +101,12 @@ INITIALISATION
     VehiclesVy :: Vehicles --> REAL ||
     VehiclesAx :: Vehicles --> REAL ||
     VehiclesAy :: Vehicles --> REAL ||
-    Reward :: REAL ||
-    ErrorMsg := ""
+    Reward :: REAL
 
 OPERATIONS
   IDLE =
   SELECT
-    not(#v. (v : PresentVehicles \ {EgoVehicle} & VehiclesX(v) > 0.0 & VehiclesX(v) < 35.0  & VehiclesY(v) < 3.5 & VehiclesY(v) > -3.5 & VehiclesVx(v) < 0.0))
+    IDLE_ALLOWED
   THEN
     Crash :: BOOL ||
     PresentVehicles : (PresentVehicles : POW(Vehicles) & EgoVehicle : PresentVehicles) ||
@@ -117,17 +116,13 @@ OPERATIONS
     VehiclesVy :: Vehicles --> REAL ||
     VehiclesAx :: Vehicles --> REAL ||
     VehiclesAy :: Vehicles --> REAL ||
-    Reward :: REAL ||
-    IF not(IDLE_ALLOWED) THEN ErrorMsg := ```IDLE was not ALLOWED at x:$[2f]{VehiclesX(EgoVehicle)} y:$[2f]{VehiclesY(EgoVehicle)}``` ELSE ErrorMsg := "IDLE ok" END
+    Reward :: REAL
   END;
 
   LANE_LEFT =
   SELECT
     EgoVehicle : dom(VehiclesY) &
-    VehiclesY(EgoVehicle) > 1.0 &
-    not(#v. (v : PresentVehicles \ {EgoVehicle} & VehiclesX(v) > -25.0 & VehiclesX(v) <= -15.0  & VehiclesY(v) > -6.0 & VehiclesY(v) < -2.0 & VehiclesVx(v) > 0.0)) &
-    not(#v. (v : PresentVehicles \ {EgoVehicle} & VehiclesX(v) > -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) > -6.0 & VehiclesY(v) < -2.0)) &
-    not(#v. (v : PresentVehicles \ {EgoVehicle} & VehiclesX(v) > 15.0 & VehiclesX(v) <= 35.0  & VehiclesY(v) > -6.0 & VehiclesY(v) < -2.0 & VehiclesVx(v) < 0.0))
+    LEFT_ALLOWED
   THEN
     Crash :: BOOL ||
     PresentVehicles : (PresentVehicles : POW(Vehicles) & EgoVehicle : PresentVehicles) ||
@@ -137,17 +132,13 @@ OPERATIONS
     VehiclesVy :: Vehicles --> REAL ||
     VehiclesAx :: Vehicles --> REAL ||
     VehiclesAy :: Vehicles --> REAL ||
-    Reward :: REAL ||
-    IF not(LEFT_ALLOWED) THEN ErrorMsg := ```LEFT was not ALLOWED at x:$[2f]{VehiclesX(EgoVehicle)} y:$[2f]{VehiclesY(EgoVehicle)}``` ELSE ErrorMsg := "LEFT ok" END
+    Reward :: REAL
   END;
 
   LANE_RIGHT =
   SELECT
     EgoVehicle : dom(VehiclesY) &
-    VehiclesY(EgoVehicle) < 7.0 &
-    not(#v. (v : PresentVehicles \ {EgoVehicle} & VehiclesX(v) > -25.0 & VehiclesX(v) <= -15.0  & VehiclesY(v) < 6.0 & VehiclesY(v) > 2.0 & VehiclesVx(v) > 0.0)) &
-    not(#v. (v : PresentVehicles \ {EgoVehicle} & VehiclesX(v) > -15.0 & VehiclesX(v) < 15.0  & VehiclesY(v) < 6.0 & VehiclesY(v) > 2.0)) &
-    not(#v. (v : PresentVehicles \ {EgoVehicle} & VehiclesX(v) > 15.0 & VehiclesX(v) <= 35.0  & VehiclesY(v) < 6.0 & VehiclesY(v) > 2.0 & VehiclesVx(v) < 0.0))
+    RIGHT_ALLOWED
   THEN
     Crash :: BOOL ||
     PresentVehicles : (PresentVehicles : POW(Vehicles) & EgoVehicle : PresentVehicles) ||
@@ -157,14 +148,13 @@ OPERATIONS
     VehiclesVy :: Vehicles --> REAL ||
     VehiclesAx :: Vehicles --> REAL ||
     VehiclesAy :: Vehicles --> REAL ||
-    Reward :: REAL ||
-    IF not(RIGHT_ALLOWED) THEN ErrorMsg := ```RIGHT was not ALLOWED at x:$[2f]{VehiclesX(EgoVehicle)} y:$[2f]{VehiclesY(EgoVehicle)}``` ELSE ErrorMsg := "RIGHT ok" END
+    Reward :: REAL
   END;
 
   FASTER =
   SELECT
     EgoVehicle : dom(VehiclesVx) &
-    not(#v. (v : PresentVehicles \ {EgoVehicle} & VehiclesX(v) > 0.0 & VehiclesX(v) < 45.0  & VehiclesY(v) < 3.5 & VehiclesY(v) > -3.5))
+    FASTER_ALLOWED
   THEN
     Crash :: BOOL ||
     PresentVehicles : (PresentVehicles : POW(Vehicles) & EgoVehicle : PresentVehicles) ||
@@ -174,27 +164,16 @@ OPERATIONS
     VehiclesVy :: Vehicles --> REAL ||
     VehiclesAx :: Vehicles --> REAL ||
     VehiclesAy :: Vehicles --> REAL ||
-    Reward :: REAL ||
-    IF not(FASTER_ALLOWED) THEN ErrorMsg := ```FASTER was not ALLOWED at x:$[2f]{VehiclesX(EgoVehicle)} y:$[2f]{VehiclesY(EgoVehicle)}``` ELSE ErrorMsg := "FASTER ok" END
+    Reward :: REAL
   END;
 
   SLOWER =
   SELECT
     EgoVehicle : dom(VehiclesVx) &
-    (#v. (v : PresentVehicles \ {EgoVehicle} & VehiclesX(v) > 0.0 & VehiclesX(v) < 15.0  & VehiclesY(v) < 3.5 & VehiclesY(v) > -3.5 & VehiclesVx(v) < 0.0)
+    (not(SLOWER_ALLOWED)
     =>
-    (not(
-    VehiclesY(EgoVehicle) > 1.0 &
-      not(#v. (v : PresentVehicles \ {EgoVehicle} & VehiclesX(v) > -25.0 & VehiclesX(v) <= -15.0  & VehiclesY(v) > -6.0 & VehiclesY(v) < -2.0 & VehiclesVx(v) > 0.0)) &
-      not(#v. (v : PresentVehicles \ {EgoVehicle} & VehiclesX(v) > -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) > -6.0 & VehiclesY(v) < -2.0)) &
-      not(#v. (v : PresentVehicles \ {EgoVehicle} & VehiclesX(v) > 15.0 & VehiclesX(v) <= 35.0  & VehiclesY(v) > -6.0 & VehiclesY(v) < -2.0 & VehiclesVx(v) < 0.0))
-    ) &
-    not(
-      VehiclesY(EgoVehicle) < 7.0 &
-      not(#v. (v : PresentVehicles \ {EgoVehicle} & VehiclesX(v) > -25.0 & VehiclesX(v) <= -15.0  & VehiclesY(v) < 6.0 & VehiclesY(v) > 2.0 & VehiclesVx(v) > 0.0)) &
-      not(#v. (v : PresentVehicles \ {EgoVehicle} & VehiclesX(v) > -15.0 & VehiclesX(v) < 15.0  & VehiclesY(v) < 6.0 & VehiclesY(v) > 2.0)) &
-      not(#v. (v : PresentVehicles \ {EgoVehicle} & VehiclesX(v) > 15.0 & VehiclesX(v) <= 35.0  & VehiclesY(v) < 6.0 & VehiclesY(v) > 2.0 & VehiclesVx(v) < 0.0))
-    )))
+    (not(LEFT_ALLOWED) &
+    not(RIGHT_ALLOWED)))
   THEN
     Crash :: BOOL ||
     PresentVehicles : (PresentVehicles : POW(Vehicles) & EgoVehicle : PresentVehicles) ||
@@ -204,8 +183,7 @@ OPERATIONS
     VehiclesVy :: Vehicles --> REAL ||
     VehiclesAx :: Vehicles --> REAL ||
     VehiclesAy :: Vehicles --> REAL ||
-    Reward :: REAL ||
-    ErrorMsg := "SLOWER (ok)"
+    Reward :: REAL
   END
 
 END
