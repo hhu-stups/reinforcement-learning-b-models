@@ -34,10 +34,12 @@ DEFINITIONS
     CurLane == 0;
     RightLane == 1;
     // TODO: also take Vy into account:
-    VehiclesInSameLane == {v|v:OtherV & floor(VehiclesY(v)/4.0+0.5)=CurLane};
-    VehiclesInLeftLane == {v|v:OtherV & floor(VehiclesY(v)/4.0+0.5)=LeftLane};
-    VehiclesInRightLane == {v|v:OtherV & floor(VehiclesY(v)/4.0+0.5)=RightLane};
-    VehiclesInLane(Lane) == {v|v:OtherV & floor(VehiclesY(v)/4.0+0.5)=Lane};
+    GetLane(vv) == floor(VehiclesY(vv)/4.0+0.5);
+    GetNextLane(vv) == floor((VehiclesY(vv)+VehiclesVy(vv)*reactionTime)/4.0+0.5); // predicated lane after one cycle
+    VehiclesInSameLane == {v|v:OtherV & GetLane(v)=CurLane};
+    VehiclesInLeftLane == {v|v:OtherV & GetLane(v)=LeftLane};
+    VehiclesInRightLane == {v|v:OtherV & GetLane(v)=RightLane};
+    VehiclesInLane(Lane) == {v|v:OtherV & (GetLane(v)=Lane or GetNextLane(v)=Lane)};
     NextVehiclesInLane(Lane) == {v|v:VehiclesInLane(Lane) & VehiclesX(v) = min(VehiclesX[VehiclesInLane(Lane)])};
   
     dRSS_lane(maxAccRear,Lane) == max({0.0, 
