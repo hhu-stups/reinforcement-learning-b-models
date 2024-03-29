@@ -1,0 +1,263 @@
+{
+  "svg":"HighwayEnv.svg",
+  "definitions":[
+    { "name":"xoffset",
+      "value" :"100.0",
+      "comment":"x coordinate of EgoVehicle in visualization"
+    },
+    { "name":"yoffset",
+      "value" :"75.0",
+      "comment":"y coordinate of EgoVehicle in visualization"
+    },
+    { "name":"vehicle_height",
+       "value" :"20.0"
+    },
+    { "name":"vehicle_length",
+       "value" :"50.0"
+    },
+    { "name":"SCALE",
+       "value" :"10.0"
+    },
+    { "name":"ego_xpos",
+      "value":"xoffset - SCALE * 2.0/2.0"
+    },
+    { "name":"ego_ypos",
+      "value":"yoffset + SCALE * (VehiclesY(EgoVehicle) - 5.0/2.0)"
+    },
+    { "name":"xpos",
+      "value":"%v.(v:Vehicles|xoffset + SCALE * (VehiclesX(v) - 2.0/2.0))"
+    },
+    { "name":"ypos",
+      "value":"%v.(v:Vehicles|yoffset + SCALE * (VehiclesY(EgoVehicle) + VehiclesY(v) - 5.0/2.0))"
+    },
+    { "name":"Vehicles1",
+      "value" : "EgoVehicle"
+    },
+    { "name":"dss_wrt_vx",
+      "value" : "%(VxOther).(VxOther:REAL|max({0.0, reactionDistance +
+       brakeDistance(VehiclesVx(EgoVehicle)+aMax*reactionTime,aBrakeMax) -
+       brakeDistance(VxOther,aBrakeMax)}))"
+    },
+    { "name":"dss_wrt_vehicle",
+      "value" : "%(Other).(Other:Vehicles|dss_wrt_vx(VehiclesVx(EgoVehicle)+VehiclesVx(Other)))"
+    },
+    { "name":"realSpeed",
+      "value" : "%v.(v:REAL|VehiclesVx(EgoVehicle)+v)",
+      "comment" : "compute real speed of other vehicles, as it is relative to EgoVehicle"
+    },
+    { "name":"dss_all_lanes",
+      "value" : "dss_wrt_vx(realSpeed(min(ran({EgoVehicle} <<| VehiclesVx))))",
+      "comment" : "safe distance wrt slowest vehicle in all other lanes"
+    }
+  ],
+  "svg_objects":[
+    {
+      "svg_class":"rect",
+      "id":"ego",
+      "fill":"red",
+      "visibility":"visible",
+      "width":"50",
+      "height":"20",
+      "x":"100",
+      "y":"90",
+      "rx":"5",
+      "title":"Ego vehicle"
+    },
+    {
+      "svg_class":"text",
+      "id":"ego_text",
+      "font-size":"11.0",
+      "visibility":"visible",
+      "x":"100",
+      "y":"90",
+      "text":"Ego"
+    },
+    {
+      "for":{"from":2,"to":"card(Vehicles)"}, 
+      "svg_class":"rect",
+      "id":"car_%0",
+      "fill":"blue",
+      "visibility":"visible",
+      "width":"50",
+      "height":"20",
+      "x":"100",
+      "y":"90",
+      "rx":"5",
+      "title":"other vehicle"
+    },
+    {
+      "for":{"from":1,"to":"card(Vehicles)"}, 
+      "svg_class":"line",
+      "id":"speed%0",
+      "stroke":"white",
+      "visibility":"visible",
+      "stroke-width":"0.8",
+      "marker-start": "url(#circlemarker)",
+      "marker-end":"url(#arrowhead)"
+    },
+    {
+      "for":{"from":1,"to":"card(Vehicles)"}, 
+      "svg_class":"line",
+      "id":"brakeline%0",
+      "stroke":"orange",
+      "stroke-dash-array" : "0.5 0.5",
+      "visibility":"hidden",
+      "stroke-width":"0.8",
+      "marker-start": "url(#circlemarker)",
+      "marker-end":"url(#arrowhead)"
+    },
+    {
+      "for":{"from":1,"to":"3"}, 
+      "svg_class":"line",
+      "id":"dRSS_%0",
+      "stroke":"purple",
+      "visibility":"visible",
+      "stroke-width":"0.8",
+      "marker-start": "url(#circlemarker)",
+      "marker-end":"url(#arrowhead)"
+    },
+    {
+      "svg_class":"text",
+      "id":"infotext",
+      "x":100,
+      "y":180,
+      "fill":"black",
+      "font-size": "9.0",
+      "text": "",
+      "comment": "used to display hover informations"
+    },
+    {
+      "svg_class":"text",
+      "id":"FASTER_txt",
+      "x":150,
+      "y":180,
+      "fill":"black",
+      "font-size": "9.0",
+      "text": "FASTER"
+    },
+    {
+      "svg_class":"text",
+      "id":"IDLE_txt",
+      "x":200,
+      "y":180,
+      "fill":"black",
+      "font-size": "9.0",
+      "text": "IDLE"
+    },
+    {
+      "svg_class":"text",
+      "id":"LEFT_txt",
+      "x":250,
+      "y":180,
+      "fill":"black",
+      "font-size": "9.0",
+      "text": "LEFT"
+    },
+    {
+      "svg_class":"text",
+      "id":"RIGHT_txt",
+      "x":300,
+      "y":180,
+      "fill":"black",
+      "font-size": "9.0",
+      "text": "RIGHT"
+    }
+  ],
+  "items":[
+    {
+      "id": "ego",
+      "x":"ego_xpos",
+      "y":"ego_ypos",
+      "title":"```Ego vehicle at x:${VehiclesX(EgoVehicle)}, y:${VehiclesY(EgoVehicle)}, vx:${VehiclesVx(EgoVehicle)}```"
+    },
+    {
+      "id": "ego_text",
+      "x":"ego_xpos-45.0",
+      "y":"ego_ypos+vehicle_height/2.0+4.0",
+      "text":"```vx:$[2f]{VehiclesVx(EgoVehicle)}```"
+    },
+    {
+      "for":{"from":2,"to":"card(Vehicles)"}, 
+      "id": "car_%0",
+      "x":"xpos(Vehicles%0)",
+      "y":"ypos(Vehicles%0)",
+      "title":"```Vehicle %0 at x:${VehiclesX(Vehicles%0)}, y:${VehiclesY(Vehicles%0)}```",
+      "visibility":"IF Vehicles%0 : PresentVehicles THEN \"visible\" ELSE \"hidden\" END",
+      "fill":"IF Vehicles%0 : VehiclesInLeftLane THEN \"purple\"ELSIF Vehicles%0 : VehiclesInRightLane THEN \"purple\" ELSIF Vehicles%0 : VehiclesInSameLane THEN \"palevioletred\" ELSE \"blue\" END"
+    },
+    {
+      "for":{"from":2,"to":"card(Vehicles)"}, 
+      "id": "speed%0",
+      "x1":"xpos(Vehicles%0)+vehicle_length/2.0",
+      "y1":"ypos(Vehicles%0) + vehicle_height/2.0",
+      "x2":"xpos(Vehicles%0)+SCALE*VehiclesVx(Vehicles%0) + vehicle_length/2.0",
+      "y2":"ypos(Vehicles%0)+SCALE*VehiclesVy(Vehicles%0) + vehicle_height/2.0"
+    },
+    {
+      "id": "speed1",
+      "x1":"ego_xpos + vehicle_length/2.0",
+      "y1":"ego_ypos + vehicle_height/2.0",
+      "x2":"ego_xpos+SCALE*VehiclesVx(EgoVehicle) + vehicle_length/2.0",
+      "y2":"ego_ypos+SCALE*VehiclesVy(EgoVehicle) + vehicle_height/2.0"
+    },
+    {
+      "for":{"from":2,"to":"card(Vehicles)"}, 
+      "id": "brakeline%0",
+      "x1":"xpos(Vehicles%0) + vehicle_length",
+      "y1":"ypos(Vehicles%0) + vehicle_height/2.0",
+      "x2":"xpos(Vehicles%0) + SCALE*brakeDistance(realSpeed(VehiclesVx(Vehicles%0)),aBrakeMax)+vehicle_length+5.0",
+      "y2":"ypos(Vehicles%0) + vehicle_height/2.0"
+    },
+    {
+      "id": "brakeline1",
+      "x1":"ego_xpos + vehicle_length",
+      "y1":"ego_ypos + vehicle_height/2.0",
+      "x2":"ego_xpos + vehicle_length + SCALE*dRSS_cur_lane",
+      "y2":"ego_ypos + vehicle_height/2.0"
+    },
+    {
+      "id": "dRSS_1",
+      "x1":"ego_xpos + vehicle_length",
+      "y1":"ego_ypos",
+      "x2":"ego_xpos + vehicle_length + SCALE*dRSS_left_lane",
+      "y2":"ego_ypos"
+    },
+    {
+      "id": "dRSS_2",
+      "x1":"ego_xpos + vehicle_length",
+      "y1":"ego_ypos + vehicle_height/2.0",
+      "x2":"ego_xpos + vehicle_length + SCALE*dRSS_cur_lane",
+      "y2":"ego_ypos + vehicle_height/2.0"
+    },
+    {
+      "id": "dRSS_3",
+      "x1":"ego_xpos + vehicle_length",
+      "y1":"ego_ypos + vehicle_height",
+      "x2":"ego_xpos + vehicle_length + SCALE*dRSS_right_lane",
+      "y2":"ego_ypos + vehicle_height"
+    },
+    {
+      "repeat" : ["FASTER", "IDLE", "LEFT", "RIGHT"],
+      "id": "%0_txt",
+      "fill": "IF %0_ALLOWED THEN \"yellow\" ELSE \"gray\" END"
+    }
+  ],
+  "events": [
+    {
+	  "for": {"from":2, "to":"card(Vehicles)"},
+      "id": "car_%0",
+      "event": "",
+      "hovers": [{ "attr":"opacity", "enter":"0.5", "leave":"1"},
+                 { "id": "brakeline%0","attr":"visibility", "enter":"visible", "leave":"hidden"},
+                 { "id": "infotext","attr":"text", "enter":"Vehicle%0", "leave":""}]
+    },
+    {
+      "id": "ego",
+      "event": "",
+      "hovers": [{ "attr":"opacity", "enter":"0.5", "leave":"1"},
+                 { "id": "brakeline1","attr":"visibility", "enter":"visible", "leave":"hidden"},
+                 { "id": "speed1","attr":"stroke", "enter":"red", "leave":"white"},
+                 { "id": "infotext","attr":"text", "enter":"EgoVehicle", "leave":""}]
+    }
+    ]
+}

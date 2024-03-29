@@ -19,7 +19,13 @@ DEFINITIONS
     minOtherSpeed == min({v•v:OtherV|vSV+VehiclesVx(v)});
     reactionDistance == distanceTravelled(reactionTime,vSV,aMax)
      /* "distance car travels during reaction time supposing maximal acceleration" */;
-     
+
+    dRSS_wo_max_absolute(maxAccRear,vFront) ==
+       distanceTravelled(reactionTime,vSV,maxAccRear) +
+       brakeDistance(vSV+maxAccRear*reactionTime,aBrakeMin) -
+       brakeDistance(vFront,aBrakeMax);
+
+    // now a version just taking relative speed to minAbsoluteSpeed into account:
     dRSS_wo_max(maxAccRear,vFront) ==
        distanceTravelled(reactionTime,vSV,maxAccRear) +
        brakeDistance(vSV+maxAccRear*reactionTime,aBrakeMin) -

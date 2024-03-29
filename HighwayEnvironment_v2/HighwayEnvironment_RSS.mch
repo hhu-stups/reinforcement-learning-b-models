@@ -15,7 +15,7 @@ DEFINITIONS
       ELSE initialSpeed*deltaTime + 0.5*acceleration*(deltaTime**2)
       END;
     vSV == VehiclesVx(EgoVehicle);
-    minOtherSpeed == min({v•v:OtherV|vSV+VehiclesVx(v)});
+    minOtherSpeed == min({v•v:OtherV|VehiclesVx(v)});
     reactionDistance == distanceTravelled(reactionTime,vSV,aMax)
      /* "distance car travels during reaction time supposing maximal acceleration" */;
      
@@ -34,32 +34,39 @@ DEFINITIONS
     CurLane == 0;
     RightLane == 1;
     // TODO: also take Vy into account:
-    GetLane(vv) == floor(VehiclesY(vv)/4.0+0.5);
-    GetNextLane(vv) == floor((VehiclesY(vv)+VehiclesVy(vv)*reactionTime)/4.0+0.5); // predicated lane after one cycle
+
+    VehiclesX_relative == {x,y | x : Vehicles & y = VehiclesX(x) - VehiclesX(EgoVehicle)};
+    VehiclesY_relative == {x,y | x : Vehicles & y = VehiclesY(x) - VehiclesY(EgoVehicle)};
+    VehiclesVx_relative == {x,y | x : Vehicles & y = VehiclesVx(x) - VehiclesVx(EgoVehicle)};
+    VehiclesVy_relative == {x,y | x : Vehicles & y = VehiclesVy(x) - VehiclesVy(EgoVehicle)};
+    GetLane(vv) == floor(VehiclesY_relative(vv)/4.0+0.5);
+    GetNextLane(vv) == floor((VehiclesY_relative(vv)+VehiclesVy(vv)*reactionTime)/4.0+0.5); // predicated lane after one cycle
     VehiclesInSameLane == {v|v:OtherV & GetLane(v)=CurLane};
     VehiclesInLeftLane == {v|v:OtherV & GetLane(v)=LeftLane};
     VehiclesInRightLane == {v|v:OtherV & GetLane(v)=RightLane};
     VehiclesInLane(Lane) == {v|v:OtherV & (GetLane(v)=Lane or GetNextLane(v)=Lane)};
-    NextVehiclesInLane(Lane) == {v|v:VehiclesInLane(Lane) & VehiclesX(v) = min(VehiclesX[VehiclesInLane(Lane)])};
+
+
+    NextVehiclesInLane(Lane) == {v|v:VehiclesInLane(Lane) & VehiclesX_relative(v) = min(VehiclesX_relative[VehiclesInLane(Lane)])};
   
     dRSS_lane(maxAccRear,Lane) == max({0.0, 
-                       dRSS_wo_max(maxAccRear,vSV+min({30.0} \/ VehiclesVx[NextVehiclesInLane(Lane)]))});
+                       dRSS_wo_max(maxAccRear,vSV+min({30.0} \/ VehiclesVx_relative[NextVehiclesInLane(Lane)]))});
     dRSS_cur_lane == dRSS_lane(aMax,CurLane);
     dRSS_left_lane == dRSS_lane(0.05,LeftLane); // if we go left we will accelerate by at most 0.05 (TODO:check)
     dRSS_right_lane == dRSS_lane(0.05,RightLane); // ditto
     
     FASTER_ALLOWED == (NextVehiclesInLane(CurLane)/={}
-                         => dRSS_lane(aMax,CurLane) + vehLen <= min(VehiclesX[NextVehiclesInLane(CurLane)]));
+                         => dRSS_lane(aMax,CurLane) + vehLen <= min(VehiclesX_relative[NextVehiclesInLane(CurLane)]));
     IDLE_ALLOWED == (NextVehiclesInLane(CurLane)/={}
-                         => dRSS_lane(0.05,CurLane) + vehLen <= min(VehiclesX[NextVehiclesInLane(CurLane)]));
+                         => dRSS_lane(0.05,CurLane) + vehLen <= min(VehiclesX_relative[NextVehiclesInLane(CurLane)]));
     SLOWER_ALLOWED == (NextVehiclesInLane(CurLane)/={}
-                         => dRSS_lane(0.05,CurLane) + vehLen <= min(VehiclesX[NextVehiclesInLane(CurLane)]));
+                         => dRSS_lane(0.05,CurLane) + vehLen <= min(VehiclesX_relative[NextVehiclesInLane(CurLane)]));
     LEFT_ALLOWED == VehiclesY(EgoVehicle) > 1.0 & 
                     (NextVehiclesInLane(LeftLane)/={}
-                         => dRSS_lane(0.05,LeftLane) + vehLen <= min(VehiclesX[NextVehiclesInLane(LeftLane)]));
+                         => dRSS_lane(0.05,LeftLane) + vehLen <= min(VehiclesX_relative[NextVehiclesInLane(LeftLane)]));
     RIGHT_ALLOWED == VehiclesY(EgoVehicle) < 7.0 &
                      (NextVehiclesInLane(RightLane)/={}
-                         => dRSS_lane(0.05,RightLane) + vehLen <= min(VehiclesX[NextVehiclesInLane(RightLane)]))
+                         => dRSS_lane(0.05,RightLane) + vehLen <= min(VehiclesX_relative[NextVehiclesInLane(RightLane)]))
 ASSERTIONS
     dRSS_cur_lane >= 0.0;
     dRSS_left_lane >= 0.0;
@@ -110,13 +117,13 @@ INVARIANT
 
 INITIALISATION
     Crash :: BOOL ||
-    PresentVehicles : (PresentVehicles : POW(Vehicles) & EgoVehicle : PresentVehicles) ||
-    VehiclesX :: Vehicles --> REAL ||
-    VehiclesY :: Vehicles --> REAL ||
-    VehiclesVx :: Vehicles --> REAL ||
-    VehiclesVy :: Vehicles --> REAL ||
-    VehiclesAx :: Vehicles --> REAL ||
-    VehiclesAy :: Vehicles --> REAL ||
+    PresentVehicles : (PresentVehicles : POW(Vehicles) & EgoVehicle : PresentVehicles);
+    VehiclesX :: PresentVehicles --> REAL ||
+    VehiclesY :: PresentVehicles --> REAL ||
+    VehiclesVx :: PresentVehicles --> REAL ||
+    VehiclesVy :: PresentVehicles --> REAL ||
+    VehiclesAx := PresentVehicles * {0.0} ||
+    VehiclesAy := PresentVehicles * {0.0} ||
     Reward :: REAL ||
     ErrorMsg := ""
 
@@ -125,15 +132,17 @@ OPERATIONS
   SELECT
     not(#v. (v : PresentVehicles \ {EgoVehicle} & VehiclesX(v) > 0.0 & VehiclesX(v) < 35.0  & VehiclesY(v) < 3.5 & VehiclesY(v) > -3.5 & VehiclesVx(v) < 0.0))
   THEN
-    Crash :: BOOL ||
-    PresentVehicles : (PresentVehicles : POW(Vehicles) & EgoVehicle : PresentVehicles) ||
-    VehiclesX :: Vehicles --> REAL ||
-    VehiclesY :: Vehicles --> REAL ||
-    VehiclesVx :: Vehicles --> REAL ||
-    VehiclesVy :: Vehicles --> REAL ||
-    VehiclesAx :: Vehicles --> REAL ||
-    VehiclesAy :: Vehicles --> REAL ||
-    Reward :: REAL ||
+    LET OldVehiclesVx, OldVehiclesVy BE OldVehiclesVx = VehiclesVx & OldVehiclesVy = VehiclesVy IN
+        Crash :: BOOL ||
+        PresentVehicles : (PresentVehicles : POW(Vehicles) & EgoVehicle : PresentVehicles);
+        VehiclesX :: PresentVehicles --> REAL ||
+        VehiclesY :: PresentVehicles --> REAL ||
+        VehiclesVx :: PresentVehicles --> REAL ||
+        VehiclesVy :: PresentVehicles --> REAL;
+        VehiclesAx := {v,a | v : PresentVehicles & a = VehiclesVx(v) - OldVehiclesVx(v)} ||
+        VehiclesAy := {v,a | v : PresentVehicles & a = VehiclesVy(v) - OldVehiclesVy(v)} ||
+        Reward :: REAL
+    END ||
     IF not(IDLE_ALLOWED) THEN ErrorMsg := ```IDLE was not ALLOWED at x:$[2f]{VehiclesX(EgoVehicle)} y:$[2f]{VehiclesY(EgoVehicle)}``` ELSE ErrorMsg := "IDLE ok" END
   END;
 
@@ -145,15 +154,17 @@ OPERATIONS
     not(#v. (v : PresentVehicles \ {EgoVehicle} & VehiclesX(v) > -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) > -6.0 & VehiclesY(v) < -2.0)) &
     not(#v. (v : PresentVehicles \ {EgoVehicle} & VehiclesX(v) > 15.0 & VehiclesX(v) <= 35.0  & VehiclesY(v) > -6.0 & VehiclesY(v) < -2.0 & VehiclesVx(v) < 0.0))
   THEN
-    Crash :: BOOL ||
-    PresentVehicles : (PresentVehicles : POW(Vehicles) & EgoVehicle : PresentVehicles) ||
-    VehiclesX :: Vehicles --> REAL ||
-    VehiclesY :: Vehicles --> REAL ||
-    VehiclesVx :: Vehicles --> REAL ||
-    VehiclesVy :: Vehicles --> REAL ||
-    VehiclesAx :: Vehicles --> REAL ||
-    VehiclesAy :: Vehicles --> REAL ||
-    Reward :: REAL ||
+    LET OldVehiclesVx, OldVehiclesVy BE OldVehiclesVx = VehiclesVx & OldVehiclesVy = VehiclesVy IN
+        Crash :: BOOL ||
+        PresentVehicles : (PresentVehicles : POW(Vehicles) & EgoVehicle : PresentVehicles);
+        VehiclesX :: PresentVehicles --> REAL ||
+        VehiclesY :: PresentVehicles --> REAL ||
+        VehiclesVx :: PresentVehicles --> REAL ||
+        VehiclesVy :: PresentVehicles --> REAL;
+        VehiclesAx := {v,a | v : PresentVehicles & a = VehiclesVx(v) - OldVehiclesVx(v)} ||
+        VehiclesAy := {v,a | v : PresentVehicles & a = VehiclesVy(v) - OldVehiclesVy(v)} ||
+        Reward :: REAL
+    END ||
     IF not(LEFT_ALLOWED) THEN ErrorMsg := ```LEFT was not ALLOWED at x:$[2f]{VehiclesX(EgoVehicle)} y:$[2f]{VehiclesY(EgoVehicle)}``` ELSE ErrorMsg := "LEFT ok" END
   END;
 
@@ -165,15 +176,17 @@ OPERATIONS
     not(#v. (v : PresentVehicles \ {EgoVehicle} & VehiclesX(v) > -15.0 & VehiclesX(v) < 15.0  & VehiclesY(v) < 6.0 & VehiclesY(v) > 2.0)) &
     not(#v. (v : PresentVehicles \ {EgoVehicle} & VehiclesX(v) > 15.0 & VehiclesX(v) <= 35.0  & VehiclesY(v) < 6.0 & VehiclesY(v) > 2.0 & VehiclesVx(v) < 0.0))
   THEN
-    Crash :: BOOL ||
-    PresentVehicles : (PresentVehicles : POW(Vehicles) & EgoVehicle : PresentVehicles) ||
-    VehiclesX :: Vehicles --> REAL ||
-    VehiclesY :: Vehicles --> REAL ||
-    VehiclesVx :: Vehicles --> REAL ||
-    VehiclesVy :: Vehicles --> REAL ||
-    VehiclesAx :: Vehicles --> REAL ||
-    VehiclesAy :: Vehicles --> REAL ||
-    Reward :: REAL ||
+    LET OldVehiclesVx, OldVehiclesVy BE OldVehiclesVx = VehiclesVx & OldVehiclesVy = VehiclesVy IN
+        Crash :: BOOL ||
+        PresentVehicles : (PresentVehicles : POW(Vehicles) & EgoVehicle : PresentVehicles);
+        VehiclesX :: PresentVehicles --> REAL ||
+        VehiclesY :: PresentVehicles --> REAL ||
+        VehiclesVx :: PresentVehicles --> REAL ||
+        VehiclesVy :: PresentVehicles --> REAL;
+        VehiclesAx := {v,a | v : PresentVehicles & a = VehiclesVx(v) - OldVehiclesVx(v)} ||
+        VehiclesAy := {v,a | v : PresentVehicles & a = VehiclesVy(v) - OldVehiclesVy(v)} ||
+        Reward :: REAL
+    END ||
     IF not(RIGHT_ALLOWED) THEN ErrorMsg := ```RIGHT was not ALLOWED at x:$[2f]{VehiclesX(EgoVehicle)} y:$[2f]{VehiclesY(EgoVehicle)}``` ELSE ErrorMsg := "RIGHT ok" END
   END;
 
@@ -182,15 +195,17 @@ OPERATIONS
     EgoVehicle : dom(VehiclesVx) &
     not(#v. (v : PresentVehicles \ {EgoVehicle} & VehiclesX(v) > 0.0 & VehiclesX(v) < 45.0  & VehiclesY(v) < 3.5 & VehiclesY(v) > -3.5))
   THEN
-    Crash :: BOOL ||
-    PresentVehicles : (PresentVehicles : POW(Vehicles) & EgoVehicle : PresentVehicles) ||
-    VehiclesX :: Vehicles --> REAL ||
-    VehiclesY :: Vehicles --> REAL ||
-    VehiclesVx :: Vehicles --> REAL ||
-    VehiclesVy :: Vehicles --> REAL ||
-    VehiclesAx :: Vehicles --> REAL ||
-    VehiclesAy :: Vehicles --> REAL ||
-    Reward :: REAL ||
+    LET OldVehiclesVx, OldVehiclesVy BE OldVehiclesVx = VehiclesVx & OldVehiclesVy = VehiclesVy IN
+        Crash :: BOOL ||
+        PresentVehicles : (PresentVehicles : POW(Vehicles) & EgoVehicle : PresentVehicles);
+        VehiclesX :: PresentVehicles --> REAL ||
+        VehiclesY :: PresentVehicles --> REAL ||
+        VehiclesVx :: PresentVehicles --> REAL ||
+        VehiclesVy :: PresentVehicles --> REAL;
+        VehiclesAx := {v,a | v : PresentVehicles & a = VehiclesVx(v) - OldVehiclesVx(v)} ||
+        VehiclesAy := {v,a | v : PresentVehicles & a = VehiclesVy(v) - OldVehiclesVy(v)} ||
+        Reward :: REAL
+    END ||
     IF not(FASTER_ALLOWED) THEN ErrorMsg := ```FASTER was not ALLOWED at x:$[2f]{VehiclesX(EgoVehicle)} y:$[2f]{VehiclesY(EgoVehicle)}``` ELSE ErrorMsg := "FASTER ok" END
   END;
 
@@ -212,15 +227,17 @@ OPERATIONS
       not(#v. (v : PresentVehicles \ {EgoVehicle} & VehiclesX(v) > 15.0 & VehiclesX(v) <= 35.0  & VehiclesY(v) < 6.0 & VehiclesY(v) > 2.0 & VehiclesVx(v) < 0.0))
     )))
   THEN
-    Crash :: BOOL ||
-    PresentVehicles : (PresentVehicles : POW(Vehicles) & EgoVehicle : PresentVehicles) ||
-    VehiclesX :: Vehicles --> REAL ||
-    VehiclesY :: Vehicles --> REAL ||
-    VehiclesVx :: Vehicles --> REAL ||
-    VehiclesVy :: Vehicles --> REAL ||
-    VehiclesAx :: Vehicles --> REAL ||
-    VehiclesAy :: Vehicles --> REAL ||
-    Reward :: REAL ||
+    LET OldVehiclesVx, OldVehiclesVy BE OldVehiclesVx = VehiclesVx & OldVehiclesVy = VehiclesVy IN
+        Crash :: BOOL ||
+        PresentVehicles : (PresentVehicles : POW(Vehicles) & EgoVehicle : PresentVehicles);
+        VehiclesX :: PresentVehicles --> REAL ||
+        VehiclesY :: PresentVehicles --> REAL ||
+        VehiclesVx :: PresentVehicles --> REAL ||
+        VehiclesVy :: PresentVehicles --> REAL;
+        VehiclesAx := {v,a | v : PresentVehicles & a = VehiclesVx(v) - OldVehiclesVx(v)} ||
+        VehiclesAy := {v,a | v : PresentVehicles & a = VehiclesVy(v) - OldVehiclesVy(v)} ||
+        Reward :: REAL
+    END ||
     IF not(SLOWER_ALLOWED) THEN ErrorMsg := ```SLOWER was not ALLOWED at x:$[2f]{VehiclesX(EgoVehicle)} y:$[2f]{VehiclesY(EgoVehicle)}``` ELSE ErrorMsg := "SLOWER ok" END
   END
 
