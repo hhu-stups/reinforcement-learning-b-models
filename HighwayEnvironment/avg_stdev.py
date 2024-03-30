@@ -4,8 +4,10 @@ import os
 dirs = [
     'Traces_Base/',
     'Traces_Base_Shield/',
+    'Traces_Base_RSS_Shield/',
     'Traces_Higher_Penalty_Collision/',
     'Traces_Higher_Penalty_Collision_Shield/',
+    'Traces_Higher_Penalty_Collision_RSS_Shield/',
 ]
 
 
