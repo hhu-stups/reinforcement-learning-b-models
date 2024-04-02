@@ -41,6 +41,8 @@ DEFINITIONS
     VehiclesInRightLane == {v|v:OtherV & GetLane(v)=RightLane};
     VehiclesInLane(Lane) == {v|v:OtherV & (GetLane(v)=Lane or GetNextLane(v)=Lane)};
     NextVehiclesInLane(Lane) == {v|v:VehiclesInLane(Lane) & VehiclesX(v) = min(VehiclesX[VehiclesInLane(Lane)])};
+    // TODO: we should discard those vehicles that are sufficiently behind Ego
+    // e.g., such that their position + their dRSS distance wrt Ego is ok
   
     dRSS_lane(maxAccRear,Lane) == max({0.0, 
                        dRSS_wo_max(maxAccRear,vSV+min({30.0} \/ VehiclesVx[NextVehiclesInLane(Lane)]))});

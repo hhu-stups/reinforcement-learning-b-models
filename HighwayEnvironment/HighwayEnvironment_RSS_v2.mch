@@ -1,4 +1,4 @@
-MACHINE HighwayEnvironment_RSS
+MACHINE HighwayEnvironment_RSS_v2
 
 SETS
     Vehicles
@@ -7,7 +7,7 @@ DEFINITIONS
     brakeDistance(initialSpeed,brakeAcc) == (initialSpeed**2)/(2.0*brakeAcc);
     // and now the distance required to brake until a target speed which is not necessarily 0.0:
     brakeDistanceWithTarget(initialSpeed,targetSpeed,brakeAcc) == (initialSpeed**2 - targetSpeed**2)/(2.0*brakeAcc);
-    minAbsoluteSpeed == 19.5;
+    minAbsoluteSpeed == 13.5;
     brakeDistance20(initialSpeed,brakeAcc) == brakeDistanceWithTarget(initialSpeed,minAbsoluteSpeed,brakeAcc);
     
     distanceTravelled(deltaTime,initialSpeed,acceleration) ==
@@ -35,11 +35,15 @@ DEFINITIONS
     CurLane == 0;
     RightLane == 1;
     // TODO: also take Vy into account:
-    VehiclesInSameLane == {v|v:OtherV & floor(VehiclesY(v)/4.0+0.5)=CurLane};
-    VehiclesInLeftLane == {v|v:OtherV & floor(VehiclesY(v)/4.0+0.5)=LeftLane};
-    VehiclesInRightLane == {v|v:OtherV & floor(VehiclesY(v)/4.0+0.5)=RightLane};
-    VehiclesInLane(Lane) == {v|v:OtherV & floor(VehiclesY(v)/4.0+0.5)=Lane};
+    GetLane(vv) == floor(VehiclesY(vv)/4.0+0.5);
+    GetNextLane(vv) == floor((VehiclesY(vv)+VehiclesVy(vv)*reactionTime)/4.0+0.5); // predicated lane after one cycle
+    VehiclesInSameLane == {v|v:OtherV & GetLane(v)=CurLane};
+    VehiclesInLeftLane == {v|v:OtherV & GetLane(v)=LeftLane};
+    VehiclesInRightLane == {v|v:OtherV & GetLane(v)=RightLane};
+    VehiclesInLane(Lane) == {v|v:OtherV & (GetLane(v)=Lane or GetNextLane(v)=Lane)};
     NextVehiclesInLane(Lane) == {v|v:VehiclesInLane(Lane) & VehiclesX(v) = min(VehiclesX[VehiclesInLane(Lane)])};
+    // TODO: we should discard those vehicles that are sufficiently behind Ego
+    // e.g., such that their position + their dRSS distance wrt Ego is ok
   
     dRSS_lane(maxAccRear,Lane) == max({0.0, 
                        dRSS_wo_max(maxAccRear,vSV+min({30.0} \/ VehiclesVx[NextVehiclesInLane(Lane)]))});
