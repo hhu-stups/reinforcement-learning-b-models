@@ -4,6 +4,9 @@ SETS
     Vehicles
 DEFINITIONS
     VISB_JSON_FILE == "visualization/HighwayEnvRSS_v2.json";
+    ANIMATION_EXPRESSION_dRSS_cur_lane == dRSS_cur_lane;
+    ANIMATION_EXPRESSION_dRSS_left_lane == dRSS_left_lane;
+    ANIMATION_EXPRESSION_dRSS_right_lane == dRSS_right_lane;
     brakeDistance(initialSpeed,brakeAcc) == (initialSpeed**2)/(2.0*brakeAcc);
     // and now the distance required to brake until a target speed which is not necessarily 0.0:
     brakeDistanceWithTarget(initialSpeed,targetSpeed,brakeAcc) == (initialSpeed**2 - targetSpeed**2)/(2.0*brakeAcc);
