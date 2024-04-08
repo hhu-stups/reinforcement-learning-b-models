@@ -10,13 +10,13 @@
       "comment":"y coordinate of EgoVehicle in visualization"
     },
     { "name":"vehicle_height",
-       "value" :"20.0"
+      "value" :"20.0"
     },
     { "name":"vehicle_length",
-       "value" :"50.0"
+      "value" :"50.0"
     },
     { "name":"SCALE",
-       "value" :"10.0"
+      "value" :"10.0"
     },
     { "name":"ego_xpos",
       "value":"xoffset - SCALE * 2.0/2.0"
@@ -35,8 +35,8 @@
     },
     { "name":"dss_wrt_vx",
       "value" : "%(VxOther).(VxOther:REAL|max({0.0, reactionDistance +
-       brakeDistance(VehiclesVx(EgoVehicle)+aMax*reactionTime,aBrakeMax) -
-       brakeDistance(VxOther,aBrakeMax)}))"
+      brakeDistance(VehiclesVx(EgoVehicle)+aMax*reactionTime,aBrakeMax) -
+      brakeDistance(VxOther,aBrakeMax)}))"
     },
     { "name":"dss_wrt_vehicle",
       "value" : "%(Other).(Other:Vehicles|dss_wrt_vx(VehiclesVx(EgoVehicle)+VehiclesVx(Other)))"
@@ -73,7 +73,7 @@
       "text":"Ego"
     },
     {
-      "for":{"from":2,"to":"card(Vehicles)"}, 
+      "for":{"from":2,"to":"card(Vehicles)"},
       "svg_class":"rect",
       "id":"car_%0",
       "fill":"blue",
@@ -86,7 +86,7 @@
       "title":"other vehicle"
     },
     {
-      "for":{"from":1,"to":"card(Vehicles)"}, 
+      "for":{"from":1,"to":"card(Vehicles)"},
       "svg_class":"line",
       "id":"speed%0",
       "stroke":"white",
@@ -96,7 +96,7 @@
       "marker-end":"url(#arrowhead)"
     },
     {
-      "for":{"from":1,"to":"card(Vehicles)"}, 
+      "for":{"from":1,"to":"card(Vehicles)"},
       "svg_class":"line",
       "id":"brakeline%0",
       "stroke":"orange",
@@ -107,7 +107,7 @@
       "marker-end":"url(#arrowhead)"
     },
     {
-      "for":{"from":1,"to":"3"}, 
+      "for":{"from":1,"to":"3"},
       "svg_class":"line",
       "id":"dRSS_%0",
       "stroke":"purple",
@@ -186,7 +186,7 @@
       "text":"```vx:$[2f]{VehiclesVx(EgoVehicle)}```"
     },
     {
-      "for":{"from":2,"to":"card(Vehicles)"}, 
+      "for":{"from":2,"to":"card(Vehicles)"},
       "id": "car_%0",
       "x":"xpos(Vehicles%0)",
       "y":"ypos(Vehicles%0)",
@@ -195,7 +195,7 @@
       "fill":"IF Vehicles%0 : VehiclesInLeftLane THEN \"purple\"ELSIF Vehicles%0 : VehiclesInRightLane THEN \"purple\" ELSIF Vehicles%0 : VehiclesInSameLane THEN \"palevioletred\" ELSE \"blue\" END"
     },
     {
-      "for":{"from":2,"to":"card(Vehicles)"}, 
+      "for":{"from":2,"to":"card(Vehicles)"},
       "id": "speed%0",
       "x1":"xpos(Vehicles%0)+vehicle_length/2.0",
       "y1":"ypos(Vehicles%0) + vehicle_height/2.0",
@@ -210,7 +210,7 @@
       "y2":"ego_ypos+SCALE*VehiclesVy(EgoVehicle) + vehicle_height/2.0"
     },
     {
-      "for":{"from":2,"to":"card(Vehicles)"}, 
+      "for":{"from":2,"to":"card(Vehicles)"},
       "id": "brakeline%0",
       "x1":"xpos(Vehicles%0) + vehicle_length",
       "y1":"ypos(Vehicles%0) + vehicle_height/2.0",
@@ -257,20 +257,20 @@
   ],
   "events": [
     {
-	  "for": {"from":2, "to":"card(Vehicles)"},
+      "for": {"from":2, "to":"card(Vehicles)"},
       "id": "car_%0",
       "event": "",
       "hovers": [{ "attr":"opacity", "enter":"0.5", "leave":"1"},
-                 { "id": "brakeline%0","attr":"visibility", "enter":"visible", "leave":"hidden"},
-                 { "id": "infotext","attr":"text", "enter":"Vehicle%0", "leave":""}]
+        { "id": "brakeline%0","attr":"visibility", "enter":"visible", "leave":"hidden"},
+        { "id": "infotext","attr":"text", "enter":"Vehicle%0", "leave":""}]
     },
     {
       "id": "ego",
       "event": "",
       "hovers": [{ "attr":"opacity", "enter":"0.5", "leave":"1"},
-                 { "id": "brakeline1","attr":"visibility", "enter":"visible", "leave":"hidden"},
-                 { "id": "speed1","attr":"stroke", "enter":"red", "leave":"white"},
-                 { "id": "infotext","attr":"text", "enter":"EgoVehicle", "leave":""}]
+        { "id": "brakeline1","attr":"visibility", "enter":"visible", "leave":"hidden"},
+        { "id": "speed1","attr":"stroke", "enter":"red", "leave":"white"},
+        { "id": "infotext","attr":"text", "enter":"EgoVehicle", "leave":""}]
     }
-    ]
+  ]
 }
