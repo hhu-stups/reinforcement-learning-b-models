@@ -161,6 +161,15 @@
       "fill":"black",
       "font-size": "9.0",
       "text": "RIGHT"
+    },
+    {
+      "svg_class":"text",
+      "id":"SLOWER_txt",
+      "x":350,
+      "y":180,
+      "fill":"black",
+      "font-size": "9.0",
+      "text": "SLOWER"
     }
   ],
   "items":[
@@ -237,9 +246,14 @@
       "y2":"ego_ypos + vehicle_height"
     },
     {
-      "repeat" : ["FASTER", "IDLE", "LEFT", "RIGHT"],
+      "repeat" : ["FASTER", "IDLE", "SLOWER"],
       "id": "%0_txt",
       "fill": "IF %0_ALLOWED THEN \"yellow\" ELSE \"gray\" END"
+    },
+    {
+      "repeat" : ["LEFT", "RIGHT"],
+      "id": "%0_txt",
+      "fill": "IF %0_ALLOWED THEN \"yellow\" ELSIF %0_ALLOWED_OR_IMPROVES_CHANCES(0.0) THEN \"orange\" ELSE \"gray\" END"
     }
   ],
   "events": [
