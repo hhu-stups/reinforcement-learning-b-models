@@ -56,13 +56,39 @@ DEFINITIONS
     IDLE_ALLOWED == (NextVehiclesInLane(CurLane)/={}
                          => dRSS_lane(0.05,CurLane) + vehLen <= min(VehiclesX[NextVehiclesInLane(CurLane)]));
     SLOWER_ALLOWED == (NextVehiclesInLane(CurLane)/={}
-                         => dRSS_lane(0.05,CurLane) + vehLen <= min(VehiclesX[NextVehiclesInLane(CurLane)]));
+                         => dRSS_lane(0.00,CurLane) + vehLen <= min(VehiclesX[NextVehiclesInLane(CurLane)])
+                             // TODO: take minimal speed into account
+                     );
+    COLLISION_DANGER_CUR_LANE(otherLane) == // collision danger in current lane, otherLane has better chances
+                      (NextVehiclesInLane(CurLane)/={} &
+                          LET overshoot 
+                          BE overshoot = dRSS_lane(0.00,CurLane) + vehLen - min(VehiclesX[NextVehiclesInLane(CurLane)])
+                             // TODO: take minimal speed into account
+                          IN overshoot>0.0 &
+                             overshoot > dRSS_lane(0.05,otherLane) + vehLen - min(VehiclesX[NextVehiclesInLane(otherLane)])
+                          END
+                     );
     LEFT_ALLOWED == VehiclesY(EgoVehicle) > 1.0 & 
                     (NextVehiclesInLane(LeftLane)/={}
-                         => dRSS_lane(0.05,LeftLane) + vehLen <= min(VehiclesX[NextVehiclesInLane(LeftLane)]));
+                         => dRSS_lane(0.05,LeftLane) + vehLen <= min(VehiclesX[NextVehiclesInLane(LeftLane)])
+                    );
+    LEFT_ALLOWED_OR_IMPROVES_CHANCES == VehiclesY(EgoVehicle) > 1.0 & 
+                    (NextVehiclesInLane(LeftLane)/={}
+                         => (dRSS_lane(0.05,LeftLane) + vehLen <= min(VehiclesX[NextVehiclesInLane(LeftLane)])
+                            or
+                            COLLISION_DANGER_CUR_LANE(LeftLane)
+                            )
+                    );
     RIGHT_ALLOWED == VehiclesY(EgoVehicle) < 7.0 &
                      (NextVehiclesInLane(RightLane)/={}
-                         => dRSS_lane(0.05,RightLane) + vehLen <= min(VehiclesX[NextVehiclesInLane(RightLane)]))
+                         => dRSS_lane(0.05,RightLane) + vehLen <= min(VehiclesX[NextVehiclesInLane(RightLane)])
+                    );
+    RIGHT_ALLOWED_OR_IMPROVES_CHANCES == VehiclesY(EgoVehicle) < 7.0 &
+                     (NextVehiclesInLane(RightLane)/={}
+                         => (dRSS_lane(0.05,RightLane) + vehLen <= min(VehiclesX[NextVehiclesInLane(RightLane)])
+                            or
+                            COLLISION_DANGER_CUR_LANE(RightLane))
+                    )
 ASSERTIONS
     dRSS_cur_lane >= 0.0;
     dRSS_left_lane >= 0.0;
@@ -139,7 +165,7 @@ OPERATIONS
   LANE_LEFT =
   SELECT
     EgoVehicle : dom(VehiclesY) &
-    LEFT_ALLOWED
+    LEFT_ALLOWED_OR_IMPROVES_CHANCES
   THEN
     Crash :: BOOL ||
     PresentVehicles : (PresentVehicles : POW(Vehicles) & EgoVehicle : PresentVehicles) ||
@@ -155,7 +181,7 @@ OPERATIONS
   LANE_RIGHT =
   SELECT
     EgoVehicle : dom(VehiclesY) &
-    RIGHT_ALLOWED
+    RIGHT_ALLOWED_OR_IMPROVES_CHANCES
   THEN
     Crash :: BOOL ||
     PresentVehicles : (PresentVehicles : POW(Vehicles) & EgoVehicle : PresentVehicles) ||
@@ -189,8 +215,7 @@ OPERATIONS
     EgoVehicle : dom(VehiclesVx) &
     (not(SLOWER_ALLOWED)
     =>
-    (not(LEFT_ALLOWED) &
-    not(RIGHT_ALLOWED)))
+    (not(LEFT_ALLOWED) &  not(RIGHT_ALLOWED)))
   THEN
     Crash :: BOOL ||
     PresentVehicles : (PresentVehicles : POW(Vehicles) & EgoVehicle : PresentVehicles) ||
