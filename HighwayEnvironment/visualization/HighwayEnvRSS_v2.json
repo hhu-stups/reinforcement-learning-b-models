@@ -192,7 +192,7 @@
       "y":"ypos(Vehicles%0)",
       "title":"```Vehicle %0 at x:${VehiclesX(Vehicles%0)}, y:${VehiclesY(Vehicles%0)}```",
       "visibility":"IF Vehicles%0 : PresentVehicles THEN \"visible\" ELSE \"hidden\" END",
-      "fill":"IF Vehicles%0 : VehiclesInLeftLane THEN \"purple\"ELSIF Vehicles%0 : VehiclesInRightLane THEN \"purple\" ELSIF Vehicles%0 : VehiclesInSameLane THEN \"palevioletred\" ELSE \"blue\" END"
+      "fill":"IF Vehicles%0 : VehiclesInLeftLane THEN \"purple\"ELSIF Vehicles%0 : VehiclesInRightLane THEN \"purple\" ELSIF Vehicles%0 : VehiclesInSameLane THEN \"palevioletred\" ELSIF Vehicles%0 : VehiclesInLane(LeftLane) THEN \"blueviolet\" ELSIF Vehicles%0 : VehiclesInLane(RightLane) THEN \"blueviolet\" ELSE \"blue\" END"
     },
     {
       "for":{"from":2,"to":"card(Vehicles)"},

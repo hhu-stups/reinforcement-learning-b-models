@@ -40,7 +40,8 @@ DEFINITIONS
     RightLane == 1;
     // TODO: also take Vy into account:
     GetLane(vv) == floor(VehiclesY(vv)/4.0+0.5);
-    GetNextLane(vv) == floor((VehiclesY(vv)+VehiclesVy(vv)*reactionTime)/4.0+0.5); // predicated lane after one cycle
+    MaxOneLane(Delta) == IF Delta < -4.0 THEN -4.0 ELSIF Delta>4.0 THEN 4.0 ELSE Delta END;
+    GetNextLane(vv) == floor((VehiclesY(vv)+MaxOneLane(VehiclesVy(vv)*reactionTime))/4.0+0.5); // predicted lane after one cycle; assume at most one lane change (4 metres)
     VehiclesInSameLane == {v|v:OtherV & GetLane(v)=CurLane};
     VehiclesInLeftLane == {v|v:OtherV & GetLane(v)=LeftLane};
     VehiclesInRightLane == {v|v:OtherV & GetLane(v)=RightLane};
