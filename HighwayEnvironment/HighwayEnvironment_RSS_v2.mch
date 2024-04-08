@@ -66,12 +66,11 @@ DEFINITIONS
     COLLISION_DANGER_CUR_LANE(otherLane,margin) == // collision danger in current lane, otherLane has better chances
                       (NextVehiclesInLane(CurLane)/={} &
                           LET overshoot 
-                          BE overshoot = dRSS_lane(-aBrakeMin,CurLane) + vehLen
+                          BE overshoot = dRSS_lane(-aBrakeMinCorrected,CurLane) + vehLen
                                          - min(VehiclesX[NextVehiclesInLane(CurLane)])
-                             // TODO: take minimal speed into account
-                          IN overshoot > 0.0 &
-                             overshoot > dRSS_lane(0.05,otherLane) + vehLen
-                                         - min(VehiclesX[NextVehiclesInLane(otherLane)])
+                          IN overshoot > 0.0 /*@desc "staying in current lane is not safe" */ &
+                             overshoot - margin > dRSS_lane(0.05,otherLane) + vehLen
+                                                  - min(VehiclesX[NextVehiclesInLane(otherLane)])
                           END
                      );
     LEFT_ALLOWED == VehiclesY(EgoVehicle) > 1.0 & 
