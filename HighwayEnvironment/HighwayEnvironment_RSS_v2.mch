@@ -7,12 +7,13 @@ DEFINITIONS
     ANIMATION_EXPRESSION_dRSS_cur_lane == dRSS_cur_lane;
     ANIMATION_EXPRESSION_dRSS_left_lane == dRSS_left_lane;
     ANIMATION_EXPRESSION_dRSS_right_lane == dRSS_right_lane;
-    // SET_PREF_MAX_OPERATIONS == 0; // comment in to check LTL formulas below on replayed traces only
+    SET_PREF_MAX_OPERATIONS == 0; // comment in to check LTL formulas below on replayed traces only
     // check that environmental assumptions are true
     ASSERT_LTL1 == "G(BA({VehiclesVx$0(EgoVehicle) <= VehiclesVx(EgoVehicle)+aMax}))";
-    ASSERT_LTL2 == "G(BA({!v.(v:PresentVehicles /\ PresentVehicles$0 => (VehiclesVx$0(v) <= VehiclesVx(v)+aMax))}))";
+    deltavSV == VehiclesVx(EgoVehicle)-VehiclesVx$0(EgoVehicle);
+    ASSERT_LTL2 == "G(BA({!v.(v:OtherV /\ PresentVehicles$0 => (VehiclesVx$0(v)-deltavSV <= VehiclesVx(v)+aMax))}))";
     ASSERT_LTL3 == "G(BA({VehiclesVx$0(EgoVehicle) >= VehiclesVx(EgoVehicle)-aBrakeMax}))";
-    ASSERT_LTL4 == "G(BA({!v.(v:PresentVehicles /\ PresentVehicles$0 => (VehiclesVx$0(v) >= VehiclesVx(v)-aBrakeMax))}))";
+    ASSERT_LTL4 == "G(BA({!v.(v:OtherV /\ PresentVehicles$0 => (VehiclesVx$0(v)-deltavSV >= VehiclesVx(v)-aBrakeMax))}))";
     brakeDistance(initialSpeed,brakeAcc) == (initialSpeed**2)/(2.0*brakeAcc);
     // and now the distance required to brake until a target speed which is not necessarily 0.0:
     brakeDistanceWithTarget(initialSpeed,targetSpeed,brakeAcc) == (initialSpeed**2 - targetSpeed**2)/(2.0*brakeAcc);
@@ -40,7 +41,7 @@ DEFINITIONS
        distanceTravelled(reactionTime,vSV,maxAccRear) +
        brakeDistance(vSV+maxAccRear*reactionTime,aBrakeMin) -
        brakeDistance(vFront,aBrakeMax);
-    OtherV == Vehicles \ {EgoVehicle};
+    OtherV == PresentVehicles \ {EgoVehicle};
     LeftLane == -1;
     CurLane == 0;
     RightLane == 1;
