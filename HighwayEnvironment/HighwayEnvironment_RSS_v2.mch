@@ -11,9 +11,10 @@ DEFINITIONS
     // check that environmental assumptions are true
     ASSERT_LTL1 == "G(BA({VehiclesVx$0(EgoVehicle) <= VehiclesVx(EgoVehicle)+aMax}))";
     deltavSV == VehiclesVx(EgoVehicle)-VehiclesVx$0(EgoVehicle);
-    ASSERT_LTL2 == "G(BA({!v.(v:OtherV /\ PresentVehicles$0 => (VehiclesVx$0(v)-deltavSV <= VehiclesVx(v)+aMax))}))";
+    ASSERT_LTL2 == "G(BA({!v.(v:OtherV /\ PresentVehicles$0 => (VehiclesVx$0(v)+VehiclesVx$0(EgoVehicle)+aMax >= VehiclesVx(v)+VehiclesVx(EgoVehicle)))}))";
     ASSERT_LTL3 == "G(BA({VehiclesVx$0(EgoVehicle) >= VehiclesVx(EgoVehicle)-aBrakeMax}))";
-    ASSERT_LTL4 == "G(BA({!v.(v:OtherV /\ PresentVehicles$0 => (VehiclesVx$0(v)-deltavSV >= VehiclesVx(v)-aBrakeMax))}))";
+    ASSERT_LTL4 == "G(BA({!v.(v:OtherV /\ PresentVehicles$0 => (VehiclesVx$0(v)+VehiclesVx$0(EgoVehicle)-aBrakeMax <= VehiclesVx(v)+VehiclesVx(EgoVehicle)))}))";
+    ANIMATION_EXPRESSION_rspeed == %v.(v:OtherV|VehiclesVx(v)+VehiclesVx(EgoVehicle));
     brakeDistance(initialSpeed,brakeAcc) == (initialSpeed**2)/(2.0*brakeAcc);
     // and now the distance required to brake until a target speed which is not necessarily 0.0:
     brakeDistanceWithTarget(initialSpeed,targetSpeed,brakeAcc) == (initialSpeed**2 - targetSpeed**2)/(2.0*brakeAcc);
