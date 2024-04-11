@@ -7,7 +7,7 @@ DEFINITIONS
     ANIMATION_EXPRESSION_dRSS_cur_lane == dRSS_cur_lane;
     ANIMATION_EXPRESSION_dRSS_left_lane == dRSS_left_lane;
     ANIMATION_EXPRESSION_dRSS_right_lane == dRSS_right_lane;
-    SET_PREF_MAX_OPERATIONS == 0; // comment in to check LTL formulas below on replayed traces only
+    //SET_PREF_MAX_OPERATIONS == 0; // comment in to check LTL formulas below on replayed traces only; comment out to apply Real-Time simulation
     // check that environmental assumptions are true
     ASSERT_LTL1 == "G(BA({VehiclesVx$0(EgoVehicle) <= VehiclesVx(EgoVehicle)+aMax}))";
     deltavSV == VehiclesVx(EgoVehicle)-VehiclesVx$0(EgoVehicle);
@@ -183,7 +183,8 @@ OPERATIONS
   LANE_LEFT =
   SELECT
     EgoVehicle : dom(VehiclesY) &
-    LEFT_ALLOWED_OR_IMPROVES_CHANCES(0.0)
+    (LEFT_ALLOWED or
+    (not(RIGHT_ALLOWED) & LEFT_ALLOWED_OR_IMPROVES_CHANCES(0.0)))
   THEN
     Crash :: BOOL ||
     PresentVehicles : (PresentVehicles : POW(Vehicles) & EgoVehicle : PresentVehicles) ||
@@ -199,7 +200,8 @@ OPERATIONS
   LANE_RIGHT =
   SELECT
     EgoVehicle : dom(VehiclesY) &
-    RIGHT_ALLOWED_OR_IMPROVES_CHANCES(0.0)
+    (RIGHT_ALLOWED or
+    (not(LEFT_ALLOWED) & RIGHT_ALLOWED_OR_IMPROVES_CHANCES(0.0)))
   THEN
     Crash :: BOOL ||
     PresentVehicles : (PresentVehicles : POW(Vehicles) & EgoVehicle : PresentVehicles) ||
