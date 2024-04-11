@@ -184,7 +184,7 @@ OPERATIONS
   SELECT
     EgoVehicle : dom(VehiclesY) &
     (LEFT_ALLOWED or
-    (not(RIGHT_ALLOWED) & LEFT_ALLOWED_OR_IMPROVES_CHANCES(0.0)))
+    (not(RIGHT_ALLOWED) & not(FASTER_ALLOWED) & not(IDLE_ALLOWED) & not(SLOWER_ALLOWED) & LEFT_ALLOWED_OR_IMPROVES_CHANCES(0.0)))
   THEN
     Crash :: BOOL ||
     PresentVehicles : (PresentVehicles : POW(Vehicles) & EgoVehicle : PresentVehicles) ||
@@ -201,7 +201,7 @@ OPERATIONS
   SELECT
     EgoVehicle : dom(VehiclesY) &
     (RIGHT_ALLOWED or
-    (not(LEFT_ALLOWED) & RIGHT_ALLOWED_OR_IMPROVES_CHANCES(0.0)))
+    (not(LEFT_ALLOWED) & not(FASTER_ALLOWED) & not(IDLE_ALLOWED) & not(SLOWER_ALLOWED) & RIGHT_ALLOWED_OR_IMPROVES_CHANCES(0.0)))
   THEN
     Crash :: BOOL ||
     PresentVehicles : (PresentVehicles : POW(Vehicles) & EgoVehicle : PresentVehicles) ||
