@@ -7,7 +7,7 @@ DEFINITIONS
     ANIMATION_EXPRESSION_dRSS_cur_lane == dRSS_cur_lane;
     ANIMATION_EXPRESSION_dRSS_left_lane == dRSS_left_lane;
     ANIMATION_EXPRESSION_dRSS_right_lane == dRSS_right_lane;
-    SET_PREF_MAX_OPERATIONS == 0; // comment in to check LTL formulas below on replayed traces only
+    SET_PREF_MAX_OPERATIONS == 1; // comment in to check LTL formulas below on replayed traces only
     // check that environmental assumptions are true
     ASSERT_LTL1 == "G(BA({VehiclesVx$0(EgoVehicle) <= VehiclesVx(EgoVehicle)+aMax}))";
     deltavSV == VehiclesVx(EgoVehicle)-VehiclesVx$0(EgoVehicle);
@@ -48,38 +48,47 @@ DEFINITIONS
     RightLane == 1;
     // TODO: also take Vy into account:
     GetLane(vv) == floor(VehiclesY(vv)/4.0+0.5);
+    
+    InFront(vv) == VehiclesX(vv) >= -vehLen; // Vehicle in front or in collision (for vehicles in same lane as we do not apply any safety margin)
+    SafelyInFront(v) == VehiclesX(v) > -(vehLen+vehLen); // TODO: use RSS of other vehicle
     MaxOneLane(Delta) == IF Delta < -4.0 THEN -4.0 ELSIF Delta>4.0 THEN 4.0 ELSE Delta END;
     GetNextLane(vv) == floor((VehiclesY(vv)+MaxOneLane(VehiclesVy(vv)*reactionTime))/4.0+0.5); // predicted lane after one cycle; assume at most one lane change (4 metres)
     VehiclesInSameLane == {v|v:OtherV & GetLane(v)=CurLane};
     VehiclesInLeftLane == {v|v:OtherV & GetLane(v)=LeftLane};
     VehiclesInRightLane == {v|v:OtherV & GetLane(v)=RightLane};
     VehiclesInLane(Lane) == {v|v:OtherV & (GetLane(v)=Lane or GetNextLane(v)=Lane)};
+    VehiclesInFrontInLane(Lane) == {v|v:OtherV & InFront(v) & (GetLane(v)=Lane or GetNextLane(v)=Lane)};
     NextVehiclesInLane(Lane) == {v|v:VehiclesInLane(Lane) & VehiclesX(v) = min(VehiclesX[VehiclesInLane(Lane)])};
+    NextVehiclesInFrontInLane(Lane) == {v|v:VehiclesInFrontInLane(Lane) & 
+                                          VehiclesX(v) = min(VehiclesX[VehiclesInLane(Lane)])};
     // TODO: we should discard those vehicles that are sufficiently behind Ego
     // e.g., such that their position + their dRSS distance wrt Ego is ok
   
     dRSS_lane(maxAccRear,Lane) == max({0.0, 
                        dRSS_wo_max(maxAccRear,vSV+min({30.0} \/ VehiclesVx[NextVehiclesInLane(Lane)]))});
-    dRSS_cur_lane == dRSS_lane(aMax,CurLane);
+    dRSS_cur_lane == dRSS_cur_lane1(aMax);
+    dRSS_cur_lane1(maxAccRear) ==
+                     max({0.0, 
+                       dRSS_wo_max(maxAccRear,vSV+min({30.0} \/ VehiclesVx[NextVehiclesInFrontInLane(CurLane)]))});
     dRSS_left_lane == dRSS_lane(0.05,LeftLane); // if we go left we will accelerate by at most 0.05 (TODO:check)
     dRSS_right_lane == dRSS_lane(0.05,RightLane); // ditto
     
-    FASTER_ALLOWED == (NextVehiclesInLane(CurLane)/={}
-                         => dRSS_lane(aMax,CurLane) + vehLen <= min(VehiclesX[NextVehiclesInLane(CurLane)]));
-    IDLE_ALLOWED == (NextVehiclesInLane(CurLane)/={}
-                         => dRSS_lane(0.05,CurLane) + vehLen <= min(VehiclesX[NextVehiclesInLane(CurLane)]));
+    FASTER_ALLOWED == (NextVehiclesInFrontInLane(CurLane)/={}
+                         => dRSS_cur_lane + vehLen <= min(VehiclesX[NextVehiclesInFrontInLane(CurLane)]));
+    IDLE_ALLOWED == (NextVehiclesInFrontInLane(CurLane)/={}
+                         => dRSS_cur_lane1(0.05) + vehLen <= min(VehiclesX[NextVehiclesInFrontInLane(CurLane)]));
     aBrakeMinCorrected == IF vSV <= minEgoSpeed THEN 0.0
                              ELSIF vSV > minEgoSpeed + aBrakeMin THEN aBrakeMin
                              ELSE vSV - minEgoSpeed END; // corrected aBrakeMin taking into account Ego vehicle does not
-    SLOWER_ALLOWED == (NextVehiclesInLane(CurLane)/={}
-                         => dRSS_lane(-aBrakeMin,CurLane) + vehLen <= min(VehiclesX[NextVehiclesInLane(CurLane)])
+    SLOWER_ALLOWED == (NextVehiclesInFrontInLane(CurLane)/={}
+                         => dRSS_cur_lane1(-aBrakeMin) + vehLen <= min(VehiclesX[NextVehiclesInFrontInLane(CurLane)])
                              // TODO: take minimal speed into account
                      );
     COLLISION_DANGER_CUR_LANE(otherLane,margin) == // collision danger in current lane, otherLane has better chances
-                      (NextVehiclesInLane(CurLane)/={} &
+                      (NextVehiclesInFrontInLane(CurLane)/={} &
                           LET overshoot 
-                          BE overshoot = dRSS_lane(-aBrakeMinCorrected,CurLane) + vehLen
-                                         - min(VehiclesX[NextVehiclesInLane(CurLane)])
+                          BE overshoot = dRSS_cur_lane1(-aBrakeMinCorrected) + vehLen
+                                         - min(VehiclesX[NextVehiclesInFrontInLane(CurLane)])
                           IN overshoot > 0.0 /*@desc "staying in current lane is not safe" */ &
                             // TODO: check that switching to other lane is also not safe !
                              overshoot - margin > dRSS_lane(0.05,otherLane) + vehLen
