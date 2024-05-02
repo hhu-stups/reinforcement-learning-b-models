@@ -19,6 +19,10 @@
 
 ![Play SimB Simulation](/images/Start_RL_Agent_4.png)
 
+
+More information on SIMB including RL agents in SimB are available at: https://prob.hhu.de/w/index.php?title=SimB
+
+
 ## Simulation Scenarios
 
 Here are some simulation scenarios for the HighwayEnvironment RL agent:
