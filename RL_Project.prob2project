@@ -859,6 +859,84 @@
             "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
             "CHECKING_TYPE": "ALL_INVARIANTS"
           }
+        },
+        {
+          "taskType": "SIMULATION",
+          "simulationPath": "HighwayEnvironment/HighwayEnvironment_High_Penalty_Collision.py",
+          "type": "MONTE_CARLO_SIMULATION",
+          "information": {
+            "MAX_STEPS_BEFORE_PROPERTY": 0,
+            "EXECUTIONS": 1000,
+            "ENDING_TIME": 60000
+          }
+        },
+        {
+          "taskType": "SIMULATION",
+          "simulationPath": "HighwayEnvironment/HighwayEnvironment_Highest_Penalty_Collision.py",
+          "type": "MONTE_CARLO_SIMULATION",
+          "information": {
+            "MAX_STEPS_BEFORE_PROPERTY": 0,
+            "EXECUTIONS": 1000,
+            "ENDING_TIME": 60000
+          }
+        },
+        {
+          "taskType": "SIMULATION",
+          "id": "Sim_SAF1_Base",
+          "simulationPath": "HighwayEnvironment/HighwayEnvironment_High_Penalty_Collision.py",
+          "type": "HYPOTHESIS_TEST",
+          "information": {
+            "SIGNIFICANCE": 0.01,
+            "PROBABILITY": 0.95,
+            "MAX_STEPS_BEFORE_PROPERTY": 0,
+            "EXECUTIONS": 1000,
+            "PREDICATE": "Crash = FALSE",
+            "ENDING_TIME": 60000,
+            "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+            "CHECKING_TYPE": "PREDICATE_INVARIANT"
+          }
+        },
+        {
+          "taskType": "SIMULATION",
+          "id": "Sim_SAF1_Base",
+          "simulationPath": "HighwayEnvironment/HighwayEnvironment_Highest_Penalty_Collision.py",
+          "type": "HYPOTHESIS_TEST",
+          "information": {
+            "SIGNIFICANCE": 0.01,
+            "PROBABILITY": 0.95,
+            "MAX_STEPS_BEFORE_PROPERTY": 0,
+            "EXECUTIONS": 1000,
+            "PREDICATE": "Crash = FALSE",
+            "ENDING_TIME": 60000,
+            "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+            "CHECKING_TYPE": "PREDICATE_INVARIANT"
+          }
+        },
+        {
+          "taskType": "SIMULATION",
+          "simulationPath": "HighwayEnvironment/HighwayEnvironment_500k.py",
+          "type": "MONTE_CARLO_SIMULATION",
+          "information": {
+            "EXECUTIONS": 1000,
+            "MAX_STEPS_BEFORE_PROPERTY": 0,
+            "ENDING_TIME": 60000
+          }
+        },
+        {
+          "taskType": "SIMULATION",
+          "id": "Sim_SAF1_Base",
+          "simulationPath": "HighwayEnvironment/HighwayEnvironment_500k.py",
+          "type": "HYPOTHESIS_TEST",
+          "information": {
+            "SIGNIFICANCE": 0.01,
+            "PROBABILITY": 0.95,
+            "MAX_STEPS_BEFORE_PROPERTY": 0,
+            "EXECUTIONS": 1000,
+            "PREDICATE": "Crash = FALSE",
+            "ENDING_TIME": 60000,
+            "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+            "CHECKING_TYPE": "PREDICATE_INVARIANT"
+          }
         }
       ],
       "ltlPatterns": [],
@@ -885,6 +963,9 @@
         },
         {
           "path": "HighwayEnvironment/HighwayEnvironment_Highest_Penalty_Collision.py"
+        },
+        {
+          "path": "HighwayEnvironment/HighwayEnvironment_500k.py"
         }
       ],
       "visBVisualisation": "HighwayEnvironment/visualization/HighwayEnv.json",
@@ -7834,7 +7915,7 @@
   "metadata": {
     "fileType": "Project",
     "formatVersion": 46,
-    "savedAt": "2024-05-14T08:31:08.552678Z",
+    "savedAt": "2024-05-14T10:38:15.859624Z",
     "creator": "User",
     "proB2KernelVersion": "4.13.1",
     "proBCliVersion": null,
