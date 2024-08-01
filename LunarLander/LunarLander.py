@@ -2,6 +2,8 @@ import gymnasium as gym
 import json
 import os
 import sys
+import socket
+import json
 
 from stable_baselines3 import DQN
 from stable_baselines3.common.callbacks import CheckpointCallback
@@ -111,49 +113,63 @@ if __name__ == '__main__':
         model.learn(int(2_000_000), callback=checkpoint_callback, tb_log_name="new_dqn", progress_bar=True)
         model.save(model_path)
     else:
-        # Load pre-trained model
-        model = DQN.load("models/new/trained_model")
-        while True:
-            obs = env.reset()[0]
-            rewards = 0.0
-            info = None
-            done = False
-            finished = False
-            j = 0
-            delta = 10
-            finished = (int(input("")) == 1)
-            input("")
-            print("$initialise_machine")
-            print(0)
-            print("x = {0}".format(get_x(obs)) + " & " + "y = {0}".format(get_y(obs)) + " & " + "v_x = {0}".format(get_v_x(obs)) + " & " + "v_y = {0}".format(get_v_y(obs)) + " & " + "angle = {0}".format(get_angle(obs)) + " & " + "v_angular = {0}".format(get_v_angular(obs)) + " & " + "left_leg_on_ground = {0}".format(get_left_leg_on_ground(obs)) + " & " + "right_leg_on_ground = {0}".format(get_right_leg_on_ground(obs)) + " & " + "surface = {0}".format(get_surface(env)))
-            print("false")
+        try:
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client_socket:
+                port = int(sys.argv[1])
+                client_socket.connect(("127.0.0.1", port))
 
-            while not done and not finished:
-                finished = int(input("")) == 1
-                if finished:
-                    break
+                # Load pre-trained model
+                model = DQN.load("models/new/trained_model")
+                while True:
+                    obs = env.reset()[0]
+                    rewards = 0.0
+                    info = None
+                    done = False
+                    finished = False
+                    j = 0
+                    delta = 10
+                    request = json.loads(client_socket.recv(1024).decode('utf-8'))
+                    finished = (int(request['finished']) == 1)
 
-                enabled_operations = input("")
-                operations_list = enabled_operations.split(",")
+                    response = json.dumps({
+                        'op': '$initialise_machine',
+                        'delta': 10,
+                        'predicate': "x = {0}".format(get_x(obs)) + " & " + "y = {0}".format(get_y(obs)) + " & " + "v_x = {0}".format(get_v_x(obs)) + " & " + "v_y = {0}".format(get_v_y(obs)) + " & " + "angle = {0}".format(get_angle(obs)) + " & " + "v_angular = {0}".format(get_v_angular(obs)) + " & " + "left_leg_on_ground = {0}".format(get_left_leg_on_ground(obs)) + " & " + "right_leg_on_ground = {0}".format(get_right_leg_on_ground(obs)) + " & " + "surface = {0}".format(get_surface(env)),
+                        'done': 'false'
+                    }) + "\n"
+                    client_socket.sendall(response.encode('utf-8'))
 
-                obs_tensor, _ = model.policy.obs_to_tensor(obs)
-                predictions = model.policy.q_net(obs_tensor)
-                action_order = (-predictions).argsort(dim=1)
+                    while not done and not finished:
+                        request = json.loads(client_socket.recv(1024).decode('utf-8'))
+                        finished = (int(request['finished']) == 1)
+                        if finished:
+                            break
 
-                new_action = 0
+                        enabled_operations = request['enabledOperations']
+                        operations_list = enabled_operations.split(",")
 
-                for action in action_order[0]:
-                    if action_names.get(int(action)) in operations_list:
-                        new_action = action
-                        break
+                        obs_tensor, _ = model.policy.obs_to_tensor(obs)
+                        predictions = model.policy.q_net(obs_tensor)
+                        action_order = (-predictions).argsort(dim=1)
 
-                obs, rewards, done, truncated, info = env.step(int(new_action))
-                actionName = action_names.get(int(new_action))
+                        new_action = 0
 
-                print(actionName)
-                print(delta)
-                print("x = {0}".format(get_x(obs)) + " & " + "y = {0}".format(get_y(obs)) + " & " + "v_x = {0}".format(get_v_x(obs)) + " & " + "v_y = {0}".format(get_v_y(obs)) + " & " + "angle = {0}".format(get_angle(obs)) + " & " + "v_angular = {0}".format(get_v_angular(obs)) + " & " + "left_leg_on_ground = {0}".format(get_left_leg_on_ground(obs)) + " & " + "right_leg_on_ground = {0}".format(get_right_leg_on_ground(obs)) + " & " + "surface = {0}".format(get_surface(env)))
-                print("true" if done else "false")
+                        for action in action_order[0]:
+                            if action_names.get(int(action)) in operations_list:
+                                new_action = action
+                                break
 
+                        obs, rewards, done, truncated, info = env.step(int(new_action))
+                        actionName = action_names.get(int(new_action))
+
+                        response = json.dumps({
+                            'op': actionName,
+                            'delta': delta,
+                            'predicate': "x = {0}".format(get_x(obs)) + " & " + "y = {0}".format(get_y(obs)) + " & " + "v_x = {0}".format(get_v_x(obs)) + " & " + "v_y = {0}".format(get_v_y(obs)) + " & " + "angle = {0}".format(get_angle(obs)) + " & " + "v_angular = {0}".format(get_v_angular(obs)) + " & " + "left_leg_on_ground = {0}".format(get_left_leg_on_ground(obs)) + " & " + "right_leg_on_ground = {0}".format(get_right_leg_on_ground(obs)) + " & " + "surface = {0}".format(get_surface(env)),
+                            'done': "true" if done else "false"
+                        }) + "\n"
+                        client_socket.sendall(response.encode('utf-8'))
+        except Exception as e:
+            print(f"Error: {e}")
 
 env.close()

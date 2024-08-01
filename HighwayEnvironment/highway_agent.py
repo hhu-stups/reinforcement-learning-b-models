@@ -9,7 +9,7 @@ from stable_baselines3 import DQN
 from stable_baselines3.common.callbacks import CheckpointCallback
 
 
-save_base_path = "models/highway_dqn/"
+save_base_path = "models/highway_dqn/higher_col_penalty_35k"
 
 # Configuration (default values in parenthesis)
 env = gym.make("highway-fast-v0", render_mode='human')
@@ -104,7 +104,7 @@ if __name__ == '__main__':
             name_prefix="rl_model"
         )
 
-        model.learn(int(20_000), callback=checkpoint_callback, tb_log_name="new_dqn", progress_bar=True)
+        model.learn(int(35_000), callback=checkpoint_callback, tb_log_name="new_dqn", progress_bar=True)
         model.save(model_path)
 
 

@@ -14,7 +14,7 @@ env = gym.make('highway-fast-v0')
 env.reset()
 
 # Load pre-trained model
-model = DQN.load("models/highway_dqn/higher_col_penalty/trained_model")
+model = DQN.load("models/highway_dqn/higher_col_penalty_35k/trained_model")
 
 
 action_names = {
@@ -57,6 +57,16 @@ def get_VehiclesVx(obs):
 def get_VehiclesVy(obs):
     return "{{EgoVehicle |-> {0}, Vehicles2 |-> {1}, Vehicles3 |-> {2}, Vehicles4 |-> {3}, Vehicles5 |-> {4}}}".format(obs[0][4]*80, obs[1][4]*80, obs[2][4]*80, obs[3][4]*80, obs[4][4]*80)
 
+def get_VehiclesAx(obs, prev_obs):
+    if prev_obs is None:
+        return "{{EgoVehicle |-> {0}, Vehicles2 |-> {1}, Vehicles3 |-> {2}, Vehicles4 |-> {3}, Vehicles5 |-> {4}}}".format(0.0, 0.0, 0.0, 0.0, 0.0)
+    return "{{EgoVehicle |-> {0}, Vehicles2 |-> {1}, Vehicles3 |-> {2}, Vehicles4 |-> {3}, Vehicles5 |-> {4}}}".format(obs[0][3]*80 - prev_obs[0][3] * 80, obs[1][3]*80 - prev_obs[1][3] * 80, obs[2][3]*80 - prev_obs[2][3] * 80, obs[3][3]*80 - prev_obs[3][3] * 80, obs[4][3]*80 - prev_obs[4][3] * 80)
+
+def get_VehiclesAy(obs, prev_obs):
+    if prev_obs is None:
+        return "{{EgoVehicle |-> {0}, Vehicles2 |-> {1}, Vehicles3 |-> {2}, Vehicles4 |-> {3}, Vehicles5 |-> {4}}}".format(0.0, 0.0, 0.0, 0.0, 0.0)
+    return "{{EgoVehicle |-> {0}, Vehicles2 |-> {1}, Vehicles3 |-> {2}, Vehicles4 |-> {3}, Vehicles5 |-> {4}}}".format(obs[0][4]*80 - prev_obs[0][4] * 80, obs[1][4] * 80  - prev_obs[1][4]*80, obs[2][4]*80  - prev_obs[2][4]*80, obs[3][4]*80  - prev_obs[3][4]*80, obs[4][4]*80 -  - prev_obs[4][4]*80)
+
 def get_Reward(obs, rewards):
     return rewards * 1.0
 
@@ -72,22 +82,20 @@ try:
             prev_obs = None
             done = False
             finished = False
-            j = 0
             delta = 1000
-
             request = json.loads(client_socket.recv(1024).decode('utf-8'))
             finished = (int(request['finished']) == 1)
 
             response = json.dumps({
                 'op': '$initialise_machine',
                 'delta': 0,
-                'predicate': "Crash = {0}".format(get_Crash(obs, info)) + " & " + "PresentVehicles = {0}".format(get_PresentVehicles(obs)) + " & " + "VehiclesX = {0}".format(get_VehiclesX(obs)) + " & " + "VehiclesY = {0}".format(get_VehiclesY(obs)) + " & " + "VehiclesVx = {0}".format(get_VehiclesVx(obs)) + " & " + "VehiclesVy = {0}".format(get_VehiclesVy(obs)) + " & " + "Reward = {0}".format(get_Reward(obs, rewards)),
+                'predicate': "Crash = {0}".format(get_Crash(obs, info)) + " & " + "PresentVehicles = {0}".format(get_PresentVehicles(obs)) + " & " + "VehiclesX = {0}".format(get_VehiclesX(obs)) + " & " + "VehiclesY = {0}".format(get_VehiclesY(obs)) + " & " + "VehiclesVx = {0}".format(get_VehiclesVx(obs)) + " & " + "VehiclesVy = {0}".format(get_VehiclesVy(obs)) + " & " + "VehiclesAx = {0}".format(get_VehiclesAx(obs, prev_obs)) + " & " + "VehiclesAy = {0}".format(get_VehiclesAy(obs, prev_obs)) + " & " + "Reward = {0}".format(get_Reward(obs, rewards)),
                 'done': 'false'
             }) + "\n"
-
             client_socket.sendall(response.encode('utf-8'))
 
-            while not done:
+            while not done and not finished:
+
                 request = json.loads(client_socket.recv(1024).decode('utf-8'))
                 finished = (int(request['finished']) == 1)
                 if finished:
@@ -96,19 +104,22 @@ try:
                 enabled_operations = request['enabledOperations']
                 operations_list = enabled_operations.split(",")
 
-
+                action, _states = model.predict(obs)
+                new_action = action
                 prev_obs = obs
 
-                obs_tensor, _ = model.policy.obs_to_tensor(obs)
-                predictions = model.policy.q_net(obs_tensor)
-                action_order = (-predictions).argsort(dim=1)
-
-                new_action = 0
-
-                for action in action_order[0]:
-                    if action_names.get(int(action)) in operations_list:
-                        new_action = action
-                        break
+                if not action_names.get(int(action)) in operations_list:
+                    current_reward = -1.0
+                    for forward_action in range(env.action_space.n):
+                        if action == forward_action:
+                            continue
+                        if not action_names.get(forward_action) in operations_list:
+                            continue
+                        env_copy = copy.deepcopy(env)
+                        _obs, action_reward, _done, _truncated, _info = env_copy.step(forward_action)
+                        if action_reward > current_reward:
+                            current_reward = action_reward
+                            new_action = forward_action
 
                 obs, rewards, done, truncated, info = env.step(int(new_action))
                 actionName = action_names.get(int(new_action))
@@ -116,11 +127,10 @@ try:
                 response = json.dumps({
                     'op': actionName,
                     'delta': delta,
-                    'predicate': "Crash = {0}".format(get_Crash(obs, info)) + " & " + "PresentVehicles = {0}".format(get_PresentVehicles(obs)) + " & " + "VehiclesX = {0}".format(get_VehiclesX(obs)) + " & " + "VehiclesY = {0}".format(get_VehiclesY(obs)) + " & " + "VehiclesVx = {0}".format(get_VehiclesVx(obs)) + " & " + "VehiclesVy = {0}".format(get_VehiclesVy(obs)) + " & " + "Reward = {0}".format(get_Reward(obs, rewards)),
+                    'predicate': "Crash = {0}".format(get_Crash(obs, info)) + " & " + "PresentVehicles = {0}".format(get_PresentVehicles(obs)) + " & " + "VehiclesX = {0}".format(get_VehiclesX(obs)) + " & " + "VehiclesY = {0}".format(get_VehiclesY(obs)) + " & " + "VehiclesVx = {0}".format(get_VehiclesVx(obs)) + " & " + "VehiclesVy = {0}".format(get_VehiclesVy(obs)) + " & " + "VehiclesAx = {0}".format(get_VehiclesAx(obs, prev_obs)) + " & " + "VehiclesAy = {0}".format(get_VehiclesAy(obs, prev_obs)) + " & " + "Reward = {0}".format(get_Reward(obs, rewards)),
                     'done': "true" if done else "false"
                 }) + "\n"
                 client_socket.sendall(response.encode('utf-8'))
-                
     except Exception as e:
         print(f"Error: {e}")
 

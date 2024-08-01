@@ -12,6 +12,8 @@ import seaborn as sns
 import pandas as pd
 import joblib
 import sys
+import socket
+import json
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -442,50 +444,66 @@ if __name__ == '__main__':
     if len(sys.argv) == 2 and sys.argv[1] == 'train':
         train()
     else:
-        model = joblib.load("q_class_multi_fixed_fov.txt")[-10]
-        while True:
-            obs = env.reset()
-            agent_pos = env.agent_pos
-            rewards = 0.0
-            info = None
-            done = False
-            finished = False
-            j = 0
-            delta = 1000
-            finished = (int(input("")) == 1)
-            input("")
-            print("$initialise_machine")
-            print(0)
-            print("drone_positions = {0}".format(get_drone_positions(obs, agent_pos)))
-            print("false")
+        try:
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client_socket:
+                port = int(sys.argv[1])
+                client_socket.connect(("127.0.0.1", port))
 
-            while not done and not finished:
-                for i in range(n_agents):
-                    finished = int(input("")) == 1
-                    if finished:
-                        break
+                model = joblib.load("q_class_multi_fixed_fov.txt")[-10]
+                while True:
+                    obs = env.reset()
+                    agent_pos = env.agent_pos
+                    rewards = 0.0
+                    info = None
+                    done = False
+                    finished = False
+                    j = 0
+                    delta = 1000
 
-                    enabled_operations = input("")
-                    operations_list = enabled_operations.split(",")
+                    request = json.loads(client_socket.recv(1024).decode('utf-8'))
+                    finished = (int(request['finished']) == 1)
 
-                    q_tables = model.q_tables
-                    obs_row = model.obs_to_row(obs[i])
-                    predictions = np.array(q_tables[i][int(obs_row)])
-                    action_order = (-predictions).argsort()
+                    response = json.dumps({
+                        'op': '$initialise_machine',
+                        'delta': 0,
+                        'predicate': "drone_positions = {0}".format(get_drone_positions(obs, agent_pos)),
+                        'done': 'false'
+                    }) + "\n"
+                    client_socket.sendall(response.encode('utf-8'))
 
-                    new_action = 0
+                    while not done and not finished:
+                        for i in range(n_agents):
+                            request = json.loads(client_socket.recv(1024).decode('utf-8'))
+                            finished = (int(request['finished']) == 1)
+                            if finished:
+                                break
 
-                    for action in action_order:
-                        if action_names.get(int(action)) in operations_list:
-                            new_action = action
-                            break
+                            enabled_operations = request['enabledOperations']
+                            operations_list = enabled_operations.split(",")
 
-                    obs, rewards, done = env.step(int(new_action), i=i)
-                    actionName = action_names.get(int(new_action))
+                            q_tables = model.q_tables
+                            obs_row = model.obs_to_row(obs[i])
+                            predictions = np.array(q_tables[i][int(obs_row)])
+                            action_order = (-predictions).argsort()
 
-                    print(actionName)
-                    print(delta if i == n_agents - 1 else 0)
-                    print("drone_positions = {0}".format(get_drone_positions(obs, agent_pos)))
-                    print("true" if done else "false")
-                    if done:
-                        break
+                            new_action = 0
+
+                            for action in action_order:
+                                if action_names.get(int(action)) in operations_list:
+                                    new_action = action
+                                    break
+
+                            obs, rewards, done = env.step(int(new_action), i=i)
+                            actionName = action_names.get(int(new_action))
+                            response = json.dumps({
+                                'op': actionName,
+                                'delta': delta if i == n_agents - 1 else 0,
+                                'predicate': "drone_positions = {0}".format(get_drone_positions(obs, agent_pos)),
+                                'done': "true" if done else "false"
+                            }) + "\n"
+                            client_socket.sendall(response.encode('utf-8'))
+
+                            if done:
+                                break
+        except Exception as e:
+            print(f"Error: {e}")
