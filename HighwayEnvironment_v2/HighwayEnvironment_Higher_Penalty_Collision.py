@@ -70,13 +70,13 @@ def read_line(socket):
     return result
 
 def read_line(socket):
-    result = ''
+    result = []
     while True:
         data = socket.recv(1).decode('utf-8')
         if data == '\n':
             break
-        result += data
-    return result
+        result.append(data)
+    return ''.join(result)
 
 try:
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client_socket:

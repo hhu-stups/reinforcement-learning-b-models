@@ -71,13 +71,13 @@ def get_Reward(obs, rewards):
     return rewards * 1.0
 
 def read_line(socket):
-    result = ''
+    result = []
     while True:
         data = socket.recv(1).decode('utf-8')
         if data == '\n':
             break
-        result += data
-    return result
+        result.append(data)
+    return ''.join(result)
 
 if __name__ == '__main__':
     try:

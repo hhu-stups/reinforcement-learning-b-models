@@ -441,13 +441,13 @@ action_names = {
 action_names_inv = {val: key for key, val in action_names.items()}
 
 def read_line(socket):
-    result = ''
+    result = []
     while True:
         data = socket.recv(1).decode('utf-8')
         if data == '\n':
             break
-        result += data
-    return result
+        result.append(data)
+    return ''.join(result)
 
 if __name__ == '__main__':
     if len(sys.argv) == 2 and sys.argv[1] == 'train':
