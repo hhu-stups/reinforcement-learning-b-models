@@ -70,6 +70,15 @@ def get_VehiclesAy(obs, prev_obs):
 def get_Reward(obs, rewards):
     return rewards * 1.0
 
+def read_line(socket):
+    result = ''
+    while True:
+        data = socket.recv(1).decode('utf-8')
+        if data == '\n':
+            break
+        result += data
+    return result
+
 try:
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client_socket:
         port = int(sys.argv[1])
@@ -82,7 +91,7 @@ try:
             done = False
             finished = False
             delta = 1000
-            request = json.loads(client_socket.recv(1024).decode('utf-8'))
+            request = json.loads(read_line(client_socket))
             finished = (int(request['finished']) == 1)
 
             response = json.dumps({
@@ -94,7 +103,7 @@ try:
             client_socket.sendall(response.encode('utf-8'))
 
             while not done and not finished:
-                request = json.loads(client_socket.recv(1024).decode('utf-8'))
+                request = json.loads(read_line(client_socket))
                 finished = (int(request['finished']) == 1)
                 if finished:
                     break

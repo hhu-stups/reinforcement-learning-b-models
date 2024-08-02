@@ -43,6 +43,15 @@ def get_paths():
 
     return save_path, model_path
 
+def read_line(socket):
+    result = ''
+    while True:
+        data = socket.recv(1).decode('utf-8')
+        if data == '\n':
+            break
+        result += data
+    return result
+
 if __name__ == '__main__':
     if len(sys.argv) == 2 and sys.argv[1] == 'train':
         save_path, model_path = get_paths()
@@ -89,7 +98,7 @@ if __name__ == '__main__':
                     j = 0
                     delta = 1000
 
-                    request = json.loads(client_socket.recv(1024).decode('utf-8'))
+                    request = json.loads(read_line(client_socket))
                     finished = (int(request['finished']) == 1)
 
                     response = json.dumps({
@@ -101,7 +110,7 @@ if __name__ == '__main__':
                     client_socket.sendall(response.encode('utf-8'))
 
                     while not done and not finished:
-                        request = json.loads(client_socket.recv(1024).decode('utf-8'))
+                        request = json.loads(read_line(client_socket))
                         finished = (int(request['finished']) == 1)
                         if finished:
                             break
