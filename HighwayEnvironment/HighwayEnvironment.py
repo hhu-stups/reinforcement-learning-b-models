@@ -79,64 +79,66 @@ def read_line(socket):
         result.append(data)
     return ''.join(result)
 
-try:
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client_socket:
-        port = int(sys.argv[1])
-        client_socket.connect(("127.0.0.1", port))
-        while True:
-            obs = env.reset()[0]
-            rewards = 0.0
-            info = None
-            prev_obs = None
-            done = False
-            finished = False
-            j = 0
-            delta = 1000
+if __name__ == '__main__':
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client_socket:
+            port = int(sys.argv[1])
+            client_socket.connect(("127.0.0.1", port))
+            while True:
+                obs = env.reset()[0]
+                rewards = 0.0
+                info = None
+                prev_obs = None
+                done = False
+                finished = False
+                j = 0
+                delta = 1000
 
-            request = json.loads(read_line(client_socket))
-            finished = (int(request['finished']) == 1)
-
-            response = json.dumps({
-                'op': '$initialise_machine',
-                'delta': 0,
-                'predicate': "Crash = {0}".format(get_Crash(obs, info)) + " & " + "PresentVehicles = {0}".format(get_PresentVehicles(obs)) + " & " + "VehiclesX = {0}".format(get_VehiclesX(obs)) + " & " + "VehiclesY = {0}".format(get_VehiclesY(obs)) + " & " + "VehiclesVx = {0}".format(get_VehiclesVx(obs)) + " & " + "VehiclesVy = {0}".format(get_VehiclesVy(obs)) + " & " + "VehiclesAx = {0}".format(get_VehiclesAx(obs, prev_obs)) + " & " + "VehiclesAy = {0}".format(get_VehiclesAy(obs, prev_obs)) + " & " + "Reward = {0}".format(get_Reward(obs, rewards)),
-                'done': 'false'
-            }) + "\n"
-            client_socket.sendall(response.encode('utf-8'))
-
-            while not done:
                 request = json.loads(read_line(client_socket))
                 finished = (int(request['finished']) == 1)
-                if finished:
-                    break
-
-                enabled_operations = request['enabledOperations']
-                operations_list = enabled_operations.split(",")
-
-                prev_obs = obs
-
-                obs_tensor, _ = model.policy.obs_to_tensor(obs)
-                predictions = model.policy.q_net(obs_tensor)
-                action_order = (-predictions).argsort(dim=1)
-
-                new_action = 0
-
-                for action in action_order[0]:
-                    if action_names.get(int(action)) in operations_list:
-                        new_action = action
-                        break
-
-                obs, rewards, done, truncated, info = env.step(int(new_action))
-                actionName = action_names.get(int(new_action))
 
                 response = json.dumps({
-                    'op': actionName,
-                    'delta': delta,
+                    'op': '$initialise_machine',
+                    'delta': 0,
                     'predicate': "Crash = {0}".format(get_Crash(obs, info)) + " & " + "PresentVehicles = {0}".format(get_PresentVehicles(obs)) + " & " + "VehiclesX = {0}".format(get_VehiclesX(obs)) + " & " + "VehiclesY = {0}".format(get_VehiclesY(obs)) + " & " + "VehiclesVx = {0}".format(get_VehiclesVx(obs)) + " & " + "VehiclesVy = {0}".format(get_VehiclesVy(obs)) + " & " + "VehiclesAx = {0}".format(get_VehiclesAx(obs, prev_obs)) + " & " + "VehiclesAy = {0}".format(get_VehiclesAy(obs, prev_obs)) + " & " + "Reward = {0}".format(get_Reward(obs, rewards)),
-                    'done': "true" if done else "false"
+                    'done': 'false'
                 }) + "\n"
                 client_socket.sendall(response.encode('utf-8'))
 
+                while not done:
+                    request = json.loads(read_line(client_socket))
+                    finished = (int(request['finished']) == 1)
+                    if finished:
+                        break
+
+                    enabled_operations = request['enabledOperations']
+                    operations_list = enabled_operations.split(",")
+
+                    prev_obs = obs
+
+                    obs_tensor, _ = model.policy.obs_to_tensor(obs)
+                    predictions = model.policy.q_net(obs_tensor)
+                    action_order = (-predictions).argsort(dim=1)
+
+                    new_action = 0
+
+                    for action in action_order[0]:
+                        if action_names.get(int(action)) in operations_list:
+                            new_action = action
+                            break
+
+                    obs, rewards, done, truncated, info = env.step(int(new_action))
+                    actionName = action_names.get(int(new_action))
+
+                    response = json.dumps({
+                        'op': actionName,
+                        'delta': delta,
+                        'predicate': "Crash = {0}".format(get_Crash(obs, info)) + " & " + "PresentVehicles = {0}".format(get_PresentVehicles(obs)) + " & " + "VehiclesX = {0}".format(get_VehiclesX(obs)) + " & " + "VehiclesY = {0}".format(get_VehiclesY(obs)) + " & " + "VehiclesVx = {0}".format(get_VehiclesVx(obs)) + " & " + "VehiclesVy = {0}".format(get_VehiclesVy(obs)) + " & " + "VehiclesAx = {0}".format(get_VehiclesAx(obs, prev_obs)) + " & " + "VehiclesAy = {0}".format(get_VehiclesAy(obs, prev_obs)) + " & " + "Reward = {0}".format(get_Reward(obs, rewards)),
+                        'done': "true" if done else "false"
+                    }) + "\n"
+                    client_socket.sendall(response.encode('utf-8'))
+
     except Exception as e:
         print(f"Error: {e}")
+
 env.close()

@@ -129,7 +129,7 @@ try:
                 }) + "\n"
                 client_socket.sendall(response.encode('utf-8'))
 
-    except Exception as e:
-        print(f"Error: {e}")
+except Exception as e:
+    print(f"Error: {e}")
 
 env.close()
