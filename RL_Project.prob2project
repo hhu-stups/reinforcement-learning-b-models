@@ -917,6 +917,32 @@
           "simulationPath": "HighwayEnvironment/HighwayEnvironment_500k.py",
           "type": "MONTE_CARLO_SIMULATION",
           "information": {
+            "MAX_STEPS_BEFORE_PROPERTY": 0,
+            "EXECUTIONS": 1000,
+            "ENDING_TIME": 60000
+          }
+        },
+        {
+          "taskType": "SIMULATION",
+          "id": "Sim_SAF1_Base",
+          "simulationPath": "HighwayEnvironment/HighwayEnvironment_500k.py",
+          "type": "HYPOTHESIS_TEST",
+          "information": {
+            "SIGNIFICANCE": 0.01,
+            "PROBABILITY": 0.95,
+            "MAX_STEPS_BEFORE_PROPERTY": 0,
+            "EXECUTIONS": 1000,
+            "PREDICATE": "Crash = FALSE",
+            "ENDING_TIME": 60000,
+            "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
+            "CHECKING_TYPE": "PREDICATE_INVARIANT"
+          }
+        },
+        {
+          "taskType": "SIMULATION",
+          "simulationPath": "HighwayEnvironment/HighwayEnvironment_Higher_Penalty_Collision_35k.py",
+          "type": "MONTE_CARLO_SIMULATION",
+          "information": {
             "EXECUTIONS": 1000,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
             "ENDING_TIME": 60000
@@ -925,7 +951,7 @@
         {
           "taskType": "SIMULATION",
           "id": "Sim_SAF1_Base",
-          "simulationPath": "HighwayEnvironment/HighwayEnvironment_500k.py",
+          "simulationPath": "HighwayEnvironment/HighwayEnvironment_Higher_Penalty_Collision_35k.py",
           "type": "HYPOTHESIS_TEST",
           "information": {
             "SIGNIFICANCE": 0.01,
@@ -966,6 +992,9 @@
         },
         {
           "path": "HighwayEnvironment/HighwayEnvironment_500k.py"
+        },
+        {
+          "path": "HighwayEnvironment/HighwayEnvironment_Higher_Penalty_Collision_35k.py"
         }
       ],
       "visBVisualisation": "HighwayEnvironment/visualization/HighwayEnv.json",
@@ -1139,6 +1168,7 @@
           "information": {
             "SIGNIFICANCE": 0.01,
             "PROBABILITY": 0.95,
+            "EXECUTIONS": 1000,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
             "PREDICATE": "Crash = FALSE & not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
             "ENDING_TIME": 60000,
@@ -1241,6 +1271,7 @@
             "MAX_STEPS_BEFORE_PROPERTY": 0,
             "ESTIMATION_TYPE": "MEAN",
             "ENDING_TIME": 60000,
+            "EXECUTIONS": 1000,
             "EXPRESSION": "RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle))",
             "DESIRED_VALUE": 25.0,
             "CHECKING_TYPE": "AVERAGE",
@@ -1256,6 +1287,7 @@
             "MAX_STEPS_BEFORE_PROPERTY": 0,
             "ESTIMATION_TYPE": "MEAN",
             "ENDING_TIME": 60000,
+            "EXECUTIONS": 1000,
             "EXPRESSION": "Reward",
             "DESIRED_VALUE": 40.0,
             "CHECKING_TYPE": "SUM",
@@ -1271,6 +1303,7 @@
             "MAX_STEPS_BEFORE_PROPERTY": 0,
             "ESTIMATION_TYPE": "MEAN",
             "ENDING_TIME": 60000,
+            "EXECUTIONS": 1000,
             "EXPRESSION": "VehiclesVx(EgoVehicle)",
             "DESIRED_VALUE": 1500.0,
             "CHECKING_TYPE": "SUM_MEAN_BETWEEN_STEPS",
@@ -1285,6 +1318,7 @@
           "information": {
             "SIGNIFICANCE": 0.01,
             "PROBABILITY": 0.7,
+            "EXECUTIONS": 1000,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
             "PREDICATE": "Crash = FALSE => (VehiclesAx(EgoVehicle) < 0.0 => RSQRT(VehiclesAy(EgoVehicle) * VehiclesAy(EgoVehicle) + VehiclesAx(EgoVehicle) * VehiclesAx(EgoVehicle)) <= 5.0)",
             "ENDING_TIME": 60000,
@@ -1300,6 +1334,7 @@
           "information": {
             "SIGNIFICANCE": 0.01,
             "PROBABILITY": 0.7,
+            "EXECUTIONS": 1000,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
             "PREDICATE": "Crash = FALSE => (VehiclesAx(EgoVehicle) > 0.0 => RSQRT(VehiclesAy(EgoVehicle) * VehiclesAy(EgoVehicle) + VehiclesAx(EgoVehicle) * VehiclesAx(EgoVehicle)) <= 5.0)",
             "ENDING_TIME": 60000,
@@ -1315,6 +1350,7 @@
           "information": {
             "SIGNIFICANCE": 0.01,
             "PROBABILITY": 0.7,
+            "EXECUTIONS": 1000,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
             "PREDICATE": "Crash = FALSE => (RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle)) >= 20.0)",
             "ENDING_TIME": 60000,
@@ -1331,6 +1367,7 @@
             "SIGNIFICANCE": 0.01,
             "PROBABILITY": 0.7,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
+            "EXECUTIONS": 1000,
             "PREDICATE": "Crash = FALSE => (RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle)) <= 30.0)",
             "ENDING_TIME": 60000,
             "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
@@ -1346,6 +1383,7 @@
             "SIGNIFICANCE": 0.01,
             "PROBABILITY": 0.95,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
+            "EXECUTIONS": 1000,
             "PREDICATE": "Crash = FALSE & not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
             "ENDING_TIME": 60000,
             "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
@@ -1360,6 +1398,7 @@
             "SIGNIFICANCE": 0.001,
             "PROBABILITY": 0.999,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
+            "EXECUTIONS": 1000,
             "PREDICATE": "Crash = FALSE => not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) < 0.01 & VehiclesX(v) > -0.01 & VehiclesY(v) < 0.01 & VehiclesY(v) > -0.01))",
             "ENDING_TIME": 60000,
             "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
@@ -2077,6 +2116,7 @@
             "SIGNIFICANCE": 0.01,
             "PROBABILITY": 0.95,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
+            "EXECUTIONS": 1000,
             "PREDICATE": "Crash = FALSE & not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
             "ENDING_TIME": 60000,
             "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
@@ -2178,6 +2218,7 @@
             "MAX_STEPS_BEFORE_PROPERTY": 0,
             "ESTIMATION_TYPE": "MEAN",
             "ENDING_TIME": 60000,
+            "EXECUTIONS": 1000,
             "EXPRESSION": "RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle))",
             "DESIRED_VALUE": 25.0,
             "CHECKING_TYPE": "AVERAGE",
@@ -2194,6 +2235,7 @@
             "ESTIMATION_TYPE": "MEAN",
             "ENDING_TIME": 60000,
             "EXPRESSION": "Reward",
+            "EXECUTIONS": 1000,
             "DESIRED_VALUE": 40.0,
             "CHECKING_TYPE": "SUM",
             "EPSILON": 20.0
@@ -2222,6 +2264,7 @@
           "information": {
             "SIGNIFICANCE": 0.01,
             "PROBABILITY": 0.7,
+            "EXECUTIONS": 1000,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
             "PREDICATE": "Crash = FALSE => (VehiclesAx(EgoVehicle) < 0.0 => RSQRT(VehiclesAy(EgoVehicle) * VehiclesAy(EgoVehicle) + VehiclesAx(EgoVehicle) * VehiclesAx(EgoVehicle)) <= 5.0)",
             "ENDING_TIME": 60000,
@@ -2238,6 +2281,7 @@
             "SIGNIFICANCE": 0.01,
             "PROBABILITY": 0.7,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
+            "EXECUTIONS": 1000,
             "PREDICATE": "Crash = FALSE => (VehiclesAx(EgoVehicle) > 0.0 => RSQRT(VehiclesAy(EgoVehicle) * VehiclesAy(EgoVehicle) + VehiclesAx(EgoVehicle) * VehiclesAx(EgoVehicle)) <= 5.0)",
             "ENDING_TIME": 60000,
             "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
@@ -2253,6 +2297,7 @@
             "SIGNIFICANCE": 0.01,
             "PROBABILITY": 0.7,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
+            "EXECUTIONS": 1000,
             "PREDICATE": "Crash = FALSE => (RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle)) >= 20.0)",
             "ENDING_TIME": 60000,
             "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
@@ -2268,6 +2313,7 @@
             "SIGNIFICANCE": 0.01,
             "PROBABILITY": 0.7,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
+            "EXECUTIONS": 1000,
             "PREDICATE": "Crash = FALSE => (RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle)) <= 30.0)",
             "ENDING_TIME": 60000,
             "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
@@ -2283,6 +2329,7 @@
             "SIGNIFICANCE": 0.01,
             "PROBABILITY": 0.95,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
+            "EXECUTIONS": 1000,
             "PREDICATE": "Crash = FALSE & not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
             "ENDING_TIME": 60000,
             "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
@@ -2297,6 +2344,7 @@
             "SIGNIFICANCE": 0.001,
             "PROBABILITY": 0.999,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
+            "EXECUTIONS": 1000,
             "PREDICATE": "Crash = FALSE => not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) < 0.01 & VehiclesX(v) > -0.01 & VehiclesY(v) < 0.01 & VehiclesY(v) > -0.01))",
             "ENDING_TIME": 60000,
             "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
@@ -3896,6 +3944,7 @@
             "SIGNIFICANCE": 0.01,
             "PROBABILITY": 0.95,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
+            "EXECUTIONS": 1000,
             "PREDICATE": "Crash = FALSE & not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
             "ENDING_TIME": 60000,
             "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
@@ -3997,6 +4046,7 @@
             "MAX_STEPS_BEFORE_PROPERTY": 0,
             "ESTIMATION_TYPE": "MEAN",
             "ENDING_TIME": 60000,
+            "EXECUTIONS": 1000,
             "EXPRESSION": "RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle))",
             "DESIRED_VALUE": 25.0,
             "CHECKING_TYPE": "AVERAGE",
@@ -4012,6 +4062,7 @@
             "MAX_STEPS_BEFORE_PROPERTY": 0,
             "ESTIMATION_TYPE": "MEAN",
             "ENDING_TIME": 60000,
+            "EXECUTIONS": 1000,
             "EXPRESSION": "Reward",
             "DESIRED_VALUE": 40.0,
             "CHECKING_TYPE": "SUM",
@@ -4027,6 +4078,7 @@
             "MAX_STEPS_BEFORE_PROPERTY": 0,
             "ESTIMATION_TYPE": "MEAN",
             "ENDING_TIME": 60000,
+            "EXECUTIONS": 1000,
             "EXPRESSION": "VehiclesVx(EgoVehicle)",
             "DESIRED_VALUE": 1500.0,
             "CHECKING_TYPE": "SUM_MEAN_BETWEEN_STEPS",
@@ -4044,6 +4096,7 @@
             "MAX_STEPS_BEFORE_PROPERTY": 0,
             "PREDICATE": "Crash = FALSE => (VehiclesAx(EgoVehicle) < 0.0 => RSQRT(VehiclesAy(EgoVehicle) * VehiclesAy(EgoVehicle) + VehiclesAx(EgoVehicle) * VehiclesAx(EgoVehicle)) <= 5.0)",
             "ENDING_TIME": 60000,
+            "EXECUTIONS": 1000,
             "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
             "CHECKING_TYPE": "PREDICATE_INVARIANT"
           }
@@ -4056,6 +4109,7 @@
           "information": {
             "SIGNIFICANCE": 0.01,
             "PROBABILITY": 0.7,
+            "EXECUTIONS": 1000,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
             "PREDICATE": "Crash = FALSE => (VehiclesAx(EgoVehicle) > 0.0 => RSQRT(VehiclesAy(EgoVehicle) * VehiclesAy(EgoVehicle) + VehiclesAx(EgoVehicle) * VehiclesAx(EgoVehicle)) <= 5.0)",
             "ENDING_TIME": 60000,
@@ -4071,6 +4125,7 @@
           "information": {
             "SIGNIFICANCE": 0.01,
             "PROBABILITY": 0.7,
+            "EXECUTIONS": 1000,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
             "PREDICATE": "Crash = FALSE => (RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle)) >= 20.0)",
             "ENDING_TIME": 60000,
@@ -4086,6 +4141,7 @@
           "information": {
             "SIGNIFICANCE": 0.01,
             "PROBABILITY": 0.7,
+            "EXECUTIONS": 1000,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
             "PREDICATE": "Crash = FALSE => (RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle)) <= 30.0)",
             "ENDING_TIME": 60000,
@@ -4101,6 +4157,7 @@
           "information": {
             "SIGNIFICANCE": 0.01,
             "PROBABILITY": 0.95,
+            "EXECUTIONS": 1000,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
             "PREDICATE": "Crash = FALSE & not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
             "ENDING_TIME": 60000,
@@ -4115,6 +4172,7 @@
           "information": {
             "SIGNIFICANCE": 0.001,
             "PROBABILITY": 0.999,
+            "EXECUTIONS": 1000,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
             "PREDICATE": "Crash = FALSE => not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) < 0.01 & VehiclesX(v) > -0.01 & VehiclesY(v) < 0.01 & VehiclesY(v) > -0.01))",
             "ENDING_TIME": 60000,
@@ -4833,6 +4891,7 @@
             "SIGNIFICANCE": 0.01,
             "PROBABILITY": 0.95,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
+            "EXECUTIONS": 1000,
             "PREDICATE": "Crash = FALSE & not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
             "ENDING_TIME": 60000,
             "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
@@ -4934,6 +4993,7 @@
             "MAX_STEPS_BEFORE_PROPERTY": 0,
             "ESTIMATION_TYPE": "MEAN",
             "ENDING_TIME": 60000,
+            "EXECUTIONS": 1000,
             "EXPRESSION": "RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle))",
             "DESIRED_VALUE": 25.0,
             "CHECKING_TYPE": "AVERAGE",
@@ -4949,6 +5009,7 @@
             "MAX_STEPS_BEFORE_PROPERTY": 0,
             "ESTIMATION_TYPE": "MEAN",
             "ENDING_TIME": 60000,
+            "EXECUTIONS": 1000,
             "EXPRESSION": "Reward",
             "DESIRED_VALUE": 40.0,
             "CHECKING_TYPE": "SUM",
@@ -4964,6 +5025,7 @@
             "MAX_STEPS_BEFORE_PROPERTY": 0,
             "ESTIMATION_TYPE": "MEAN",
             "ENDING_TIME": 60000,
+            "EXECUTIONS": 1000,
             "EXPRESSION": "VehiclesVx(EgoVehicle)",
             "DESIRED_VALUE": 1500.0,
             "CHECKING_TYPE": "SUM_MEAN_BETWEEN_STEPS",
@@ -4979,6 +5041,7 @@
             "SIGNIFICANCE": 0.01,
             "PROBABILITY": 0.7,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
+            "EXECUTIONS": 1000,
             "PREDICATE": "Crash = FALSE => (VehiclesAx(EgoVehicle) < 0.0 => RSQRT(VehiclesAy(EgoVehicle) * VehiclesAy(EgoVehicle) + VehiclesAx(EgoVehicle) * VehiclesAx(EgoVehicle)) <= 5.0)",
             "ENDING_TIME": 60000,
             "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
@@ -4994,6 +5057,7 @@
             "SIGNIFICANCE": 0.01,
             "PROBABILITY": 0.7,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
+            "EXECUTIONS": 1000,
             "PREDICATE": "Crash = FALSE => (VehiclesAx(EgoVehicle) > 0.0 => RSQRT(VehiclesAy(EgoVehicle) * VehiclesAy(EgoVehicle) + VehiclesAx(EgoVehicle) * VehiclesAx(EgoVehicle)) <= 5.0)",
             "ENDING_TIME": 60000,
             "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
@@ -5009,6 +5073,7 @@
             "SIGNIFICANCE": 0.01,
             "PROBABILITY": 0.7,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
+            "EXECUTIONS": 1000,
             "PREDICATE": "Crash = FALSE => (RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle)) >= 20.0)",
             "ENDING_TIME": 60000,
             "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
@@ -5024,6 +5089,7 @@
             "SIGNIFICANCE": 0.01,
             "PROBABILITY": 0.7,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
+            "EXECUTIONS": 1000,
             "PREDICATE": "Crash = FALSE => (RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle)) <= 30.0)",
             "ENDING_TIME": 60000,
             "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
@@ -5039,6 +5105,7 @@
             "SIGNIFICANCE": 0.01,
             "PROBABILITY": 0.95,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
+            "EXECUTIONS": 1000,
             "PREDICATE": "Crash = FALSE & not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
             "ENDING_TIME": 60000,
             "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
@@ -5053,6 +5120,7 @@
             "SIGNIFICANCE": 0.001,
             "PROBABILITY": 0.999,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
+            "EXECUTIONS": 1000,
             "PREDICATE": "Crash = FALSE => not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) < 0.01 & VehiclesX(v) > -0.01 & VehiclesY(v) < 0.01 & VehiclesY(v) > -0.01))",
             "ENDING_TIME": 60000,
             "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
@@ -5770,6 +5838,7 @@
             "SIGNIFICANCE": 0.01,
             "PROBABILITY": 0.95,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
+            "EXECUTIONS": 1000,
             "PREDICATE": "Crash = FALSE & not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
             "ENDING_TIME": 60000,
             "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
@@ -5871,6 +5940,7 @@
             "MAX_STEPS_BEFORE_PROPERTY": 0,
             "ESTIMATION_TYPE": "MEAN",
             "ENDING_TIME": 60000,
+            "EXECUTIONS": 1000,
             "EXPRESSION": "RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle))",
             "DESIRED_VALUE": 25.0,
             "CHECKING_TYPE": "AVERAGE",
@@ -5888,6 +5958,7 @@
             "ENDING_TIME": 60000,
             "EXPRESSION": "Reward",
             "DESIRED_VALUE": 40.0,
+            "EXECUTIONS": 1000,
             "CHECKING_TYPE": "SUM",
             "EPSILON": 20.0
           }
@@ -5901,6 +5972,7 @@
             "MAX_STEPS_BEFORE_PROPERTY": 0,
             "ESTIMATION_TYPE": "MEAN",
             "ENDING_TIME": 60000,
+            "EXECUTIONS": 1000,
             "EXPRESSION": "VehiclesVx(EgoVehicle)",
             "DESIRED_VALUE": 1500.0,
             "CHECKING_TYPE": "SUM_MEAN_BETWEEN_STEPS",
@@ -5915,6 +5987,7 @@
           "information": {
             "SIGNIFICANCE": 0.01,
             "PROBABILITY": 0.7,
+            "EXECUTIONS": 1000,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
             "PREDICATE": "Crash = FALSE => (VehiclesAx(EgoVehicle) < 0.0 => RSQRT(VehiclesAy(EgoVehicle) * VehiclesAy(EgoVehicle) + VehiclesAx(EgoVehicle) * VehiclesAx(EgoVehicle)) <= 5.0)",
             "ENDING_TIME": 60000,
@@ -5930,6 +6003,7 @@
           "information": {
             "SIGNIFICANCE": 0.01,
             "PROBABILITY": 0.7,
+            "EXECUTIONS": 1000,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
             "PREDICATE": "Crash = FALSE => (VehiclesAx(EgoVehicle) > 0.0 => RSQRT(VehiclesAy(EgoVehicle) * VehiclesAy(EgoVehicle) + VehiclesAx(EgoVehicle) * VehiclesAx(EgoVehicle)) <= 5.0)",
             "ENDING_TIME": 60000,
@@ -5946,6 +6020,7 @@
             "SIGNIFICANCE": 0.01,
             "PROBABILITY": 0.7,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
+            "EXECUTIONS": 1000,
             "PREDICATE": "Crash = FALSE => (RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle)) >= 20.0)",
             "ENDING_TIME": 60000,
             "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
@@ -5961,6 +6036,7 @@
             "SIGNIFICANCE": 0.01,
             "PROBABILITY": 0.7,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
+            "EXECUTIONS": 1000,
             "PREDICATE": "Crash = FALSE => (RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle)) <= 30.0)",
             "ENDING_TIME": 60000,
             "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
@@ -5975,6 +6051,7 @@
           "information": {
             "SIGNIFICANCE": 0.01,
             "PROBABILITY": 0.95,
+            "EXECUTIONS": 1000,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
             "PREDICATE": "Crash = FALSE & not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
             "ENDING_TIME": 60000,
@@ -5990,6 +6067,7 @@
             "SIGNIFICANCE": 0.001,
             "PROBABILITY": 0.999,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
+            "EXECUTIONS": 1000,
             "PREDICATE": "Crash = FALSE => not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) < 0.01 & VehiclesX(v) > -0.01 & VehiclesY(v) < 0.01 & VehiclesY(v) > -0.01))",
             "ENDING_TIME": 60000,
             "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
@@ -6722,6 +6800,7 @@
             "SIGNIFICANCE": 0.01,
             "PROBABILITY": 0.95,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
+            "EXECUTIONS": 1000,
             "PREDICATE": "Crash = FALSE & not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
             "ENDING_TIME": 60000,
             "HYPOTHESIS_CHECKING_TYPE": "LEFT_TAILED",
@@ -6823,6 +6902,7 @@
             "MAX_STEPS_BEFORE_PROPERTY": 0,
             "ESTIMATION_TYPE": "MEAN",
             "ENDING_TIME": 60000,
+            "EXECUTIONS": 1000,
             "EXPRESSION": "RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle))",
             "DESIRED_VALUE": 25.0,
             "CHECKING_TYPE": "AVERAGE",
@@ -6839,6 +6919,7 @@
             "ESTIMATION_TYPE": "MEAN",
             "ENDING_TIME": 60000,
             "EXPRESSION": "Reward",
+            "EXECUTIONS": 1000,
             "DESIRED_VALUE": 40.0,
             "CHECKING_TYPE": "SUM",
             "EPSILON": 20.0
@@ -6853,6 +6934,7 @@
             "MAX_STEPS_BEFORE_PROPERTY": 0,
             "ESTIMATION_TYPE": "MEAN",
             "ENDING_TIME": 60000,
+            "EXECUTIONS": 1000,
             "EXPRESSION": "VehiclesVx(EgoVehicle)",
             "DESIRED_VALUE": 1500.0,
             "CHECKING_TYPE": "SUM_MEAN_BETWEEN_STEPS",
@@ -6867,6 +6949,7 @@
           "information": {
             "SIGNIFICANCE": 0.01,
             "PROBABILITY": 0.7,
+            "EXECUTIONS": 1000,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
             "PREDICATE": "Crash = FALSE => (VehiclesAx(EgoVehicle) < 0.0 => RSQRT(VehiclesAy(EgoVehicle) * VehiclesAy(EgoVehicle) + VehiclesAx(EgoVehicle) * VehiclesAx(EgoVehicle)) <= 5.0)",
             "ENDING_TIME": 60000,
@@ -6882,6 +6965,7 @@
           "information": {
             "SIGNIFICANCE": 0.01,
             "PROBABILITY": 0.7,
+            "EXECUTIONS": 1000,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
             "PREDICATE": "Crash = FALSE => (VehiclesAx(EgoVehicle) > 0.0 => RSQRT(VehiclesAy(EgoVehicle) * VehiclesAy(EgoVehicle) + VehiclesAx(EgoVehicle) * VehiclesAx(EgoVehicle)) <= 5.0)",
             "ENDING_TIME": 60000,
@@ -6897,6 +6981,7 @@
           "information": {
             "SIGNIFICANCE": 0.01,
             "PROBABILITY": 0.7,
+            "EXECUTIONS": 1000,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
             "PREDICATE": "Crash = FALSE => (RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle)) >= 20.0)",
             "ENDING_TIME": 60000,
@@ -6912,6 +6997,7 @@
           "information": {
             "SIGNIFICANCE": 0.01,
             "PROBABILITY": 0.7,
+            "EXECUTIONS": 1000,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
             "PREDICATE": "Crash = FALSE => (RSQRT(VehiclesVy(EgoVehicle) * VehiclesVy(EgoVehicle) + VehiclesVx(EgoVehicle) * VehiclesVx(EgoVehicle)) <= 30.0)",
             "ENDING_TIME": 60000,
@@ -6927,6 +7013,7 @@
           "information": {
             "SIGNIFICANCE": 0.01,
             "PROBABILITY": 0.95,
+            "EXECUTIONS": 1000,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
             "PREDICATE": "Crash = FALSE & not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) >= -15.0 & VehiclesX(v) <= 15.0  & VehiclesY(v) >= -4.0 & VehiclesY(v) <= 4.0))",
             "ENDING_TIME": 60000,
@@ -6941,6 +7028,7 @@
           "information": {
             "SIGNIFICANCE": 0.001,
             "PROBABILITY": 0.999,
+            "EXECUTIONS": 1000,
             "MAX_STEPS_BEFORE_PROPERTY": 0,
             "PREDICATE": "Crash = FALSE => not(#v. (v : Vehicles \\ {EgoVehicle} & VehiclesX(v) < 0.01 & VehiclesX(v) > -0.01 & VehiclesY(v) < 0.01 & VehiclesY(v) > -0.01))",
             "ENDING_TIME": 60000,
@@ -7915,7 +8003,7 @@
   "metadata": {
     "fileType": "Project",
     "formatVersion": 46,
-    "savedAt": "2024-05-14T10:38:15.859624Z",
+    "savedAt": "2024-05-14T12:43:47.090199Z",
     "creator": "User",
     "proB2KernelVersion": "4.13.1",
     "proBCliVersion": null,
