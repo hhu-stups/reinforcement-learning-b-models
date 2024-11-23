@@ -209,3 +209,17 @@ Example: In order to re-produce the results of `SAF1` for `Base with shield`, on
 
 ![Example: SimB Task](/images/Example_SimB_Task.png)
 
+
+### Information about Formal Models, Environments, Trained Agents
+
+- Formal Models
+  - Autonomous Drone Swarm, Cliff Walking, Frozen Lake, Highway Environments (non-RSS models), Lunar Lander by Fabian Vu
+  - Highway Environment RSS Models by Michael Leuschel
+- Environments:
+  - Cliff Walking, Frozen Lake, Lunar Lander from OpenAI Gymnasium
+  - Highway Environment: Edouard Leurent. An Environment for Autonomous Driving Decision-Making. https://github.com/eleurent/highway-env
+  - Autonomous Drone Swarm: Daisuke Nakanishi, Gurpreet Singh, Kshitij Chandna. Developing Autonomous Drone Swarms with Multi-Agent Reinforcement Learning for Scalable Post-Disaster Damage Assessment. https://github.com/mnmldb/autonomous-drone-swarm
+- Training:
+  - Autonomous Drone Swarm, Cliff Walking, Frozen Lake, Highway Environment (Refined Base, Refined Higher Penalty Collision, Refined Adversarial Agents), Lunar Lander by Fabian Vu
+  - Highway Environment (Base and Higher Penalty Agents) by Jannik Dunkelau
+
