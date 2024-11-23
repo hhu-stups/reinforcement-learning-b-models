@@ -19,7 +19,7 @@ DEFINITIONS
     // and now the distance required to brake until a target speed which is not necessarily 0.0:
     brakeDistanceWithTarget(initialSpeed,targetSpeed,brakeAcc) == (initialSpeed**2 - targetSpeed**2)/(2.0*brakeAcc);
     minAbsoluteSpeed == 13.5; // minimum speed of other vehicles
-    minEgoSpeed == 19.5; // minimum speed of Ego vehicle
+    minEgoSpeed == 0.0; // minimum speed of Ego vehicle
     brakeDistance20(initialSpeed,brakeAcc) == brakeDistanceWithTarget(initialSpeed,minAbsoluteSpeed,brakeAcc);
     
     distanceTravelled(deltaTime,initialSpeed,acceleration) ==
@@ -65,11 +65,11 @@ DEFINITIONS
     // e.g., such that their position + their dRSS distance wrt Ego is ok
   
     dRSS_lane(maxAccRear,Lane) == max({0.0, 
-                       dRSS_wo_max(maxAccRear,vSV+min({30.0} \/ VehiclesVx[NextVehiclesInLane(Lane)]))});
+                       dRSS_wo_max(maxAccRear,vSV+min({40.0} \/ VehiclesVx[NextVehiclesInLane(Lane)]))});
     dRSS_cur_lane == dRSS_cur_lane1(aMax);
     dRSS_cur_lane1(maxAccRear) ==
                      max({0.0, 
-                       dRSS_wo_max(maxAccRear,vSV+min({30.0} \/ VehiclesVx[NextVehiclesInFrontInLane(CurLane)]))});
+                       dRSS_wo_max(maxAccRear,vSV+min({40.0} \/ VehiclesVx[NextVehiclesInFrontInLane(CurLane)]))});
     dRSS_left_lane == dRSS_lane(0.05,LeftLane); // if we go left we will accelerate by at most 0.05 (TODO:check)
     dRSS_right_lane == dRSS_lane(0.05,RightLane); // ditto
     
@@ -153,13 +153,13 @@ VARIABLES
 INVARIANT
     Crash : BOOL &
     PresentVehicles : POW(Vehicles) &
-    EgoVehicle : PresentVehicles /*@desc "the Ego vehicle is always present" */ &
-    VehiclesX : PresentVehicles --> REAL &
-    VehiclesY : PresentVehicles --> REAL &
-    VehiclesVx : PresentVehicles --> REAL &
-    VehiclesVy : PresentVehicles --> REAL &
-    VehiclesAx : PresentVehicles --> REAL &
-    VehiclesAy : PresentVehicles --> REAL &
+    EgoVehicle : Vehicles /*@desc "the Ego vehicle is always present" */ &
+    VehiclesX : Vehicles --> REAL &
+    VehiclesY : Vehicles --> REAL &
+    VehiclesVx : Vehicles --> REAL &
+    VehiclesVy : Vehicles --> REAL &
+    VehiclesAx : Vehicles --> REAL &
+    VehiclesAy : Vehicles --> REAL &
     Reward : REAL
 
 INITIALISATION

@@ -1,3 +1,6 @@
+/*
+Developed by Fabian Vu
+*/
 MACHINE FrozenLake
 
 SETS 

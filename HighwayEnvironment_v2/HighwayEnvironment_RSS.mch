@@ -1,3 +1,6 @@
+/*
+Developed by Michael Leuschel
+*/
 MACHINE HighwayEnvironment_RSS
 
 SETS
