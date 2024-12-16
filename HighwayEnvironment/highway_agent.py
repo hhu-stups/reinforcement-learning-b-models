@@ -9,14 +9,20 @@ from stable_baselines3 import DQN
 from stable_baselines3.common.callbacks import CheckpointCallback
 
 
-save_base_path = "models/highway_dqn/higher_col_penalty_35k"
+save_base_path = "models/highway_dqn/adversarial"
 
 # Configuration (default values in parenthesis)
 env = gym.make("highway-fast-v0", render_mode='human')
 env.configure({
+    "action": {
+        "type": "DiscreteMetaAction",
+        "target_speeds": [0,5,10,15,20,25,30,35,40]},
     "lanes_count": 3,  # (4)
-    "collision_reward": -2,
-    "right_lane_reward": 0.2, # (0.1)
+    "collision_reward": 1, # (-1)
+    "right_lane_reward": 0.0, # (0.1),
+    "reward_speed_range": [0, 40],
+    "high_speed_reward": 2,
+    "lane_change_reward": 0.5
 })
 # env.configure({
 #     "lanes_count": 3,  # (4)
@@ -104,7 +110,7 @@ if __name__ == '__main__':
             name_prefix="rl_model"
         )
 
-        model.learn(int(35_000), callback=checkpoint_callback, tb_log_name="new_dqn", progress_bar=True)
+        model.learn(int(20_000), callback=checkpoint_callback, tb_log_name="new_dqn", progress_bar=True)
         model.save(model_path)
 
 

@@ -2,12 +2,12 @@ import pandas as pd
 import os
 
 dirs = [
-    'Traces_Base/',
-    'Traces_Base_Shield/',
-    'Traces_Base_RSS_Shield/',
-    'Traces_Higher_Penalty_Collision/',
-    'Traces_Higher_Penalty_Collision_Shield/',
-    'Traces_Higher_Penalty_Collision_RSS_Shield/',
+    'Traces_Base_Refined/',
+    'Traces_Base_Refined_Shield/',
+    'Traces_Base_Refined_RSS_Shield/',
+    'Traces_Higher_Penalty_Collision_Refined/',
+    'Traces_Higher_Penalty_Collision_Refined_Shield/',
+    'Traces_Higher_Penalty_Collision_Refined_RSS_Shield/',
 ]
 
 
